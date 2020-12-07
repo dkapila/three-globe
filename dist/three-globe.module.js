@@ -1315,13 +1315,7 @@ var Globe = Kapsule({
       state.scene.visible = true;
     };
 
-    waitForGlobeReady ? state.globeLayer.onReady(initGlobe) : initGlobe(); // run tween updates
-
-    (function onFrame() {
-      requestAnimationFrame(onFrame);
-      TWEEN.update();
-    })(); // IIFE
-
+    waitForGlobeReady ? state.globeLayer.onReady(initGlobe) : initGlobe();
   },
   update: function update(state) {}
 });
