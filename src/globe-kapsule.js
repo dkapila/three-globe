@@ -21,11 +21,7 @@ import { polar2Cartesian, cartesian2Polar } from './utils/coordTranslate';
 
 import GlobeLayerKapsule from './layers/globe';
 import PointsLayerKapsule from './layers/points';
-import ArcsLayerKapsule from './layers/arcs';
-import HexBinLayerKapsule from './layers/hexbin';
 import PolygonsLayerKapsule from './layers/polygons';
-import HexedPolygonsLayerKapsule from './layers/hexedPolygons';
-import PathsLayerKapsule from './layers/paths';
 import TilesLayerKapsule from './layers/tiles';
 import LabelsLayerKapsule from './layers/labels';
 import CustomLayerKapsule from './layers/custom';
@@ -35,11 +31,7 @@ import CustomLayerKapsule from './layers/custom';
 const layers = [
   'globeLayer',
   'pointsLayer',
-  'arcsLayer',
-  'hexBinLayer',
   'polygonsLayer',
-  'hexedPolygonsLayer',
-  'pathsLayer',
   'tilesLayer',
   'labelsLayer',
   'customLayer'
@@ -71,54 +63,6 @@ const linkedPointsLayerProps = Object.assign(...[
   'pointsTransitionDuration'
 ].map(p => ({ [p]: bindPointsLayer.linkProp(p)})));
 
-const bindArcsLayer = linkKapsule('arcsLayer', ArcsLayerKapsule);
-const linkedArcsLayerProps = Object.assign(...[
-  'arcsData',
-  'arcStartLat',
-  'arcStartLng',
-  'arcEndLat',
-  'arcEndLng',
-  'arcColor',
-  'arcAltitude',
-  'arcAltitudeAutoScale',
-  'arcStroke',
-  'arcCurveResolution',
-  'arcCircularResolution',
-  'arcDashLength',
-  'arcDashGap',
-  'arcDashInitialGap',
-  'arcDashAnimateTime',
-  'arcsTransitionDuration'
-].map(p => ({ [p]: bindArcsLayer.linkProp(p)})));
-
-const bindHexBinLayer = linkKapsule('hexBinLayer', HexBinLayerKapsule);
-const linkedHexBinLayerProps = Object.assign(...[
-  'hexBinPointsData',
-  'hexBinPointLat',
-  'hexBinPointLng',
-  'hexBinPointWeight',
-  'hexBinResolution',
-  'hexMargin',
-  'hexTopCurvatureResolution',
-  'hexTopColor',
-  'hexSideColor',
-  'hexAltitude',
-  'hexBinMerge',
-  'hexTransitionDuration'
-].map(p => ({ [p]: bindHexBinLayer.linkProp(p)})));
-
-const bindHexedPolygonsLayer = linkKapsule('hexedPolygonsLayer', HexedPolygonsLayerKapsule);
-const linkedHexedPolygonsLayerProps = Object.assign(...[
-  'hexPolygonsData',
-  'hexPolygonGeoJsonGeometry',
-  'hexPolygonColor',
-  'hexPolygonAltitude',
-  'hexPolygonResolution',
-  'hexPolygonMargin',
-  'hexPolygonCurvatureResolution',
-  'hexPolygonsTransitionDuration'
-].map(p => ({ [p]: bindHexedPolygonsLayer.linkProp(p)})));
-
 const bindPolygonsLayer = linkKapsule('polygonsLayer', PolygonsLayerKapsule);
 const linkedPolygonsLayerProps = Object.assign(...[
   'polygonsData',
@@ -130,23 +74,6 @@ const linkedPolygonsLayerProps = Object.assign(...[
   'polygonCapCurvatureResolution',
   'polygonsTransitionDuration'
 ].map(p => ({ [p]: bindPolygonsLayer.linkProp(p)})));
-
-const bindPathsLayer = linkKapsule('pathsLayer', PathsLayerKapsule);
-const linkedPathsLayerProps = Object.assign(...[
-  'pathsData',
-  'pathPoints',
-  'pathPointLat',
-  'pathPointLng',
-  'pathPointAlt',
-  'pathResolution',
-  'pathColor',
-  'pathStroke',
-  'pathDashLength',
-  'pathDashGap',
-  'pathDashInitialGap',
-  'pathDashAnimateTime',
-  'pathTransitionDuration'
-].map(p => ({ [p]: bindPathsLayer.linkProp(p)})));
 
 const bindTilesLayer = linkKapsule('tilesLayer', TilesLayerKapsule);
 const linkedTilesLayerProps = Object.assign(...[
@@ -193,18 +120,11 @@ export default Kapsule({
   props: {
     rendererSize: {
       default: new THREE.Vector2(window.innerWidth, window.innerHeight),
-      onChange(rendererSize, state) {
-        state.pathsLayer.rendererSize(rendererSize);
-      },
       triggerUpdate: false
     },
     ...linkedGlobeLayerProps,
     ...linkedPointsLayerProps,
-    ...linkedArcsLayerProps,
-    ...linkedHexBinLayerProps,
     ...linkedPolygonsLayerProps,
-    ...linkedHexedPolygonsLayerProps,
-    ...linkedPathsLayerProps,
     ...linkedTilesLayerProps,
     ...linkedLabelsLayerProps,
     ...linkedCustomLayerProps
@@ -220,11 +140,7 @@ export default Kapsule({
     return {
       globeLayer: GlobeLayerKapsule(),
       pointsLayer: PointsLayerKapsule(),
-      arcsLayer: ArcsLayerKapsule(),
-      hexBinLayer: HexBinLayerKapsule(),
       polygonsLayer: PolygonsLayerKapsule(),
-      hexedPolygonsLayer: HexedPolygonsLayerKapsule(),
-      pathsLayer: PathsLayerKapsule(),
       tilesLayer: TilesLayerKapsule(),
       labelsLayer: LabelsLayerKapsule(),
       customLayer: CustomLayerKapsule()
