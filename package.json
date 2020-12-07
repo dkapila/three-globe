@@ -8,7 +8,7 @@
   "types": "dist/three-globe.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vasturiano/three-globe.git"
+    "url": "git+https://github.com/dkapila/three-globe.git"
   },
   "homepage": "https://github.com/vasturiano/three-globe",
   "keywords": [
