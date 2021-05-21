@@ -42,8 +42,11 @@ const bindGlobeLayer = linkKapsule('globeLayer', GlobeLayerKapsule);
 const linkedGlobeLayerProps = Object.assign(...[
   'globeImageUrl',
   'bumpImageUrl',
+  'showGlobe',
+  'showGraticules',
   'showAtmosphere',
-  'showGraticules'
+  'atmosphereColor',
+  'atmosphereAltitude'
 ].map(p => ({ [p]: bindGlobeLayer.linkProp(p)})));
 
 const linkedGlobeLayerMethods = Object.assign(...[
@@ -68,7 +71,9 @@ const linkedPolygonsLayerProps = Object.assign(...[
   'polygonsData',
   'polygonGeoJsonGeometry',
   'polygonCapColor',
+  'polygonCapMaterial',
   'polygonSideColor',
+  'polygonSideMaterial',
   'polygonStrokeColor',
   'polygonAltitude',
   'polygonCapCurvatureResolution',
@@ -118,6 +123,7 @@ const linkedCustomLayerProps = Object.assign(...[
 
 export default Kapsule({
   props: {
+    onGlobeReady: { triggerUpdate: false },
     rendererSize: {
       default: new THREE.Vector2(window.innerWidth, window.innerHeight),
       triggerUpdate: false
@@ -182,6 +188,7 @@ export default Kapsule({
       }
 
       state.scene.visible = true;
+      state.onGlobeReady && state.onGlobeReady();
     };
 
     waitForGlobeReady

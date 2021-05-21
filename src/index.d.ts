@@ -1,4 +1,4 @@
-import { Object3D, Vector2, MeshPhongMaterial, Material } from 'three';
+import { Object3D, Vector2, Material } from 'three';
 
 type Accessor<In, Out> = Out | string | ((obj: In) => Out);
 type ObjAccessor<T> = Accessor<object, T>;
@@ -27,11 +27,19 @@ export declare class ThreeGlobeGeneric<ChainableInstance> extends Object3D {
   globeImageUrl(url: string): ChainableInstance;
   bumpImageUrl(): string | null;
   bumpImageUrl(url: string): ChainableInstance;
-  showAtmosphere(): boolean;
-  showAtmosphere(show: boolean): ChainableInstance;
+  showGlobe(): boolean;
+  showGlobe(show: boolean): ChainableInstance;
   showGraticules(): boolean;
   showGraticules(show: boolean): ChainableInstance;
-  globeMaterial(): MeshPhongMaterial;
+  showAtmosphere(): boolean;
+  showAtmosphere(show: boolean): ChainableInstance;
+  atmosphereColor(): string;
+  atmosphereColor(color: string): ChainableInstance;
+  atmosphereAltitude(): number;
+  atmosphereAltitude(alt: number): ChainableInstance;
+  globeMaterial(): Material;
+  globeMaterial(globeMaterial): ChainableInstance;
+  onGlobeReady(callback: (() => void)): ChainableInstance;
 
   // Points layer
   pointsData(): object[];
@@ -94,8 +102,12 @@ export declare class ThreeGlobeGeneric<ChainableInstance> extends Object3D {
   polygonGeoJsonGeometry(geometryAccessor: ObjAccessor<GeoJsonGeometry>): ChainableInstance;
   polygonCapColor(): ObjAccessor<string>;
   polygonCapColor(colorAccessor: ObjAccessor<string>): ChainableInstance;
+  polygonCapMaterial(): ObjAccessor<Material>;
+  polygonCapMaterial(materialAccessor: ObjAccessor<Material>): ChainableInstance;
   polygonSideColor(): ObjAccessor<string>;
   polygonSideColor(colorAccessor: ObjAccessor<string>): ChainableInstance;
+  polygonSideMaterial(): ObjAccessor<Material>;
+  polygonSideMaterial(materialAccessor: ObjAccessor<Material>): ChainableInstance;
   polygonStrokeColor(): ObjAccessor<string | boolean | null>;
   polygonStrokeColor(colorAccessor: ObjAccessor<string | boolean | null>): ChainableInstance;
   polygonAltitude(): ObjAccessor<number>;

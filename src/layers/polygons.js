@@ -37,7 +37,9 @@ export default Kapsule({
     polygonsData: { default: [] },
     polygonGeoJsonGeometry: { default: 'geometry' },
     polygonSideColor: { default: () => '#ffffaa' },
+    polygonSideMaterial: {},
     polygonCapColor: { default: () => '#ffffaa' },
+    polygonCapMaterial: {},
     polygonStrokeColor: {},
     polygonAltitude: { default: 0.01 }, // in units of globe radius
     polygonCapCurvatureResolution: { default: 5 }, // in angular degrees
@@ -58,7 +60,9 @@ export default Kapsule({
     const altitudeAccessor = accessorFn(state.polygonAltitude);
     const capCurvatureResolutionAccessor = accessorFn(state.polygonCapCurvatureResolution);
     const capColorAccessor = accessorFn(state.polygonCapColor);
+    const capMaterialAccessor = accessorFn(state.polygonCapMaterial);
     const sideColorAccessor = accessorFn(state.polygonSideColor);
+    const sideMaterialAccessor = accessorFn(state.polygonSideMaterial);
     const strokeColorAccessor = accessorFn(state.polygonStrokeColor);
 
     const singlePolygons = [];
@@ -66,7 +70,9 @@ export default Kapsule({
       const objAttrs = {
         data: polygon,
         capColor: capColorAccessor(polygon),
+        capMaterial: capMaterialAccessor(polygon),
         sideColor: sideColorAccessor(polygon),
+        sideMaterial: sideMaterialAccessor(polygon),
         strokeColor: strokeColorAccessor(polygon),
         altitude: +altitudeAccessor(polygon),
         capCurvatureResolution: +capCurvatureResolutionAccessor(polygon)
@@ -98,12 +104,15 @@ export default Kapsule({
       createObj: () => {
         const obj = new THREE.Group();
 
+        obj.__defaultSideMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, depthWrite: true });
+        obj.__defaultCapMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, depthWrite: true });
+
         // conic geometry
         obj.add(new THREE.Mesh(
           undefined,
           [
-            new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, depthWrite: true }), // side material
-            new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, depthWrite: true }) // cap material
+            obj.__defaultSideMaterial, // side material
+            obj.__defaultCapMaterial // cap material
           ]
         ));
 
@@ -117,15 +126,40 @@ export default Kapsule({
 
         return obj;
       },
-      updateObj: (obj, { coords, capColor, sideColor, strokeColor, altitude, capCurvatureResolution }) => {
+      updateObj: (obj, { coords, capColor, capMaterial, sideColor, sideMaterial, strokeColor, altitude, capCurvatureResolution }) => {
         const [conicObj, strokeObj] = obj.children;
 
         // hide stroke if no color set
         const addStroke = !!strokeColor;
         strokeObj.visible = addStroke;
 
-        // update materials
-        [sideColor, capColor].forEach((color, materialIdx) => {
+        // regenerate geometries if needed
+        !objMatch(conicObj.geometry.parameters || {}, { polygonGeoJson: coords, curvatureResolution: capCurvatureResolution }) &&
+          (conicObj.geometry = new ConicPolygonBufferGeometry(
+            coords,
+            0,
+            GLOBE_RADIUS,
+            false,
+            true,
+            true,
+            capCurvatureResolution
+          ));
+
+        addStroke && (!strokeObj.geometry.parameters || strokeObj.geometry.parameters.geoJson.coordinates !== coords || strokeObj.geometry.parameters.resolution !== capCurvatureResolution) &&
+          (strokeObj.geometry = new GeoJsonGeometry(
+            { type: 'Polygon', coordinates: coords },
+            GLOBE_RADIUS,
+            capCurvatureResolution
+          ));
+
+        // replace side/cap materials if defined
+        conicObj.material[0] = sideMaterial || obj.__defaultSideMaterial;
+        conicObj.material[1] = capMaterial || obj.__defaultCapMaterial;
+
+        // update default material colors
+        [!sideMaterial && sideColor, !capMaterial && capColor].forEach((color, materialIdx) => {
+          if (!color) return; // skip custom materials
+
           // conic object
           const material = conicObj.material[materialIdx];
           const opacity = colorAlpha(color);
@@ -143,22 +177,12 @@ export default Kapsule({
           material.opacity = opacity;
         }
 
-        const geoJsonGeometry = {
-          type: 'Polygon',
-          coordinates: coords
-        };
-
-        const targetD = { alt: altitude, capCurvatureResolution };
+        const targetD = { alt: altitude };
 
         const applyUpdate = td => {
-          const { alt, capCurvatureResolution } = obj.__currentTargetD = td;
-
-          // const final = Math.abs(alt - targetD.alt) < 1e-9;
-          // const res = final ? capCurvatureResolution : 180; // use lower resolution for transitory states
-          const res = capCurvatureResolution;
-
-          conicObj.geometry = new ConicPolygonBufferGeometry(coords, GLOBE_RADIUS, GLOBE_RADIUS * (1 + alt), false, true, true, res);
-          addStroke && (strokeObj.geometry = new GeoJsonGeometry(geoJsonGeometry, GLOBE_RADIUS  * (1 + alt + 1e-4), res)); // stroke slightly above the conic mesh
+          const { alt } = obj.__currentTargetD = td;
+          conicObj.scale.x = conicObj.scale.y = conicObj.scale.z = 1 + alt;
+          addStroke && (strokeObj.scale.x = strokeObj.scale.y = strokeObj.scale.z = 1 + alt + 1e-4); // stroke slightly above the conic mesh
         };
 
         const currentTargetD = obj.__currentTargetD || Object.assign({}, targetD, { alt: -1e-3 });
@@ -180,3 +204,7 @@ export default Kapsule({
     });
   }
 });
+
+function objMatch(obj, attrs, compFn = () => (a, b) => a === b) {
+  return Object.entries(attrs).every(([k, v]) => obj.hasOwnProperty(k) && compFn(k)(obj[k], v));
+}
