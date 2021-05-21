@@ -1,17 +1,55 @@
-// Version 2.11.1 three-globe - https://github.com/vasturiano/three-globe
+// Version 2.18.2 three-globe - https://github.com/vasturiano/three-globe
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('three')) :
   typeof define === 'function' && define.amd ? define(['three'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ThreeGlobe = factory(global.THREE));
-}(this, (function (three) { 'use strict';
+}(this, (function (three$1) { 'use strict';
 
-  function _classCallCheck(instance, Constructor) {
+  function ownKeys$1(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+
+      if (enumerableOnly) {
+        symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2$1(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys$1(Object(source), true).forEach(function (key) {
+          _defineProperty$1(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys$1(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _classCallCheck$3(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
 
-  function _defineProperty(obj, key, value) {
+  function _defineProperty$1(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -26,41 +64,7 @@
     return obj;
   }
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _inherits(subClass, superClass) {
+  function _inherits$2(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
@@ -72,39 +76,39 @@
         configurable: true
       }
     });
-    if (superClass) _setPrototypeOf(subClass, superClass);
+    if (superClass) _setPrototypeOf$2(subClass, superClass);
   }
 
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+  function _getPrototypeOf$2(o) {
+    _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
-    return _getPrototypeOf(o);
+    return _getPrototypeOf$2(o);
   }
 
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  function _setPrototypeOf$2(o, p) {
+    _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
 
-    return _setPrototypeOf(o, p);
+    return _setPrototypeOf$2(o, p);
   }
 
-  function _isNativeReflectConstruct() {
+  function _isNativeReflectConstruct$2() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  function _assertThisInitialized(self) {
+  function _assertThisInitialized$2(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
@@ -112,62 +116,65 @@
     return self;
   }
 
-  function _possibleConstructorReturn(self, call) {
+  function _possibleConstructorReturn$2(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     }
 
-    return _assertThisInitialized(self);
+    return _assertThisInitialized$2(self);
   }
 
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  function _createSuper$2(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct$2();
 
     return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
+      var Super = _getPrototypeOf$2(Derived),
           result;
 
       if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
+        var NewTarget = _getPrototypeOf$2(this).constructor;
 
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
 
-      return _possibleConstructorReturn(this, result);
+      return _possibleConstructorReturn$2(this, result);
     };
   }
 
-  function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  function _slicedToArray$5(arr, i) {
+    return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$5(arr, i) || _nonIterableRest$5();
   }
 
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  function _toConsumableArray$3(arr) {
+    return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$5(arr) || _nonIterableSpread$3();
   }
 
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  function _arrayWithoutHoles$3(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray$5(arr);
   }
 
-  function _arrayWithHoles(arr) {
+  function _arrayWithHoles$5(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  function _iterableToArray$3(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
-  function _iterableToArrayLimit(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  function _iterableToArrayLimit$5(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -186,16 +193,16 @@
     return _arr;
   }
 
-  function _unsupportedIterableToArray(o, minLen) {
+  function _unsupportedIterableToArray$5(o, minLen) {
     if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor) n = o.constructor.name;
     if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$5(o, minLen);
   }
 
-  function _arrayLikeToArray(arr, len) {
+  function _arrayLikeToArray$5(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
 
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
@@ -203,11 +210,11 @@
     return arr2;
   }
 
-  function _nonIterableSpread() {
+  function _nonIterableSpread$3() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  function _nonIterableRest() {
+  function _nonIterableRest$5() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
@@ -225,6 +232,7 @@
    * @param {Boolean} whether to execute at the beginning (`false`)
    * @api public
    */
+
   function debounce(func, wait, immediate){
     var timeout, args, context, timestamp, result;
     if (null == wait) wait = 100;
@@ -280,32 +288,32 @@
 
   var debounce_1 = debounce;
 
-  function _classCallCheck$1(instance, Constructor) {
+  function _classCallCheck$2(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
 
-  function _slicedToArray$1(arr, i) {
-    return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _nonIterableRest$1();
+  function _slicedToArray$4(arr, i) {
+    return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$4();
   }
 
-  function _arrayWithHoles$1(arr) {
+  function _arrayWithHoles$4(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArrayLimit$1(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
+  function _iterableToArrayLimit$4(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
 
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -324,8 +332,25 @@
     return _arr;
   }
 
-  function _nonIterableRest$1() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  function _unsupportedIterableToArray$4(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
+  }
+
+  function _arrayLikeToArray$4(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableRest$4() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var Prop = function Prop(name, _ref) {
@@ -336,7 +361,7 @@
         _ref$onChange = _ref.onChange,
         onChange = _ref$onChange === void 0 ? function (newVal, state) {} : _ref$onChange;
 
-    _classCallCheck$1(this, Prop);
+    _classCallCheck$2(this, Prop);
 
     this.name = name;
     this.defaultVal = defaultVal;
@@ -344,7 +369,7 @@
     this.onChange = onChange;
   };
 
-  function index (_ref2) {
+  function index$2 (_ref2) {
     var _ref2$stateInit = _ref2.stateInit,
         stateInit = _ref2$stateInit === void 0 ? function () {
       return {};
@@ -441,7 +466,7 @@
       }); // Link aliases
 
       Object.entries(aliases).forEach(function (_ref4) {
-        var _ref5 = _slicedToArray$1(_ref4, 2),
+        var _ref5 = _slicedToArray$4(_ref4, 2),
             alias = _ref5[0],
             target = _ref5[1];
 
@@ -1246,7 +1271,7 @@
   // https://github.com/rollup/rollup/issues/1961#issuecomment-423037881
   var getAll = TWEEN.getAll.bind(TWEEN);
   var removeAll = TWEEN.removeAll.bind(TWEEN);
-  var add = TWEEN.add.bind(TWEEN);
+  var add$1 = TWEEN.add.bind(TWEEN);
   var remove = TWEEN.remove.bind(TWEEN);
   var update = TWEEN.update.bind(TWEEN);
   var exports$1 = {
@@ -1260,7 +1285,7 @@
       VERSION: VERSION,
       getAll: getAll,
       removeAll: removeAll,
-      add: add,
+      add: add$1,
       remove: remove,
       update: update,
   };
@@ -1336,7 +1361,7 @@
 
   var GLOBE_RADIUS = 100;
 
-  function polar2Cartesian(lat, lng) {
+  function polar2Cartesian$2(lat, lng) {
     var relAltitude = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
     var phi = (90 - lat) * Math.PI / 180;
     var theta = (90 - lng) * Math.PI / 180;
@@ -1363,8 +1388,10 @@
     };
   }
 
-  var earcut_1 = earcut;
-  var _default = earcut;
+  var earcut$2 = {exports: {}};
+
+  earcut$2.exports = earcut;
+  earcut$2.exports.default = earcut;
 
   function earcut(data, holeIndices, dim) {
 
@@ -1855,10 +1882,10 @@
 
   // check if two segments intersect
   function intersects(p1, q1, p2, q2) {
-      var o1 = sign(area(p1, q1, p2));
-      var o2 = sign(area(p1, q1, q2));
-      var o3 = sign(area(p2, q2, p1));
-      var o4 = sign(area(p2, q2, q1));
+      var o1 = sign$3(area(p1, q1, p2));
+      var o2 = sign$3(area(p1, q1, q2));
+      var o3 = sign$3(area(p2, q2, p1));
+      var o4 = sign$3(area(p2, q2, q1));
 
       if (o1 !== o2 && o3 !== o4) return true; // general case
 
@@ -1875,7 +1902,7 @@
       return q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) && q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y);
   }
 
-  function sign(num) {
+  function sign$3(num) {
       return num > 0 ? 1 : num < 0 ? -1 : 0;
   }
 
@@ -2040,7 +2067,8 @@
       }
       return result;
   };
-  earcut_1.default = _default;
+
+  var earcut$1 = earcut$2.exports;
 
   function extent(values, valueof) {
     let min;
@@ -2073,7 +2101,7 @@
   }
 
   // https://github.com/python/cpython/blob/a74eea238f5baba15797e2e8b570d153bc8690a7/Modules/mathmodule.c#L1423
-  class Adder {
+  class Adder$1 {
     constructor() {
       this._partials = new Float64Array(32);
       this._n = 0;
@@ -2140,11 +2168,11 @@
     }
   }
 
-  function merge(arrays) {
+  function merge$1(arrays) {
     return Array.from(flatten(arrays));
   }
 
-  function range(start, stop, step) {
+  function range$1(start, stop, step) {
     start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
 
     var i = -1,
@@ -2158,51 +2186,51 @@
     return range;
   }
 
-  var epsilon = 1e-6;
-  var epsilon2 = 1e-12;
-  var pi = Math.PI;
-  var halfPi = pi / 2;
-  var quarterPi = pi / 4;
-  var tau = pi * 2;
+  var epsilon$3 = 1e-6;
+  var epsilon2$1 = 1e-12;
+  var pi$2 = Math.PI;
+  var halfPi$2 = pi$2 / 2;
+  var quarterPi$1 = pi$2 / 4;
+  var tau$2 = pi$2 * 2;
 
-  var degrees = 180 / pi;
-  var radians = pi / 180;
+  var degrees$2 = 180 / pi$2;
+  var radians$2 = pi$2 / 180;
 
-  var abs = Math.abs;
-  var atan2 = Math.atan2;
-  var cos = Math.cos;
+  var abs$1 = Math.abs;
+  var atan2$2 = Math.atan2;
+  var cos$2 = Math.cos;
   var ceil = Math.ceil;
-  var sin = Math.sin;
-  var sign$1 = Math.sign || function(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; };
-  var sqrt = Math.sqrt;
+  var sin$2 = Math.sin;
+  var sign$2 = Math.sign || function(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; };
+  var sqrt$2 = Math.sqrt;
 
-  function asin(x) {
-    return x > 1 ? halfPi : x < -1 ? -halfPi : Math.asin(x);
+  function asin$2(x) {
+    return x > 1 ? halfPi$2 : x < -1 ? -halfPi$2 : Math.asin(x);
   }
 
   function haversin(x) {
-    return (x = sin(x / 2)) * x;
+    return (x = sin$2(x / 2)) * x;
   }
 
-  function noop() {}
+  function noop$1() {}
 
-  function streamGeometry(geometry, stream) {
-    if (geometry && streamGeometryType.hasOwnProperty(geometry.type)) {
-      streamGeometryType[geometry.type](geometry, stream);
+  function streamGeometry$1(geometry, stream) {
+    if (geometry && streamGeometryType$1.hasOwnProperty(geometry.type)) {
+      streamGeometryType$1[geometry.type](geometry, stream);
     }
   }
 
-  var streamObjectType = {
+  var streamObjectType$1 = {
     Feature: function(object, stream) {
-      streamGeometry(object.geometry, stream);
+      streamGeometry$1(object.geometry, stream);
     },
     FeatureCollection: function(object, stream) {
       var features = object.features, i = -1, n = features.length;
-      while (++i < n) streamGeometry(features[i].geometry, stream);
+      while (++i < n) streamGeometry$1(features[i].geometry, stream);
     }
   };
 
-  var streamGeometryType = {
+  var streamGeometryType$1 = {
     Sphere: function(object, stream) {
       stream.sphere();
     },
@@ -2215,74 +2243,74 @@
       while (++i < n) object = coordinates[i], stream.point(object[0], object[1], object[2]);
     },
     LineString: function(object, stream) {
-      streamLine(object.coordinates, stream, 0);
+      streamLine$1(object.coordinates, stream, 0);
     },
     MultiLineString: function(object, stream) {
       var coordinates = object.coordinates, i = -1, n = coordinates.length;
-      while (++i < n) streamLine(coordinates[i], stream, 0);
+      while (++i < n) streamLine$1(coordinates[i], stream, 0);
     },
     Polygon: function(object, stream) {
-      streamPolygon(object.coordinates, stream);
+      streamPolygon$1(object.coordinates, stream);
     },
     MultiPolygon: function(object, stream) {
       var coordinates = object.coordinates, i = -1, n = coordinates.length;
-      while (++i < n) streamPolygon(coordinates[i], stream);
+      while (++i < n) streamPolygon$1(coordinates[i], stream);
     },
     GeometryCollection: function(object, stream) {
       var geometries = object.geometries, i = -1, n = geometries.length;
-      while (++i < n) streamGeometry(geometries[i], stream);
+      while (++i < n) streamGeometry$1(geometries[i], stream);
     }
   };
 
-  function streamLine(coordinates, stream, closed) {
+  function streamLine$1(coordinates, stream, closed) {
     var i = -1, n = coordinates.length - closed, coordinate;
     stream.lineStart();
     while (++i < n) coordinate = coordinates[i], stream.point(coordinate[0], coordinate[1], coordinate[2]);
     stream.lineEnd();
   }
 
-  function streamPolygon(coordinates, stream) {
+  function streamPolygon$1(coordinates, stream) {
     var i = -1, n = coordinates.length;
     stream.polygonStart();
-    while (++i < n) streamLine(coordinates[i], stream, 1);
+    while (++i < n) streamLine$1(coordinates[i], stream, 1);
     stream.polygonEnd();
   }
 
-  function geoStream(object, stream) {
-    if (object && streamObjectType.hasOwnProperty(object.type)) {
-      streamObjectType[object.type](object, stream);
+  function geoStream$1(object, stream) {
+    if (object && streamObjectType$1.hasOwnProperty(object.type)) {
+      streamObjectType$1[object.type](object, stream);
     } else {
-      streamGeometry(object, stream);
+      streamGeometry$1(object, stream);
     }
   }
 
-  var areaRingSum = new Adder();
+  var areaRingSum = new Adder$1();
 
   // hello?
 
-  var areaSum = new Adder(),
-      lambda00,
-      phi00,
-      lambda0,
-      cosPhi0,
-      sinPhi0;
+  var areaSum = new Adder$1(),
+      lambda00$2,
+      phi00$2,
+      lambda0$3,
+      cosPhi0$2,
+      sinPhi0$2;
 
   var areaStream = {
-    point: noop,
-    lineStart: noop,
-    lineEnd: noop,
+    point: noop$1,
+    lineStart: noop$1,
+    lineEnd: noop$1,
     polygonStart: function() {
-      areaRingSum = new Adder();
+      areaRingSum = new Adder$1();
       areaStream.lineStart = areaRingStart;
       areaStream.lineEnd = areaRingEnd;
     },
     polygonEnd: function() {
       var areaRing = +areaRingSum;
-      areaSum.add(areaRing < 0 ? tau + areaRing : areaRing);
-      this.lineStart = this.lineEnd = this.point = noop;
+      areaSum.add(areaRing < 0 ? tau$2 + areaRing : areaRing);
+      this.lineStart = this.lineEnd = this.point = noop$1;
     },
     sphere: function() {
-      areaSum.add(tau);
+      areaSum.add(tau$2);
     }
   };
 
@@ -2291,114 +2319,114 @@
   }
 
   function areaRingEnd() {
-    areaPoint(lambda00, phi00);
+    areaPoint(lambda00$2, phi00$2);
   }
 
   function areaPointFirst(lambda, phi) {
     areaStream.point = areaPoint;
-    lambda00 = lambda, phi00 = phi;
-    lambda *= radians, phi *= radians;
-    lambda0 = lambda, cosPhi0 = cos(phi = phi / 2 + quarterPi), sinPhi0 = sin(phi);
+    lambda00$2 = lambda, phi00$2 = phi;
+    lambda *= radians$2, phi *= radians$2;
+    lambda0$3 = lambda, cosPhi0$2 = cos$2(phi = phi / 2 + quarterPi$1), sinPhi0$2 = sin$2(phi);
   }
 
   function areaPoint(lambda, phi) {
-    lambda *= radians, phi *= radians;
-    phi = phi / 2 + quarterPi; // half the angular distance from south pole
+    lambda *= radians$2, phi *= radians$2;
+    phi = phi / 2 + quarterPi$1; // half the angular distance from south pole
 
     // Spherical excess E for a spherical triangle with vertices: south pole,
     // previous point, current point.  Uses a formula derived from Cagnoli’s
     // theorem.  See Todhunter, Spherical Trig. (1871), Sec. 103, Eq. (2).
-    var dLambda = lambda - lambda0,
+    var dLambda = lambda - lambda0$3,
         sdLambda = dLambda >= 0 ? 1 : -1,
         adLambda = sdLambda * dLambda,
-        cosPhi = cos(phi),
-        sinPhi = sin(phi),
-        k = sinPhi0 * sinPhi,
-        u = cosPhi0 * cosPhi + k * cos(adLambda),
-        v = k * sdLambda * sin(adLambda);
-    areaRingSum.add(atan2(v, u));
+        cosPhi = cos$2(phi),
+        sinPhi = sin$2(phi),
+        k = sinPhi0$2 * sinPhi,
+        u = cosPhi0$2 * cosPhi + k * cos$2(adLambda),
+        v = k * sdLambda * sin$2(adLambda);
+    areaRingSum.add(atan2$2(v, u));
 
     // Advance the previous points.
-    lambda0 = lambda, cosPhi0 = cosPhi, sinPhi0 = sinPhi;
+    lambda0$3 = lambda, cosPhi0$2 = cosPhi, sinPhi0$2 = sinPhi;
   }
 
-  function spherical(cartesian) {
-    return [atan2(cartesian[1], cartesian[0]), asin(cartesian[2])];
+  function spherical$2(cartesian) {
+    return [atan2$2(cartesian[1], cartesian[0]), asin$2(cartesian[2])];
   }
 
-  function cartesian(spherical) {
-    var lambda = spherical[0], phi = spherical[1], cosPhi = cos(phi);
-    return [cosPhi * cos(lambda), cosPhi * sin(lambda), sin(phi)];
+  function cartesian$2(spherical) {
+    var lambda = spherical[0], phi = spherical[1], cosPhi = cos$2(phi);
+    return [cosPhi * cos$2(lambda), cosPhi * sin$2(lambda), sin$2(phi)];
   }
 
-  function cartesianCross(a, b) {
+  function cartesianCross$2(a, b) {
     return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
   }
 
   // TODO return d
-  function cartesianNormalizeInPlace(d) {
-    var l = sqrt(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
+  function cartesianNormalizeInPlace$1(d) {
+    var l = sqrt$2(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
     d[0] /= l, d[1] /= l, d[2] /= l;
   }
 
-  var lambda0$1, phi0, lambda1, phi1, // bounds
+  var lambda0$2, phi0, lambda1, phi1, // bounds
       lambda2, // previous lambda-coordinate
       lambda00$1, phi00$1, // first point
       p0, // previous 3D point
       deltaSum,
       ranges,
-      range$1;
+      range;
 
-  var boundsStream = {
-    point: boundsPoint,
+  var boundsStream$1 = {
+    point: boundsPoint$1,
     lineStart: boundsLineStart,
     lineEnd: boundsLineEnd,
     polygonStart: function() {
-      boundsStream.point = boundsRingPoint;
-      boundsStream.lineStart = boundsRingStart;
-      boundsStream.lineEnd = boundsRingEnd;
-      deltaSum = new Adder();
+      boundsStream$1.point = boundsRingPoint;
+      boundsStream$1.lineStart = boundsRingStart;
+      boundsStream$1.lineEnd = boundsRingEnd;
+      deltaSum = new Adder$1();
       areaStream.polygonStart();
     },
     polygonEnd: function() {
       areaStream.polygonEnd();
-      boundsStream.point = boundsPoint;
-      boundsStream.lineStart = boundsLineStart;
-      boundsStream.lineEnd = boundsLineEnd;
-      if (areaRingSum < 0) lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90);
-      else if (deltaSum > epsilon) phi1 = 90;
-      else if (deltaSum < -epsilon) phi0 = -90;
-      range$1[0] = lambda0$1, range$1[1] = lambda1;
+      boundsStream$1.point = boundsPoint$1;
+      boundsStream$1.lineStart = boundsLineStart;
+      boundsStream$1.lineEnd = boundsLineEnd;
+      if (areaRingSum < 0) lambda0$2 = -(lambda1 = 180), phi0 = -(phi1 = 90);
+      else if (deltaSum > epsilon$3) phi1 = 90;
+      else if (deltaSum < -epsilon$3) phi0 = -90;
+      range[0] = lambda0$2, range[1] = lambda1;
     },
     sphere: function() {
-      lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90);
+      lambda0$2 = -(lambda1 = 180), phi0 = -(phi1 = 90);
     }
   };
 
-  function boundsPoint(lambda, phi) {
-    ranges.push(range$1 = [lambda0$1 = lambda, lambda1 = lambda]);
+  function boundsPoint$1(lambda, phi) {
+    ranges.push(range = [lambda0$2 = lambda, lambda1 = lambda]);
     if (phi < phi0) phi0 = phi;
     if (phi > phi1) phi1 = phi;
   }
 
   function linePoint(lambda, phi) {
-    var p = cartesian([lambda * radians, phi * radians]);
+    var p = cartesian$2([lambda * radians$2, phi * radians$2]);
     if (p0) {
-      var normal = cartesianCross(p0, p),
+      var normal = cartesianCross$2(p0, p),
           equatorial = [normal[1], -normal[0], 0],
-          inflection = cartesianCross(equatorial, normal);
-      cartesianNormalizeInPlace(inflection);
-      inflection = spherical(inflection);
+          inflection = cartesianCross$2(equatorial, normal);
+      cartesianNormalizeInPlace$1(inflection);
+      inflection = spherical$2(inflection);
       var delta = lambda - lambda2,
           sign = delta > 0 ? 1 : -1,
-          lambdai = inflection[0] * degrees * sign,
+          lambdai = inflection[0] * degrees$2 * sign,
           phii,
-          antimeridian = abs(delta) > 180;
+          antimeridian = abs$1(delta) > 180;
       if (antimeridian ^ (sign * lambda2 < lambdai && lambdai < sign * lambda)) {
-        phii = inflection[1] * degrees;
+        phii = inflection[1] * degrees$2;
         if (phii > phi1) phi1 = phii;
       } else if (lambdai = (lambdai + 360) % 360 - 180, antimeridian ^ (sign * lambda2 < lambdai && lambdai < sign * lambda)) {
-        phii = -inflection[1] * degrees;
+        phii = -inflection[1] * degrees$2;
         if (phii < phi0) phi0 = phii;
       } else {
         if (phi < phi0) phi0 = phi;
@@ -2406,24 +2434,24 @@
       }
       if (antimeridian) {
         if (lambda < lambda2) {
-          if (angle(lambda0$1, lambda) > angle(lambda0$1, lambda1)) lambda1 = lambda;
+          if (angle(lambda0$2, lambda) > angle(lambda0$2, lambda1)) lambda1 = lambda;
         } else {
-          if (angle(lambda, lambda1) > angle(lambda0$1, lambda1)) lambda0$1 = lambda;
+          if (angle(lambda, lambda1) > angle(lambda0$2, lambda1)) lambda0$2 = lambda;
         }
       } else {
-        if (lambda1 >= lambda0$1) {
-          if (lambda < lambda0$1) lambda0$1 = lambda;
+        if (lambda1 >= lambda0$2) {
+          if (lambda < lambda0$2) lambda0$2 = lambda;
           if (lambda > lambda1) lambda1 = lambda;
         } else {
           if (lambda > lambda2) {
-            if (angle(lambda0$1, lambda) > angle(lambda0$1, lambda1)) lambda1 = lambda;
+            if (angle(lambda0$2, lambda) > angle(lambda0$2, lambda1)) lambda1 = lambda;
           } else {
-            if (angle(lambda, lambda1) > angle(lambda0$1, lambda1)) lambda0$1 = lambda;
+            if (angle(lambda, lambda1) > angle(lambda0$2, lambda1)) lambda0$2 = lambda;
           }
         }
       }
     } else {
-      ranges.push(range$1 = [lambda0$1 = lambda, lambda1 = lambda]);
+      ranges.push(range = [lambda0$2 = lambda, lambda1 = lambda]);
     }
     if (phi < phi0) phi0 = phi;
     if (phi > phi1) phi1 = phi;
@@ -2431,19 +2459,19 @@
   }
 
   function boundsLineStart() {
-    boundsStream.point = linePoint;
+    boundsStream$1.point = linePoint;
   }
 
   function boundsLineEnd() {
-    range$1[0] = lambda0$1, range$1[1] = lambda1;
-    boundsStream.point = boundsPoint;
+    range[0] = lambda0$2, range[1] = lambda1;
+    boundsStream$1.point = boundsPoint$1;
     p0 = null;
   }
 
   function boundsRingPoint(lambda, phi) {
     if (p0) {
       var delta = lambda - lambda2;
-      deltaSum.add(abs(delta) > 180 ? delta + (delta > 0 ? 360 : -360) : delta);
+      deltaSum.add(abs$1(delta) > 180 ? delta + (delta > 0 ? 360 : -360) : delta);
     } else {
       lambda00$1 = lambda, phi00$1 = phi;
     }
@@ -2458,8 +2486,8 @@
   function boundsRingEnd() {
     boundsRingPoint(lambda00$1, phi00$1);
     areaStream.lineEnd();
-    if (abs(deltaSum) > epsilon) lambda0$1 = -(lambda1 = 180);
-    range$1[0] = lambda0$1, range$1[1] = lambda1;
+    if (abs$1(deltaSum) > epsilon$3) lambda0$2 = -(lambda1 = 180);
+    range[0] = lambda0$2, range[1] = lambda1;
     p0 = null;
   }
 
@@ -2481,9 +2509,9 @@
   function geoBounds(feature) {
     var i, n, a, b, merged, deltaMax, delta;
 
-    phi1 = lambda1 = -(lambda0$1 = phi0 = Infinity);
+    phi1 = lambda1 = -(lambda0$2 = phi0 = Infinity);
     ranges = [];
-    geoStream(feature, boundsStream);
+    geoStream$1(feature, boundsStream$1);
 
     // First, sort ranges by their minimum longitudes.
     if (n = ranges.length) {
@@ -2504,70 +2532,70 @@
       // The final bounding box will be the inverse of this gap.
       for (deltaMax = -Infinity, n = merged.length - 1, i = 0, a = merged[n]; i <= n; a = b, ++i) {
         b = merged[i];
-        if ((delta = angle(a[1], b[0])) > deltaMax) deltaMax = delta, lambda0$1 = b[0], lambda1 = a[1];
+        if ((delta = angle(a[1], b[0])) > deltaMax) deltaMax = delta, lambda0$2 = b[0], lambda1 = a[1];
       }
     }
 
-    ranges = range$1 = null;
+    ranges = range = null;
 
-    return lambda0$1 === Infinity || phi0 === Infinity
+    return lambda0$2 === Infinity || phi0 === Infinity
         ? [[NaN, NaN], [NaN, NaN]]
-        : [[lambda0$1, phi0], [lambda1, phi1]];
+        : [[lambda0$2, phi0], [lambda1, phi1]];
   }
 
-  function longitude(point) {
-    if (abs(point[0]) <= pi)
+  function longitude$1(point) {
+    if (abs$1(point[0]) <= pi$2)
       return point[0];
     else
-      return sign$1(point[0]) * ((abs(point[0]) + pi) % tau - pi);
+      return sign$2(point[0]) * ((abs$1(point[0]) + pi$2) % tau$2 - pi$2);
   }
 
-  function polygonContains(polygon, point) {
-    var lambda = longitude(point),
+  function polygonContains$1(polygon, point) {
+    var lambda = longitude$1(point),
         phi = point[1],
-        sinPhi = sin(phi),
-        normal = [sin(lambda), -cos(lambda), 0],
+        sinPhi = sin$2(phi),
+        normal = [sin$2(lambda), -cos$2(lambda), 0],
         angle = 0,
         winding = 0;
 
-    var sum = new Adder();
+    var sum = new Adder$1();
 
-    if (sinPhi === 1) phi = halfPi + epsilon;
-    else if (sinPhi === -1) phi = -halfPi - epsilon;
+    if (sinPhi === 1) phi = halfPi$2 + epsilon$3;
+    else if (sinPhi === -1) phi = -halfPi$2 - epsilon$3;
 
     for (var i = 0, n = polygon.length; i < n; ++i) {
       if (!(m = (ring = polygon[i]).length)) continue;
       var ring,
           m,
           point0 = ring[m - 1],
-          lambda0 = longitude(point0),
-          phi0 = point0[1] / 2 + quarterPi,
-          sinPhi0 = sin(phi0),
-          cosPhi0 = cos(phi0);
+          lambda0 = longitude$1(point0),
+          phi0 = point0[1] / 2 + quarterPi$1,
+          sinPhi0 = sin$2(phi0),
+          cosPhi0 = cos$2(phi0);
 
       for (var j = 0; j < m; ++j, lambda0 = lambda1, sinPhi0 = sinPhi1, cosPhi0 = cosPhi1, point0 = point1) {
         var point1 = ring[j],
-            lambda1 = longitude(point1),
-            phi1 = point1[1] / 2 + quarterPi,
-            sinPhi1 = sin(phi1),
-            cosPhi1 = cos(phi1),
+            lambda1 = longitude$1(point1),
+            phi1 = point1[1] / 2 + quarterPi$1,
+            sinPhi1 = sin$2(phi1),
+            cosPhi1 = cos$2(phi1),
             delta = lambda1 - lambda0,
             sign = delta >= 0 ? 1 : -1,
             absDelta = sign * delta,
-            antimeridian = absDelta > pi,
+            antimeridian = absDelta > pi$2,
             k = sinPhi0 * sinPhi1;
 
-        sum.add(atan2(k * sign * sin(absDelta), cosPhi0 * cosPhi1 + k * cos(absDelta)));
-        angle += antimeridian ? delta + sign * tau : delta;
+        sum.add(atan2$2(k * sign * sin$2(absDelta), cosPhi0 * cosPhi1 + k * cos$2(absDelta)));
+        angle += antimeridian ? delta + sign * tau$2 : delta;
 
         // Are the longitudes either side of the point’s meridian (lambda),
         // and are the latitudes smaller than the parallel (phi)?
         if (antimeridian ^ lambda0 >= lambda ^ lambda1 >= lambda) {
-          var arc = cartesianCross(cartesian(point0), cartesian(point1));
-          cartesianNormalizeInPlace(arc);
-          var intersection = cartesianCross(normal, arc);
-          cartesianNormalizeInPlace(intersection);
-          var phiArc = (antimeridian ^ delta >= 0 ? -1 : 1) * asin(intersection[2]);
+          var arc = cartesianCross$2(cartesian$2(point0), cartesian$2(point1));
+          cartesianNormalizeInPlace$1(arc);
+          var intersection = cartesianCross$2(normal, arc);
+          cartesianNormalizeInPlace$1(intersection);
+          var phiArc = (antimeridian ^ delta >= 0 ? -1 : 1) * asin$2(intersection[2]);
           if (phi > phiArc || phi === phiArc && (arc[0] || arc[1])) {
             winding += antimeridian ^ delta >= 0 ? 1 : -1;
           }
@@ -2586,65 +2614,65 @@
     // from the point to the South pole.  If it is zero, then the point is the
     // same side as the South pole.
 
-    return (angle < -epsilon || angle < epsilon && sum < -epsilon2) ^ (winding & 1);
+    return (angle < -epsilon$3 || angle < epsilon$3 && sum < -epsilon2$1) ^ (winding & 1);
   }
 
-  var lengthSum,
-      lambda0$2,
+  var lengthSum$1,
+      lambda0$1,
       sinPhi0$1,
       cosPhi0$1;
 
-  var lengthStream = {
-    sphere: noop,
-    point: noop,
-    lineStart: lengthLineStart,
-    lineEnd: noop,
-    polygonStart: noop,
-    polygonEnd: noop
+  var lengthStream$1 = {
+    sphere: noop$1,
+    point: noop$1,
+    lineStart: lengthLineStart$1,
+    lineEnd: noop$1,
+    polygonStart: noop$1,
+    polygonEnd: noop$1
   };
 
-  function lengthLineStart() {
-    lengthStream.point = lengthPointFirst;
-    lengthStream.lineEnd = lengthLineEnd;
+  function lengthLineStart$1() {
+    lengthStream$1.point = lengthPointFirst$1;
+    lengthStream$1.lineEnd = lengthLineEnd$1;
   }
 
-  function lengthLineEnd() {
-    lengthStream.point = lengthStream.lineEnd = noop;
+  function lengthLineEnd$1() {
+    lengthStream$1.point = lengthStream$1.lineEnd = noop$1;
   }
 
-  function lengthPointFirst(lambda, phi) {
-    lambda *= radians, phi *= radians;
-    lambda0$2 = lambda, sinPhi0$1 = sin(phi), cosPhi0$1 = cos(phi);
-    lengthStream.point = lengthPoint;
+  function lengthPointFirst$1(lambda, phi) {
+    lambda *= radians$2, phi *= radians$2;
+    lambda0$1 = lambda, sinPhi0$1 = sin$2(phi), cosPhi0$1 = cos$2(phi);
+    lengthStream$1.point = lengthPoint$1;
   }
 
-  function lengthPoint(lambda, phi) {
-    lambda *= radians, phi *= radians;
-    var sinPhi = sin(phi),
-        cosPhi = cos(phi),
-        delta = abs(lambda - lambda0$2),
-        cosDelta = cos(delta),
-        sinDelta = sin(delta),
+  function lengthPoint$1(lambda, phi) {
+    lambda *= radians$2, phi *= radians$2;
+    var sinPhi = sin$2(phi),
+        cosPhi = cos$2(phi),
+        delta = abs$1(lambda - lambda0$1),
+        cosDelta = cos$2(delta),
+        sinDelta = sin$2(delta),
         x = cosPhi * sinDelta,
         y = cosPhi0$1 * sinPhi - sinPhi0$1 * cosPhi * cosDelta,
         z = sinPhi0$1 * sinPhi + cosPhi0$1 * cosPhi * cosDelta;
-    lengthSum.add(atan2(sqrt(x * x + y * y), z));
-    lambda0$2 = lambda, sinPhi0$1 = sinPhi, cosPhi0$1 = cosPhi;
+    lengthSum$1.add(atan2$2(sqrt$2(x * x + y * y), z));
+    lambda0$1 = lambda, sinPhi0$1 = sinPhi, cosPhi0$1 = cosPhi;
   }
 
-  function length(object) {
-    lengthSum = new Adder();
-    geoStream(object, lengthStream);
-    return +lengthSum;
+  function length$1(object) {
+    lengthSum$1 = new Adder$1();
+    geoStream$1(object, lengthStream$1);
+    return +lengthSum$1;
   }
 
-  var coordinates = [null, null],
-      object = {type: "LineString", coordinates: coordinates};
+  var coordinates$1 = [null, null],
+      object$1 = {type: "LineString", coordinates: coordinates$1};
 
-  function geoDistance(a, b) {
-    coordinates[0] = a;
-    coordinates[1] = b;
-    return length(object);
+  function geoDistance$1(a, b) {
+    coordinates$1[0] = a;
+    coordinates$1[1] = b;
+    return length$1(object$1);
   }
 
   var containsObjectType = {
@@ -2700,21 +2728,21 @@
   }
 
   function containsPoint(coordinates, point) {
-    return geoDistance(coordinates, point) === 0;
+    return geoDistance$1(coordinates, point) === 0;
   }
 
   function containsLine(coordinates, point) {
     var ao, bo, ab;
     for (var i = 0, n = coordinates.length; i < n; i++) {
-      bo = geoDistance(coordinates[i], point);
+      bo = geoDistance$1(coordinates[i], point);
       if (bo === 0) return true;
       if (i > 0) {
-        ab = geoDistance(coordinates[i], coordinates[i - 1]);
+        ab = geoDistance$1(coordinates[i], coordinates[i - 1]);
         if (
           ab > 0 &&
           ao <= ab &&
           bo <= ab &&
-          (ao + bo - ab) * (1 - Math.pow((ao - bo) / ab, 2)) < epsilon2 * ab
+          (ao + bo - ab) * (1 - Math.pow((ao - bo) / ab, 2)) < epsilon2$1 * ab
         )
           return true;
       }
@@ -2724,7 +2752,7 @@
   }
 
   function containsPolygon(coordinates, point) {
-    return !!polygonContains(coordinates.map(ringRadians), pointRadians(point));
+    return !!polygonContains$1(coordinates.map(ringRadians), pointRadians(point));
   }
 
   function ringRadians(ring) {
@@ -2732,7 +2760,7 @@
   }
 
   function pointRadians(point) {
-    return [point[0] * radians, point[1] * radians];
+    return [point[0] * radians$2, point[1] * radians$2];
   }
 
   function geoContains(object, point) {
@@ -2742,12 +2770,12 @@
   }
 
   function graticuleX(y0, y1, dy) {
-    var y = range(y0, y1 - epsilon, dy).concat(y1);
+    var y = range$1(y0, y1 - epsilon$3, dy).concat(y1);
     return function(x) { return y.map(function(y) { return [x, y]; }); };
   }
 
   function graticuleY(x0, x1, dx) {
-    var x = range(x0, x1 - epsilon, dx).concat(x1);
+    var x = range$1(x0, x1 - epsilon$3, dx).concat(x1);
     return function(y) { return x.map(function(x) { return [x, y]; }); };
   }
 
@@ -2763,10 +2791,10 @@
     }
 
     function lines() {
-      return range(ceil(X0 / DX) * DX, X1, DX).map(X)
-          .concat(range(ceil(Y0 / DY) * DY, Y1, DY).map(Y))
-          .concat(range(ceil(x0 / dx) * dx, x1, dx).filter(function(x) { return abs(x % DX) > epsilon; }).map(x))
-          .concat(range(ceil(y0 / dy) * dy, y1, dy).filter(function(y) { return abs(y % DY) > epsilon; }).map(y));
+      return range$1(ceil(X0 / DX) * DX, X1, DX).map(X)
+          .concat(range$1(ceil(Y0 / DY) * DY, Y1, DY).map(Y))
+          .concat(range$1(ceil(x0 / dx) * dx, x1, dx).filter(function(x) { return abs$1(x % DX) > epsilon$3; }).map(x))
+          .concat(range$1(ceil(y0 / dy) * dy, y1, dy).filter(function(y) { return abs$1(y % DY) > epsilon$3; }).map(y));
     }
 
     graticule.lines = function() {
@@ -2836,8 +2864,8 @@
     };
 
     return graticule
-        .extentMajor([[-180, -90 + epsilon], [180, 90 - epsilon]])
-        .extentMinor([[-180, -80 - epsilon], [180, 80 + epsilon]]);
+        .extentMajor([[-180, -90 + epsilon$3], [180, 90 - epsilon$3]])
+        .extentMinor([[-180, -80 - epsilon$3], [180, 80 + epsilon$3]]);
   }
 
   function graticule10() {
@@ -2845,33 +2873,33 @@
   }
 
   function geoInterpolate(a, b) {
-    var x0 = a[0] * radians,
-        y0 = a[1] * radians,
-        x1 = b[0] * radians,
-        y1 = b[1] * radians,
-        cy0 = cos(y0),
-        sy0 = sin(y0),
-        cy1 = cos(y1),
-        sy1 = sin(y1),
-        kx0 = cy0 * cos(x0),
-        ky0 = cy0 * sin(x0),
-        kx1 = cy1 * cos(x1),
-        ky1 = cy1 * sin(x1),
-        d = 2 * asin(sqrt(haversin(y1 - y0) + cy0 * cy1 * haversin(x1 - x0))),
-        k = sin(d);
+    var x0 = a[0] * radians$2,
+        y0 = a[1] * radians$2,
+        x1 = b[0] * radians$2,
+        y1 = b[1] * radians$2,
+        cy0 = cos$2(y0),
+        sy0 = sin$2(y0),
+        cy1 = cos$2(y1),
+        sy1 = sin$2(y1),
+        kx0 = cy0 * cos$2(x0),
+        ky0 = cy0 * sin$2(x0),
+        kx1 = cy1 * cos$2(x1),
+        ky1 = cy1 * sin$2(x1),
+        d = 2 * asin$2(sqrt$2(haversin(y1 - y0) + cy0 * cy1 * haversin(x1 - x0))),
+        k = sin$2(d);
 
     var interpolate = d ? function(t) {
-      var B = sin(t *= d) / k,
-          A = sin(d - t) / k,
+      var B = sin$2(t *= d) / k,
+          A = sin$2(d - t) / k,
           x = A * kx0 + B * kx1,
           y = A * ky0 + B * ky1,
           z = A * sy0 + B * sy1;
       return [
-        atan2(y, x) * degrees,
-        atan2(z, sqrt(x * x + y * y)) * degrees
+        atan2$2(y, x) * degrees$2,
+        atan2$2(z, sqrt$2(x * x + y * y)) * degrees$2
       ];
     } : function() {
-      return [x0 * degrees, y0 * degrees];
+      return [x0 * degrees$2, y0 * degrees$2];
     };
 
     interpolate.distance = d;
@@ -2879,23 +2907,111 @@
     return interpolate;
   }
 
-  function _slicedToArray$2(arr, i) {
-    return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$2();
+  function _classCallCheck$1(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
   }
 
-  function _arrayWithHoles$2(arr) {
+  function _inherits$1(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) _setPrototypeOf$1(subClass, superClass);
+  }
+
+  function _getPrototypeOf$1(o) {
+    _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf$1(o);
+  }
+
+  function _setPrototypeOf$1(o, p) {
+    _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf$1(o, p);
+  }
+
+  function _isNativeReflectConstruct$1() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _assertThisInitialized$1(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn$1(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized$1(self);
+  }
+
+  function _createSuper$1(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct$1();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf$1(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf$1(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn$1(this, result);
+    };
+  }
+
+  function _slicedToArray$3(arr, i) {
+    return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$3();
+  }
+
+  function _arrayWithHoles$3(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArrayLimit$2(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  function _iterableToArrayLimit$3(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -2914,16 +3030,16 @@
     return _arr;
   }
 
-  function _unsupportedIterableToArray$1(o, minLen) {
+  function _unsupportedIterableToArray$3(o, minLen) {
     if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+    if (typeof o === "string") return _arrayLikeToArray$3(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor) n = o.constructor.name;
     if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$3(o, minLen);
   }
 
-  function _arrayLikeToArray$1(arr, len) {
+  function _arrayLikeToArray$3(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
 
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
@@ -2931,15 +3047,15 @@
     return arr2;
   }
 
-  function _nonIterableRest$2() {
+  function _nonIterableRest$3() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it;
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
 
-    if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
-      if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") {
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray$3(o)) || allowArrayLike && o && typeof o.length === "number") {
         if (it) o = it;
         var i = 0;
 
@@ -2971,7 +3087,7 @@
         err;
     return {
       s: function () {
-        it = o[Symbol.iterator]();
+        it = it.call(o);
       },
       n: function () {
         var step = it.next();
@@ -2999,7 +3115,7 @@
     var prevPnt = null;
     lineCoords.forEach(function (pnt) {
       if (prevPnt) {
-        var dist = geoDistance(pnt, prevPnt) * 180 / Math.PI;
+        var dist = geoDistance$1(pnt, prevPnt) * 180 / Math.PI;
 
         if (dist > maxDegDistance) {
           var interpol = geoInterpolate(prevPnt, pnt);
@@ -3018,197 +3134,207 @@
     return result;
   };
 
-  var THREE = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE$8 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    BufferGeometry: three.BufferGeometry,
-    Float32BufferAttribute: three.Float32BufferAttribute,
-    Geometry: three.Geometry
+    BufferGeometry: three$1.BufferGeometry,
+    Float32BufferAttribute: three$1.Float32BufferAttribute
   };
 
-  var setAttributeFn = new THREE.BufferGeometry().setAttribute ? 'setAttribute' : 'addAttribute';
+  var setAttributeFn$1 = new THREE$8.BufferGeometry().setAttribute ? 'setAttribute' : 'addAttribute';
 
-  function GeoJsonGeometry(geoJson) {
-    var _this = this;
+  var GeoJsonGeometry = /*#__PURE__*/function (_THREE$BufferGeometry) {
+    _inherits$1(GeoJsonGeometry, _THREE$BufferGeometry);
 
-    var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-    var resolution = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
-    THREE.BufferGeometry.call(this);
-    this.type = 'GeoJsonGeometry';
-    this.parameters = {
-      geoJson: geoJson,
-      radius: radius,
-      resolution: resolution
-    }; // process various geometry types
+    var _super = _createSuper$1(GeoJsonGeometry);
 
-    var groups = ({
-      Point: genPoint,
-      MultiPoint: genMultiPoint,
-      LineString: genLineString,
-      MultiLineString: genMultiLineString,
-      Polygon: genPolygon,
-      MultiPolygon: genMultiPolygon
-    }[geoJson.type] || function () {
-      return [];
-    })(geoJson.coordinates, radius); // concat groups
+    function GeoJsonGeometry(geoJson) {
+      var _this;
+
+      var radius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var resolution = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+
+      _classCallCheck$1(this, GeoJsonGeometry);
+
+      _this = _super.call(this);
+      _this.type = 'GeoJsonGeometry';
+      _this.parameters = {
+        geoJson: geoJson,
+        radius: radius,
+        resolution: resolution
+      }; // process various geometry types
+
+      var groups = ({
+        Point: genPoint,
+        MultiPoint: genMultiPoint,
+        LineString: genLineString,
+        MultiLineString: genMultiLineString,
+        Polygon: genPolygon,
+        MultiPolygon: genMultiPolygon
+      }[geoJson.type] || function () {
+        return [];
+      })(geoJson.coordinates, radius); // concat groups
 
 
-    var indices = [],
-        vertices = [];
-    var groupCnt = 0;
-    groups.forEach(function (newG) {
-      var prevIndCnt = indices.length;
-      concatGroup({
-        indices: indices,
-        vertices: vertices
-      }, newG);
+      var indices = [],
+          vertices = [];
+      var groupCnt = 0;
+      groups.forEach(function (newG) {
+        var prevIndCnt = indices.length;
+        concatGroup({
+          indices: indices,
+          vertices: vertices
+        }, newG);
 
-      _this.addGroup(prevIndCnt, indices.length - prevIndCnt, groupCnt++);
-    }); // build geometry
+        _this.addGroup(prevIndCnt, indices.length - prevIndCnt, groupCnt++);
+      }); // build geometry
 
-    indices.length && this.setIndex(indices);
-    vertices.length && this[setAttributeFn]('position', new THREE.Float32BufferAttribute(vertices, 3)); //
+      indices.length && _this.setIndex(indices);
+      vertices.length && _this[setAttributeFn$1]('position', new THREE$8.Float32BufferAttribute(vertices, 3)); //
 
-    function genPoint(coords, r) {
-      var vertices = polar2Cartesian$1(coords[1], coords[0], r);
-      var indices = [];
-      return [{
-        vertices: vertices,
-        indices: indices
-      }];
-    }
-
-    function genMultiPoint(coords, r) {
-      var result = {
-        vertices: [],
-        indices: []
-      };
-      coords.map(function (c) {
-        return genPoint(c, r);
-      }).forEach(function (_ref) {
-        var _ref2 = _slicedToArray$2(_ref, 1),
-            newPnt = _ref2[0];
-
-        concatGroup(result, newPnt);
-      });
-      return [result];
-    }
-
-    function genLineString(coords, r) {
-      var coords3d = interpolateLine(coords, resolution).map(function (_ref3) {
-        var _ref4 = _slicedToArray$2(_ref3, 2),
-            lng = _ref4[0],
-            lat = _ref4[1];
-
-        return polar2Cartesian$1(lat, lng, r);
-      });
-
-      var _earcut$flatten = earcut_1.flatten([coords3d]),
-          vertices = _earcut$flatten.vertices;
-
-      var numPoints = Math.round(vertices.length / 3);
-      var indices = [];
-
-      for (var vIdx = 1; vIdx < numPoints; vIdx++) {
-        indices.push(vIdx - 1, vIdx);
+      function genPoint(coords, r) {
+        var vertices = polar2Cartesian$1(coords[1], coords[0], r);
+        var indices = [];
+        return [{
+          vertices: vertices,
+          indices: indices
+        }];
       }
 
-      return [{
-        vertices: vertices,
-        indices: indices
-      }];
-    }
+      function genMultiPoint(coords, r) {
+        var result = {
+          vertices: [],
+          indices: []
+        };
+        coords.map(function (c) {
+          return genPoint(c, r);
+        }).forEach(function (_ref) {
+          var _ref2 = _slicedToArray$3(_ref, 1),
+              newPnt = _ref2[0];
 
-    function genMultiLineString(coords, r) {
-      var result = {
-        vertices: [],
-        indices: []
-      };
-      coords.map(function (c) {
-        return genLineString(c, r);
-      }).forEach(function (_ref5) {
-        var _ref6 = _slicedToArray$2(_ref5, 1),
-            newLine = _ref6[0];
+          concatGroup(result, newPnt);
+        });
+        return [result];
+      }
 
-        concatGroup(result, newLine);
-      });
-      return [result];
-    }
-
-    function genPolygon(coords, r) {
-      var coords3d = coords.map(function (coordsSegment) {
-        return interpolateLine(coordsSegment, resolution).map(function (_ref7) {
-          var _ref8 = _slicedToArray$2(_ref7, 2),
-              lng = _ref8[0],
-              lat = _ref8[1];
+      function genLineString(coords, r) {
+        var coords3d = interpolateLine(coords, resolution).map(function (_ref3) {
+          var _ref4 = _slicedToArray$3(_ref3, 2),
+              lng = _ref4[0],
+              lat = _ref4[1];
 
           return polar2Cartesian$1(lat, lng, r);
         });
-      }); // Each point generates 3 vertice items (x,y,z).
 
-      var _earcut$flatten2 = earcut_1.flatten(coords3d),
-          vertices = _earcut$flatten2.vertices,
-          holes = _earcut$flatten2.holes;
+        var _earcut$flatten = earcut$1.flatten([coords3d]),
+            vertices = _earcut$flatten.vertices;
 
-      var firstHoleIdx = holes[0] || Infinity;
-      var outerVertices = vertices.slice(0, firstHoleIdx);
-      var holeVertices = vertices.slice(firstHoleIdx);
-      var holesIdx = new Set(holes);
-      var numPoints = Math.round(vertices.length / 3);
-      var outerIndices = [],
-          holeIndices = [];
+        var numPoints = Math.round(vertices.length / 3);
+        var indices = [];
 
-      for (var vIdx = 1; vIdx < numPoints; vIdx++) {
-        if (!holesIdx.has(vIdx)) {
-          if (vIdx < firstHoleIdx) {
-            outerIndices.push(vIdx - 1, vIdx);
-          } else {
-            holeIndices.push(vIdx - 1 - firstHoleIdx, vIdx - firstHoleIdx);
+        for (var vIdx = 1; vIdx < numPoints; vIdx++) {
+          indices.push(vIdx - 1, vIdx);
+        }
+
+        return [{
+          vertices: vertices,
+          indices: indices
+        }];
+      }
+
+      function genMultiLineString(coords, r) {
+        var result = {
+          vertices: [],
+          indices: []
+        };
+        coords.map(function (c) {
+          return genLineString(c, r);
+        }).forEach(function (_ref5) {
+          var _ref6 = _slicedToArray$3(_ref5, 1),
+              newLine = _ref6[0];
+
+          concatGroup(result, newLine);
+        });
+        return [result];
+      }
+
+      function genPolygon(coords, r) {
+        var coords3d = coords.map(function (coordsSegment) {
+          return interpolateLine(coordsSegment, resolution).map(function (_ref7) {
+            var _ref8 = _slicedToArray$3(_ref7, 2),
+                lng = _ref8[0],
+                lat = _ref8[1];
+
+            return polar2Cartesian$1(lat, lng, r);
+          });
+        }); // Each point generates 3 vertice items (x,y,z).
+
+        var _earcut$flatten2 = earcut$1.flatten(coords3d),
+            vertices = _earcut$flatten2.vertices,
+            holes = _earcut$flatten2.holes;
+
+        var firstHoleIdx = holes[0] || Infinity;
+        var outerVertices = vertices.slice(0, firstHoleIdx);
+        var holeVertices = vertices.slice(firstHoleIdx);
+        var holesIdx = new Set(holes);
+        var numPoints = Math.round(vertices.length / 3);
+        var outerIndices = [],
+            holeIndices = [];
+
+        for (var vIdx = 1; vIdx < numPoints; vIdx++) {
+          if (!holesIdx.has(vIdx)) {
+            if (vIdx < firstHoleIdx) {
+              outerIndices.push(vIdx - 1, vIdx);
+            } else {
+              holeIndices.push(vIdx - 1 - firstHoleIdx, vIdx - firstHoleIdx);
+            }
           }
         }
+
+        var groups = [{
+          indices: outerIndices,
+          vertices: outerVertices
+        }];
+
+        if (holes.length) {
+          groups.push({
+            indices: holeIndices,
+            vertices: holeVertices
+          });
+        }
+
+        return groups;
       }
 
-      var groups = [{
-        indices: outerIndices,
-        vertices: outerVertices
-      }];
+      function genMultiPolygon(coords, r) {
+        var outer = {
+          vertices: [],
+          indices: []
+        };
+        var holes = {
+          vertices: [],
+          indices: []
+        };
+        coords.map(function (c) {
+          return genPolygon(c, r);
+        }).forEach(function (_ref9) {
+          var _ref10 = _slicedToArray$3(_ref9, 2),
+              newOuter = _ref10[0],
+              newHoles = _ref10[1];
 
-      if (holes.length) {
-        groups.push({
-          indices: holeIndices,
-          vertices: holeVertices
+          concatGroup(outer, newOuter);
+          newHoles && concatGroup(holes, newHoles);
         });
+        var groups = [outer];
+        holes.vertices.length && groups.push(holes);
+        return groups;
       }
 
-      return groups;
+      return _this;
     }
 
-    function genMultiPolygon(coords, r) {
-      var outer = {
-        vertices: [],
-        indices: []
-      };
-      var holes = {
-        vertices: [],
-        indices: []
-      };
-      coords.map(function (c) {
-        return genPolygon(c, r);
-      }).forEach(function (_ref9) {
-        var _ref10 = _slicedToArray$2(_ref9, 2),
-            newOuter = _ref10[0],
-            newHoles = _ref10[1];
+    return GeoJsonGeometry;
+  }(THREE$8.BufferGeometry); //
 
-        concatGroup(outer, newOuter);
-        newHoles && concatGroup(holes, newHoles);
-      });
-      var groups = [outer];
-      holes.vertices.length && groups.push(holes);
-      return groups;
-    }
-  }
-
-  GeoJsonGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
-  GeoJsonGeometry.prototype.constructor = GeoJsonGeometry; //
 
   function concatGroup(main, extra) {
     var prevVertCnt = Math.round(main.vertices.length / 3);
@@ -3244,29 +3370,94 @@
     ];
   }
 
-  var t={backside:!0,coefficient:.5,color:"gold",size:2,power:1};function a(o,n,i){return new three.ShaderMaterial({depthWrite:!1,fragmentShader:"\nuniform vec3 color;\nuniform float coefficient;\nuniform float power;\nvarying vec3 vVertexNormal;\nvarying vec3 vVertexWorldPosition;\nvoid main() {\n  vec3 worldCameraToVertex = vVertexWorldPosition - cameraPosition;\n  vec3 viewCameraToVertex\t= (viewMatrix * vec4(worldCameraToVertex, 0.0)).xyz;\n  viewCameraToVertex = normalize(viewCameraToVertex);\n  float intensity\t= pow(\n    coefficient + dot(vVertexNormal, viewCameraToVertex),\n    power\n  );\n  gl_FragColor = vec4(color, intensity);\n}",transparent:!0,uniforms:{coefficient:{value:o},color:{value:new three.Color(n)},power:{value:i}},vertexShader:"\nvarying vec3 vVertexWorldPosition;\nvarying vec3 vVertexNormal;\nvoid main() {\n  vVertexNormal\t= normalize(normalMatrix * normal);\n  vVertexWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;\n  gl_Position\t= projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n"})}function c(e,r){var n=e.clone(),i=new Array(n.vertices.length);return n.faces.forEach(function(e){e instanceof three.Face3?(i[e.a]=e.vertexNormals[0],i[e.b]=e.vertexNormals[1],i[e.c]=e.vertexNormals[2]):console.error("Face needs to be an instance of THREE.Face3.");}),n.vertices.forEach(function(e,o){var n=i[o],t=n.y,a=n.z;e.x+=n.x*r,e.y+=t*r,e.z+=a*r;}),n}function v(e,r){void 0===r&&(r=t);var o=r.backside,v=r.coefficient,l=r.color,f=r.power,m=c(e,r.size),x=a(v,l,f);return o&&(x.side=three.BackSide),new three.Mesh(m,x)}
+  var THREE$7 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  : {
+    BackSide: three$1.BackSide,
+    BufferAttribute: three$1.BufferAttribute,
+    Color: three$1.Color,
+    Mesh: three$1.Mesh,
+    ShaderMaterial: three$1.ShaderMaterial
+  };
+  var fragmentShader = "\nuniform vec3 color;\nuniform float coefficient;\nuniform float power;\nvarying vec3 vVertexNormal;\nvarying vec3 vVertexWorldPosition;\nvoid main() {\n  vec3 worldCameraToVertex = vVertexWorldPosition - cameraPosition;\n  vec3 viewCameraToVertex\t= (viewMatrix * vec4(worldCameraToVertex, 0.0)).xyz;\n  viewCameraToVertex = normalize(viewCameraToVertex);\n  float intensity\t= pow(\n    coefficient + dot(vVertexNormal, viewCameraToVertex),\n    power\n  );\n  gl_FragColor = vec4(color, intensity);\n}";
+  var vertexShader = "\nvarying vec3 vVertexWorldPosition;\nvarying vec3 vVertexNormal;\nvoid main() {\n  vVertexNormal\t= normalize(normalMatrix * normal);\n  vVertexWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;\n  gl_Position\t= projectionMatrix * modelViewMatrix * vec4(position, 1.0);\n}\n";
+  var defaultOptions = {
+    backside: true,
+    coefficient: 0.5,
+    color: 'gold',
+    size: 2,
+    power: 1
+  }; // Based off: http://stemkoski.blogspot.fr/2013/07/shaders-in-threejs-glow-and-halo.html
 
-  var THREE$1 = window.THREE ? _objectSpread2(_objectSpread2({}, window.THREE), {}, {
-    SphereGeometry: three.SphereGeometry // keep SphereGeometry from module for instance matching with three-glow-mesh
+  function createGlowMaterial(coefficient, color, power) {
+    return new THREE$7.ShaderMaterial({
+      depthWrite: false,
+      fragmentShader: fragmentShader,
+      transparent: true,
+      uniforms: {
+        coefficient: {
+          value: coefficient
+        },
+        color: {
+          value: new THREE$7.Color(color)
+        },
+        power: {
+          value: power
+        }
+      },
+      vertexShader: vertexShader
+    });
+  }
+  function createGlowGeometry(geometry, size) {
+    // expect BufferGeometry
+    var glowGeometry = geometry.clone(); // Resize vertex positions according to normals
 
-  }) : {
-    Color: three.Color,
-    LineBasicMaterial: three.LineBasicMaterial,
-    LineSegments: three.LineSegments,
-    Mesh: three.Mesh,
-    MeshPhongMaterial: three.MeshPhongMaterial,
-    SphereGeometry: three.SphereGeometry,
-    TextureLoader: three.TextureLoader
+    var position = new Float32Array(geometry.attributes.position.count * 3);
+
+    for (var idx = 0, len = position.length; idx < len; idx++) {
+      var normal = geometry.attributes.normal.array[idx];
+      var curPos = geometry.attributes.position.array[idx];
+      position[idx] = curPos + normal * size;
+    }
+
+    glowGeometry.setAttribute('position', new THREE$7.BufferAttribute(position, 3));
+    return glowGeometry;
+  }
+  function createGlowMesh(geometry) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultOptions;
+    var backside = options.backside,
+        coefficient = options.coefficient,
+        color = options.color,
+        size = options.size,
+        power = options.power;
+    var glowGeometry = createGlowGeometry(geometry, size);
+    var glowMaterial = createGlowMaterial(coefficient, color, power);
+
+    if (backside) {
+      glowMaterial.side = THREE$7.BackSide;
+    }
+
+    return new THREE$7.Mesh(glowGeometry, glowMaterial);
+  }
+
+  var THREE$6 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  : {
+    Color: three$1.Color,
+    LineBasicMaterial: three$1.LineBasicMaterial,
+    LineSegments: three$1.LineSegments,
+    Mesh: three$1.Mesh,
+    MeshPhongMaterial: three$1.MeshPhongMaterial,
+    SphereBufferGeometry: three$1.SphereBufferGeometry,
+    TextureLoader: three$1.TextureLoader
   };
 
-  var GlobeLayerKapsule = index({
+  var GlobeLayerKapsule = index$2({
     props: {
       globeImageUrl: {},
       bumpImageUrl: {},
-      showAtmosphere: {
+      showGlobe: {
         "default": true,
-        onChange: function onChange(showAtmosphere, state) {
-          state.atmosphereObj.visible = !!showAtmosphere;
+        onChange: function onChange(showGlobe, state) {
+          state.globeObj.visible = !!showGlobe;
         },
         triggerUpdate: false
       },
@@ -3277,48 +3468,56 @@
         },
         triggerUpdate: false
       },
+      showAtmosphere: {
+        "default": true,
+        onChange: function onChange(showAtmosphere, state) {
+          state.atmosphereObj && (state.atmosphereObj.visible = !!showAtmosphere);
+        },
+        triggerUpdate: false
+      },
+      atmosphereColor: {
+        "default": 'lightskyblue'
+      },
+      atmosphereAltitude: {
+        "default": 0.15
+      },
       onReady: {
         "default": function _default() {},
         triggerUpdate: false
       }
     },
     methods: {
-      globeMaterial: function globeMaterial(state) {
+      globeMaterial: function globeMaterial(state, _globeMaterial) {
+        if (_globeMaterial !== undefined) {
+          state.globeObj.material = _globeMaterial || state.defaultGlobeMaterial;
+          return this;
+        }
+
         return state.globeObj.material;
       }
     },
     stateInit: function stateInit() {
       // create globe
-      var globeGeometry = new THREE$1.SphereGeometry(GLOBE_RADIUS, 75, 75);
-      var globeObj = new THREE$1.Mesh(globeGeometry, new THREE$1.MeshPhongMaterial({
+      var globeGeometry = new THREE$6.SphereBufferGeometry(GLOBE_RADIUS, 75, 75);
+      var defaultGlobeMaterial = new THREE$6.MeshPhongMaterial({
         color: 0x000000,
         transparent: true
-      }));
+      });
+      var globeObj = new THREE$6.Mesh(globeGeometry, defaultGlobeMaterial);
       globeObj.rotation.y = -Math.PI / 2; // face prime meridian along Z axis
 
       globeObj.__globeObjType = 'globe'; // Add object type
-      // create atmosphere
-
-      var atmosphereObj = v(globeObj.geometry, {
-        backside: true,
-        color: 'lightskyblue',
-        size: GLOBE_RADIUS * 0.15,
-        power: 3.5,
-        // dispersion
-        coefficient: 0.1
-      });
-      atmosphereObj.__globeObjType = 'atmosphere'; // Add object type
       // create graticules
 
-      var graticulesObj = new THREE$1.LineSegments(new GeoJsonGeometry(graticule10(), GLOBE_RADIUS, 2), new THREE$1.LineBasicMaterial({
+      var graticulesObj = new THREE$6.LineSegments(new GeoJsonGeometry(graticule10(), GLOBE_RADIUS, 2), new THREE$6.LineBasicMaterial({
         color: 'lightgrey',
         transparent: true,
         opacity: 0.1
       }));
       return {
         globeObj: globeObj,
-        atmosphereObj: atmosphereObj,
-        graticulesObj: graticulesObj
+        graticulesObj: graticulesObj,
+        defaultGlobeMaterial: defaultGlobeMaterial
       };
     },
     init: function init(threeObj, state) {
@@ -3327,8 +3526,6 @@
 
       state.scene = threeObj;
       state.scene.add(state.globeObj); // add globe
-
-      state.scene.add(state.atmosphereObj); // add atmosphere
 
       state.scene.add(state.graticulesObj); // add graticules
 
@@ -3340,9 +3537,9 @@
       if (changedProps.hasOwnProperty('globeImageUrl')) {
         if (!state.globeImageUrl) {
           // Black globe if no image
-          !globeMaterial.color && (globeMaterial.color = new THREE$1.Color(0x000000));
+          !globeMaterial.color && (globeMaterial.color = new THREE$6.Color(0x000000));
         } else {
-          new THREE$1.TextureLoader().load(state.globeImageUrl, function (texture) {
+          new THREE$6.TextureLoader().load(state.globeImageUrl, function (texture) {
             globeMaterial.map = texture;
             globeMaterial.color = null;
             globeMaterial.needsUpdate = true; // ready when first globe image finishes loading (asynchronously to allow 1 frame to load texture)
@@ -3357,10 +3554,33 @@
           globeMaterial.bumpMap = null;
           globeMaterial.needsUpdate = true;
         } else {
-          state.bumpImageUrl && new THREE$1.TextureLoader().load(state.bumpImageUrl, function (texture) {
+          state.bumpImageUrl && new THREE$6.TextureLoader().load(state.bumpImageUrl, function (texture) {
             globeMaterial.bumpMap = texture;
             globeMaterial.needsUpdate = true;
           });
+        }
+      }
+
+      if (changedProps.hasOwnProperty('atmosphereColor') || changedProps.hasOwnProperty('atmosphereAltitude')) {
+        if (state.atmosphereObj) {
+          // recycle previous atmosphere object
+          state.scene.remove(state.atmosphereObj);
+          emptyObject(state.atmosphereObj);
+        }
+
+        if (state.atmosphereColor && state.atmosphereAltitude) {
+          var obj = state.atmosphereObj = createGlowMesh(state.globeObj.geometry, {
+            backside: true,
+            color: state.atmosphereColor,
+            size: GLOBE_RADIUS * state.atmosphereAltitude,
+            power: 3.5,
+            // dispersion
+            coefficient: 0.1
+          });
+          obj.visible = !!state.showAtmosphere;
+          obj.__globeObjType = 'atmosphere'; // Add object type
+
+          state.scene.add(obj);
         }
       }
 
@@ -3372,6 +3592,928 @@
     }
   });
 
+  class BufferGeometryUtils {
+
+  	static computeTangents( geometry ) {
+
+  		geometry.computeTangents();
+  		console.warn( 'THREE.BufferGeometryUtils: .computeTangents() has been removed. Use BufferGeometry.computeTangents() instead.' );
+
+  	}
+
+  	/**
+  	 * @param  {Array<BufferGeometry>} geometries
+  	 * @param  {Boolean} useGroups
+  	 * @return {BufferGeometry}
+  	 */
+  	static mergeBufferGeometries( geometries, useGroups = false ) {
+
+  		const isIndexed = geometries[ 0 ].index !== null;
+
+  		const attributesUsed = new Set( Object.keys( geometries[ 0 ].attributes ) );
+  		const morphAttributesUsed = new Set( Object.keys( geometries[ 0 ].morphAttributes ) );
+
+  		const attributes = {};
+  		const morphAttributes = {};
+
+  		const morphTargetsRelative = geometries[ 0 ].morphTargetsRelative;
+
+  		const mergedGeometry = new three$1.BufferGeometry();
+
+  		let offset = 0;
+
+  		for ( let i = 0; i < geometries.length; ++ i ) {
+
+  			const geometry = geometries[ i ];
+  			let attributesCount = 0;
+
+  			// ensure that all geometries are indexed, or none
+
+  			if ( isIndexed !== ( geometry.index !== null ) ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '. All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.' );
+  				return null;
+
+  			}
+
+  			// gather attributes, exit early if they're different
+
+  			for ( const name in geometry.attributes ) {
+
+  				if ( ! attributesUsed.has( name ) ) {
+
+  					console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.' );
+  					return null;
+
+  				}
+
+  				if ( attributes[ name ] === undefined ) attributes[ name ] = [];
+
+  				attributes[ name ].push( geometry.attributes[ name ] );
+
+  				attributesCount ++;
+
+  			}
+
+  			// ensure geometries have the same number of attributes
+
+  			if ( attributesCount !== attributesUsed.size ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '. Make sure all geometries have the same number of attributes.' );
+  				return null;
+
+  			}
+
+  			// gather morph attributes, exit early if they're different
+
+  			if ( morphTargetsRelative !== geometry.morphTargetsRelative ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '. .morphTargetsRelative must be consistent throughout all geometries.' );
+  				return null;
+
+  			}
+
+  			for ( const name in geometry.morphAttributes ) {
+
+  				if ( ! morphAttributesUsed.has( name ) ) {
+
+  					console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '.  .morphAttributes must be consistent throughout all geometries.' );
+  					return null;
+
+  				}
+
+  				if ( morphAttributes[ name ] === undefined ) morphAttributes[ name ] = [];
+
+  				morphAttributes[ name ].push( geometry.morphAttributes[ name ] );
+
+  			}
+
+  			// gather .userData
+
+  			mergedGeometry.userData.mergedUserData = mergedGeometry.userData.mergedUserData || [];
+  			mergedGeometry.userData.mergedUserData.push( geometry.userData );
+
+  			if ( useGroups ) {
+
+  				let count;
+
+  				if ( isIndexed ) {
+
+  					count = geometry.index.count;
+
+  				} else if ( geometry.attributes.position !== undefined ) {
+
+  					count = geometry.attributes.position.count;
+
+  				} else {
+
+  					console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed with geometry at index ' + i + '. The geometry must have either an index or a position attribute' );
+  					return null;
+
+  				}
+
+  				mergedGeometry.addGroup( offset, count, i );
+
+  				offset += count;
+
+  			}
+
+  		}
+
+  		// merge indices
+
+  		if ( isIndexed ) {
+
+  			let indexOffset = 0;
+  			const mergedIndex = [];
+
+  			for ( let i = 0; i < geometries.length; ++ i ) {
+
+  				const index = geometries[ i ].index;
+
+  				for ( let j = 0; j < index.count; ++ j ) {
+
+  					mergedIndex.push( index.getX( j ) + indexOffset );
+
+  				}
+
+  				indexOffset += geometries[ i ].attributes.position.count;
+
+  			}
+
+  			mergedGeometry.setIndex( mergedIndex );
+
+  		}
+
+  		// merge attributes
+
+  		for ( const name in attributes ) {
+
+  			const mergedAttribute = this.mergeBufferAttributes( attributes[ name ] );
+
+  			if ( ! mergedAttribute ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the ' + name + ' attribute.' );
+  				return null;
+
+  			}
+
+  			mergedGeometry.setAttribute( name, mergedAttribute );
+
+  		}
+
+  		// merge morph attributes
+
+  		for ( const name in morphAttributes ) {
+
+  			const numMorphTargets = morphAttributes[ name ][ 0 ].length;
+
+  			if ( numMorphTargets === 0 ) break;
+
+  			mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
+  			mergedGeometry.morphAttributes[ name ] = [];
+
+  			for ( let i = 0; i < numMorphTargets; ++ i ) {
+
+  				const morphAttributesToMerge = [];
+
+  				for ( let j = 0; j < morphAttributes[ name ].length; ++ j ) {
+
+  					morphAttributesToMerge.push( morphAttributes[ name ][ j ][ i ] );
+
+  				}
+
+  				const mergedMorphAttribute = this.mergeBufferAttributes( morphAttributesToMerge );
+
+  				if ( ! mergedMorphAttribute ) {
+
+  					console.error( 'THREE.BufferGeometryUtils: .mergeBufferGeometries() failed while trying to merge the ' + name + ' morphAttribute.' );
+  					return null;
+
+  				}
+
+  				mergedGeometry.morphAttributes[ name ].push( mergedMorphAttribute );
+
+  			}
+
+  		}
+
+  		return mergedGeometry;
+
+  	}
+
+  	/**
+  	 * @param {Array<BufferAttribute>} attributes
+  	 * @return {BufferAttribute}
+  	 */
+  	static mergeBufferAttributes( attributes ) {
+
+  		let TypedArray;
+  		let itemSize;
+  		let normalized;
+  		let arrayLength = 0;
+
+  		for ( let i = 0; i < attributes.length; ++ i ) {
+
+  			const attribute = attributes[ i ];
+
+  			if ( attribute.isInterleavedBufferAttribute ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. InterleavedBufferAttributes are not supported.' );
+  				return null;
+
+  			}
+
+  			if ( TypedArray === undefined ) TypedArray = attribute.array.constructor;
+  			if ( TypedArray !== attribute.array.constructor ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.' );
+  				return null;
+
+  			}
+
+  			if ( itemSize === undefined ) itemSize = attribute.itemSize;
+  			if ( itemSize !== attribute.itemSize ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.' );
+  				return null;
+
+  			}
+
+  			if ( normalized === undefined ) normalized = attribute.normalized;
+  			if ( normalized !== attribute.normalized ) {
+
+  				console.error( 'THREE.BufferGeometryUtils: .mergeBufferAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.' );
+  				return null;
+
+  			}
+
+  			arrayLength += attribute.array.length;
+
+  		}
+
+  		const array = new TypedArray( arrayLength );
+  		let offset = 0;
+
+  		for ( let i = 0; i < attributes.length; ++ i ) {
+
+  			array.set( attributes[ i ].array, offset );
+
+  			offset += attributes[ i ].array.length;
+
+  		}
+
+  		return new three$1.BufferAttribute( array, itemSize, normalized );
+
+  	}
+
+  	/**
+  	 * @param {Array<BufferAttribute>} attributes
+  	 * @return {Array<InterleavedBufferAttribute>}
+  	 */
+  	static interleaveAttributes( attributes ) {
+
+  		// Interleaves the provided attributes into an InterleavedBuffer and returns
+  		// a set of InterleavedBufferAttributes for each attribute
+  		let TypedArray;
+  		let arrayLength = 0;
+  		let stride = 0;
+
+  		// calculate the the length and type of the interleavedBuffer
+  		for ( let i = 0, l = attributes.length; i < l; ++ i ) {
+
+  			const attribute = attributes[ i ];
+
+  			if ( TypedArray === undefined ) TypedArray = attribute.array.constructor;
+  			if ( TypedArray !== attribute.array.constructor ) {
+
+  				console.error( 'AttributeBuffers of different types cannot be interleaved' );
+  				return null;
+
+  			}
+
+  			arrayLength += attribute.array.length;
+  			stride += attribute.itemSize;
+
+  		}
+
+  		// Create the set of buffer attributes
+  		const interleavedBuffer = new three$1.InterleavedBuffer( new TypedArray( arrayLength ), stride );
+  		let offset = 0;
+  		const res = [];
+  		const getters = [ 'getX', 'getY', 'getZ', 'getW' ];
+  		const setters = [ 'setX', 'setY', 'setZ', 'setW' ];
+
+  		for ( let j = 0, l = attributes.length; j < l; j ++ ) {
+
+  			const attribute = attributes[ j ];
+  			const itemSize = attribute.itemSize;
+  			const count = attribute.count;
+  			const iba = new three$1.InterleavedBufferAttribute( interleavedBuffer, itemSize, offset, attribute.normalized );
+  			res.push( iba );
+
+  			offset += itemSize;
+
+  			// Move the data for each attribute into the new interleavedBuffer
+  			// at the appropriate offset
+  			for ( let c = 0; c < count; c ++ ) {
+
+  				for ( let k = 0; k < itemSize; k ++ ) {
+
+  					iba[ setters[ k ] ]( c, attribute[ getters[ k ] ]( c ) );
+
+  				}
+
+  			}
+
+  		}
+
+  		return res;
+
+  	}
+
+  	/**
+  	 * @param {Array<BufferGeometry>} geometry
+  	 * @return {number}
+  	 */
+  	static estimateBytesUsed( geometry ) {
+
+  		// Return the estimated memory used by this geometry in bytes
+  		// Calculate using itemSize, count, and BYTES_PER_ELEMENT to account
+  		// for InterleavedBufferAttributes.
+  		let mem = 0;
+  		for ( const name in geometry.attributes ) {
+
+  			const attr = geometry.getAttribute( name );
+  			mem += attr.count * attr.itemSize * attr.array.BYTES_PER_ELEMENT;
+
+  		}
+
+  		const indices = geometry.getIndex();
+  		mem += indices ? indices.count * indices.itemSize * indices.array.BYTES_PER_ELEMENT : 0;
+  		return mem;
+
+  	}
+
+  	/**
+  	 * @param {BufferGeometry} geometry
+  	 * @param {number} tolerance
+  	 * @return {BufferGeometry>}
+  	 */
+  	static mergeVertices( geometry, tolerance = 1e-4 ) {
+
+  		tolerance = Math.max( tolerance, Number.EPSILON );
+
+  		// Generate an index buffer if the geometry doesn't have one, or optimize it
+  		// if it's already available.
+  		const hashToIndex = {};
+  		const indices = geometry.getIndex();
+  		const positions = geometry.getAttribute( 'position' );
+  		const vertexCount = indices ? indices.count : positions.count;
+
+  		// next value for triangle indices
+  		let nextIndex = 0;
+
+  		// attributes and new attribute arrays
+  		const attributeNames = Object.keys( geometry.attributes );
+  		const attrArrays = {};
+  		const morphAttrsArrays = {};
+  		const newIndices = [];
+  		const getters = [ 'getX', 'getY', 'getZ', 'getW' ];
+
+  		// initialize the arrays
+  		for ( let i = 0, l = attributeNames.length; i < l; i ++ ) {
+
+  			const name = attributeNames[ i ];
+
+  			attrArrays[ name ] = [];
+
+  			const morphAttr = geometry.morphAttributes[ name ];
+  			if ( morphAttr ) {
+
+  				morphAttrsArrays[ name ] = new Array( morphAttr.length ).fill().map( () => [] );
+
+  			}
+
+  		}
+
+  		// convert the error tolerance to an amount of decimal places to truncate to
+  		const decimalShift = Math.log10( 1 / tolerance );
+  		const shiftMultiplier = Math.pow( 10, decimalShift );
+  		for ( let i = 0; i < vertexCount; i ++ ) {
+
+  			const index = indices ? indices.getX( i ) : i;
+
+  			// Generate a hash for the vertex attributes at the current index 'i'
+  			let hash = '';
+  			for ( let j = 0, l = attributeNames.length; j < l; j ++ ) {
+
+  				const name = attributeNames[ j ];
+  				const attribute = geometry.getAttribute( name );
+  				const itemSize = attribute.itemSize;
+
+  				for ( let k = 0; k < itemSize; k ++ ) {
+
+  					// double tilde truncates the decimal value
+  					hash += `${ ~ ~ ( attribute[ getters[ k ] ]( index ) * shiftMultiplier ) },`;
+
+  				}
+
+  			}
+
+  			// Add another reference to the vertex if it's already
+  			// used by another index
+  			if ( hash in hashToIndex ) {
+
+  				newIndices.push( hashToIndex[ hash ] );
+
+  			} else {
+
+  				// copy data to the new index in the attribute arrays
+  				for ( let j = 0, l = attributeNames.length; j < l; j ++ ) {
+
+  					const name = attributeNames[ j ];
+  					const attribute = geometry.getAttribute( name );
+  					const morphAttr = geometry.morphAttributes[ name ];
+  					const itemSize = attribute.itemSize;
+  					const newarray = attrArrays[ name ];
+  					const newMorphArrays = morphAttrsArrays[ name ];
+
+  					for ( let k = 0; k < itemSize; k ++ ) {
+
+  						const getterFunc = getters[ k ];
+  						newarray.push( attribute[ getterFunc ]( index ) );
+
+  						if ( morphAttr ) {
+
+  							for ( let m = 0, ml = morphAttr.length; m < ml; m ++ ) {
+
+  								newMorphArrays[ m ].push( morphAttr[ m ][ getterFunc ]( index ) );
+
+  							}
+
+  						}
+
+  					}
+
+  				}
+
+  				hashToIndex[ hash ] = nextIndex;
+  				newIndices.push( nextIndex );
+  				nextIndex ++;
+
+  			}
+
+  		}
+
+  		// Generate typed arrays from new attribute arrays and update
+  		// the attributeBuffers
+  		const result = geometry.clone();
+  		for ( let i = 0, l = attributeNames.length; i < l; i ++ ) {
+
+  			const name = attributeNames[ i ];
+  			const oldAttribute = geometry.getAttribute( name );
+
+  			const buffer = new oldAttribute.array.constructor( attrArrays[ name ] );
+  			const attribute = new three$1.BufferAttribute( buffer, oldAttribute.itemSize, oldAttribute.normalized );
+
+  			result.setAttribute( name, attribute );
+
+  			// Update the attribute arrays
+  			if ( name in morphAttrsArrays ) {
+
+  				for ( let j = 0; j < morphAttrsArrays[ name ].length; j ++ ) {
+
+  					const oldMorphAttribute = geometry.morphAttributes[ name ][ j ];
+
+  					const buffer = new oldMorphAttribute.array.constructor( morphAttrsArrays[ name ][ j ] );
+  					const morphAttribute = new three$1.BufferAttribute( buffer, oldMorphAttribute.itemSize, oldMorphAttribute.normalized );
+  					result.morphAttributes[ name ][ j ] = morphAttribute;
+
+  				}
+
+  			}
+
+  		}
+
+  		// indices
+
+  		result.setIndex( newIndices );
+
+  		return result;
+
+  	}
+
+  	/**
+  	 * @param {BufferGeometry} geometry
+  	 * @param {number} drawMode
+  	 * @return {BufferGeometry>}
+  	 */
+  	static toTrianglesDrawMode( geometry, drawMode ) {
+
+  		if ( drawMode === three$1.TrianglesDrawMode ) {
+
+  			console.warn( 'THREE.BufferGeometryUtils.toTrianglesDrawMode(): Geometry already defined as triangles.' );
+  			return geometry;
+
+  		}
+
+  		if ( drawMode === three$1.TriangleFanDrawMode || drawMode === three$1.TriangleStripDrawMode ) {
+
+  			let index = geometry.getIndex();
+
+  			// generate index if not present
+
+  			if ( index === null ) {
+
+  				const indices = [];
+
+  				const position = geometry.getAttribute( 'position' );
+
+  				if ( position !== undefined ) {
+
+  					for ( let i = 0; i < position.count; i ++ ) {
+
+  						indices.push( i );
+
+  					}
+
+  					geometry.setIndex( indices );
+  					index = geometry.getIndex();
+
+  				} else {
+
+  					console.error( 'THREE.BufferGeometryUtils.toTrianglesDrawMode(): Undefined position attribute. Processing not possible.' );
+  					return geometry;
+
+  				}
+
+  			}
+
+  			//
+
+  			const numberOfTriangles = index.count - 2;
+  			const newIndices = [];
+
+  			if ( drawMode === three$1.TriangleFanDrawMode ) {
+
+  				// gl.TRIANGLE_FAN
+
+  				for ( let i = 1; i <= numberOfTriangles; i ++ ) {
+
+  					newIndices.push( index.getX( 0 ) );
+  					newIndices.push( index.getX( i ) );
+  					newIndices.push( index.getX( i + 1 ) );
+
+  				}
+
+  			} else {
+
+  				// gl.TRIANGLE_STRIP
+
+  				for ( let i = 0; i < numberOfTriangles; i ++ ) {
+
+  					if ( i % 2 === 0 ) {
+
+  						newIndices.push( index.getX( i ) );
+  						newIndices.push( index.getX( i + 1 ) );
+  						newIndices.push( index.getX( i + 2 ) );
+
+  					} else {
+
+  						newIndices.push( index.getX( i + 2 ) );
+  						newIndices.push( index.getX( i + 1 ) );
+  						newIndices.push( index.getX( i ) );
+
+  					}
+
+  				}
+
+  			}
+
+  			if ( ( newIndices.length / 3 ) !== numberOfTriangles ) {
+
+  				console.error( 'THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unable to generate correct amount of triangles.' );
+
+  			}
+
+  			// build final geometry
+
+  			const newGeometry = geometry.clone();
+  			newGeometry.setIndex( newIndices );
+  			newGeometry.clearGroups();
+
+  			return newGeometry;
+
+  		} else {
+
+  			console.error( 'THREE.BufferGeometryUtils.toTrianglesDrawMode(): Unknown draw mode:', drawMode );
+  			return geometry;
+
+  		}
+
+  	}
+
+  	/**
+  	 * Calculates the morphed attributes of a morphed/skinned BufferGeometry.
+  	 * Helpful for Raytracing or Decals.
+  	 * @param {Mesh | Line | Points} object An instance of Mesh, Line or Points.
+  	 * @return {Object} An Object with original position/normal attributes and morphed ones.
+  	 */
+  	static computeMorphedAttributes( object ) {
+
+  		if ( object.geometry.isBufferGeometry !== true ) {
+
+  			console.error( 'THREE.BufferGeometryUtils: Geometry is not of type BufferGeometry.' );
+  			return null;
+
+  		}
+
+  		const _vA = new three$1.Vector3();
+  		const _vB = new three$1.Vector3();
+  		const _vC = new three$1.Vector3();
+
+  		const _tempA = new three$1.Vector3();
+  		const _tempB = new three$1.Vector3();
+  		const _tempC = new three$1.Vector3();
+
+  		const _morphA = new three$1.Vector3();
+  		const _morphB = new three$1.Vector3();
+  		const _morphC = new three$1.Vector3();
+
+  		function _calculateMorphedAttributeData(
+  			object,
+  			material,
+  			attribute,
+  			morphAttribute,
+  			morphTargetsRelative,
+  			a,
+  			b,
+  			c,
+  			modifiedAttributeArray
+  		) {
+
+  			_vA.fromBufferAttribute( attribute, a );
+  			_vB.fromBufferAttribute( attribute, b );
+  			_vC.fromBufferAttribute( attribute, c );
+
+  			const morphInfluences = object.morphTargetInfluences;
+
+  			if ( material.morphTargets && morphAttribute && morphInfluences ) {
+
+  				_morphA.set( 0, 0, 0 );
+  				_morphB.set( 0, 0, 0 );
+  				_morphC.set( 0, 0, 0 );
+
+  				for ( let i = 0, il = morphAttribute.length; i < il; i ++ ) {
+
+  					const influence = morphInfluences[ i ];
+  					const morph = morphAttribute[ i ];
+
+  					if ( influence === 0 ) continue;
+
+  					_tempA.fromBufferAttribute( morph, a );
+  					_tempB.fromBufferAttribute( morph, b );
+  					_tempC.fromBufferAttribute( morph, c );
+
+  					if ( morphTargetsRelative ) {
+
+  						_morphA.addScaledVector( _tempA, influence );
+  						_morphB.addScaledVector( _tempB, influence );
+  						_morphC.addScaledVector( _tempC, influence );
+
+  					} else {
+
+  						_morphA.addScaledVector( _tempA.sub( _vA ), influence );
+  						_morphB.addScaledVector( _tempB.sub( _vB ), influence );
+  						_morphC.addScaledVector( _tempC.sub( _vC ), influence );
+
+  					}
+
+  				}
+
+  				_vA.add( _morphA );
+  				_vB.add( _morphB );
+  				_vC.add( _morphC );
+
+  			}
+
+  			if ( object.isSkinnedMesh ) {
+
+  				object.boneTransform( a, _vA );
+  				object.boneTransform( b, _vB );
+  				object.boneTransform( c, _vC );
+
+  			}
+
+  			modifiedAttributeArray[ a * 3 + 0 ] = _vA.x;
+  			modifiedAttributeArray[ a * 3 + 1 ] = _vA.y;
+  			modifiedAttributeArray[ a * 3 + 2 ] = _vA.z;
+  			modifiedAttributeArray[ b * 3 + 0 ] = _vB.x;
+  			modifiedAttributeArray[ b * 3 + 1 ] = _vB.y;
+  			modifiedAttributeArray[ b * 3 + 2 ] = _vB.z;
+  			modifiedAttributeArray[ c * 3 + 0 ] = _vC.x;
+  			modifiedAttributeArray[ c * 3 + 1 ] = _vC.y;
+  			modifiedAttributeArray[ c * 3 + 2 ] = _vC.z;
+
+  		}
+
+  		const geometry = object.geometry;
+  		const material = object.material;
+
+  		let a, b, c;
+  		const index = geometry.index;
+  		const positionAttribute = geometry.attributes.position;
+  		const morphPosition = geometry.morphAttributes.position;
+  		const morphTargetsRelative = geometry.morphTargetsRelative;
+  		const normalAttribute = geometry.attributes.normal;
+  		const morphNormal = geometry.morphAttributes.position;
+
+  		const groups = geometry.groups;
+  		const drawRange = geometry.drawRange;
+  		let i, j, il, jl;
+  		let group, groupMaterial;
+  		let start, end;
+
+  		const modifiedPosition = new Float32Array( positionAttribute.count * positionAttribute.itemSize );
+  		const modifiedNormal = new Float32Array( normalAttribute.count * normalAttribute.itemSize );
+
+  		if ( index !== null ) {
+
+  			// indexed buffer geometry
+
+  			if ( Array.isArray( material ) ) {
+
+  				for ( i = 0, il = groups.length; i < il; i ++ ) {
+
+  					group = groups[ i ];
+  					groupMaterial = material[ group.materialIndex ];
+
+  					start = Math.max( group.start, drawRange.start );
+  					end = Math.min( ( group.start + group.count ), ( drawRange.start + drawRange.count ) );
+
+  					for ( j = start, jl = end; j < jl; j += 3 ) {
+
+  						a = index.getX( j );
+  						b = index.getX( j + 1 );
+  						c = index.getX( j + 2 );
+
+  						_calculateMorphedAttributeData(
+  							object,
+  							groupMaterial,
+  							positionAttribute,
+  							morphPosition,
+  							morphTargetsRelative,
+  							a, b, c,
+  							modifiedPosition
+  						);
+
+  						_calculateMorphedAttributeData(
+  							object,
+  							groupMaterial,
+  							normalAttribute,
+  							morphNormal,
+  							morphTargetsRelative,
+  							a, b, c,
+  							modifiedNormal
+  						);
+
+  					}
+
+  				}
+
+  			} else {
+
+  				start = Math.max( 0, drawRange.start );
+  				end = Math.min( index.count, ( drawRange.start + drawRange.count ) );
+
+  				for ( i = start, il = end; i < il; i += 3 ) {
+
+  					a = index.getX( i );
+  					b = index.getX( i + 1 );
+  					c = index.getX( i + 2 );
+
+  					_calculateMorphedAttributeData(
+  						object,
+  						material,
+  						positionAttribute,
+  						morphPosition,
+  						morphTargetsRelative,
+  						a, b, c,
+  						modifiedPosition
+  					);
+
+  					_calculateMorphedAttributeData(
+  						object,
+  						material,
+  						normalAttribute,
+  						morphNormal,
+  						morphTargetsRelative,
+  						a, b, c,
+  						modifiedNormal
+  					);
+
+  				}
+
+  			}
+
+  		} else if ( positionAttribute !== undefined ) {
+
+  			// non-indexed buffer geometry
+
+  			if ( Array.isArray( material ) ) {
+
+  				for ( i = 0, il = groups.length; i < il; i ++ ) {
+
+  					group = groups[ i ];
+  					groupMaterial = material[ group.materialIndex ];
+
+  					start = Math.max( group.start, drawRange.start );
+  					end = Math.min( ( group.start + group.count ), ( drawRange.start + drawRange.count ) );
+
+  					for ( j = start, jl = end; j < jl; j += 3 ) {
+
+  						a = j;
+  						b = j + 1;
+  						c = j + 2;
+
+  						_calculateMorphedAttributeData(
+  							object,
+  							groupMaterial,
+  							positionAttribute,
+  							morphPosition,
+  							morphTargetsRelative,
+  							a, b, c,
+  							modifiedPosition
+  						);
+
+  						_calculateMorphedAttributeData(
+  							object,
+  							groupMaterial,
+  							normalAttribute,
+  							morphNormal,
+  							morphTargetsRelative,
+  							a, b, c,
+  							modifiedNormal
+  						);
+
+  					}
+
+  				}
+
+  			} else {
+
+  				start = Math.max( 0, drawRange.start );
+  				end = Math.min( positionAttribute.count, ( drawRange.start + drawRange.count ) );
+
+  				for ( i = start, il = end; i < il; i += 3 ) {
+
+  					a = i;
+  					b = i + 1;
+  					c = i + 2;
+
+  					_calculateMorphedAttributeData(
+  						object,
+  						material,
+  						positionAttribute,
+  						morphPosition,
+  						morphTargetsRelative,
+  						a, b, c,
+  						modifiedPosition
+  					);
+
+  					_calculateMorphedAttributeData(
+  						object,
+  						material,
+  						normalAttribute,
+  						morphNormal,
+  						morphTargetsRelative,
+  						a, b, c,
+  						modifiedNormal
+  					);
+
+  				}
+
+  			}
+
+  		}
+
+  		const morphedPositionAttribute = new three$1.Float32BufferAttribute( modifiedPosition, 3 );
+  		const morphedNormalAttribute = new three$1.Float32BufferAttribute( modifiedNormal, 3 );
+
+  		return {
+
+  			positionAttribute: positionAttribute,
+  			normalAttribute: normalAttribute,
+  			morphedPositionAttribute: morphedPositionAttribute,
+  			morphedNormalAttribute: morphedNormalAttribute
+
+  		};
+
+  	}
+
+  }
+
   var index$1 = (function (p) {
     return p instanceof Function ? p // fn
     : typeof p === 'string' ? function (obj) {
@@ -3382,12 +4524,9 @@
     };
   }); // constant
 
-  function createCommonjsModule(fn) {
-    var module = { exports: {} };
-  	return fn(module, module.exports), module.exports;
-  }
+  var tinycolor = {exports: {}};
 
-  var tinycolor = createCommonjsModule(function (module) {
+  (function (module) {
   // TinyColor v1.4.2
   // https://github.com/bgrins/TinyColor
   // Brian Grinstead, MIT License
@@ -4570,7 +5709,7 @@
   }
 
   // Node: Export function
-  if ( module.exports) {
+  if (module.exports) {
       module.exports = tinycolor;
   }
   // AMD/requirejs: Define the module
@@ -4579,17 +5718,19 @@
   }
 
   })(Math);
-  });
+  }(tinycolor));
+
+  var tinyColor = tinycolor.exports;
 
   var colorStr2Hex = function colorStr2Hex(str) {
-    return isNaN(str) ? parseInt(tinycolor(str).toHex(), 16) : str;
+    return isNaN(str) ? parseInt(tinyColor(str).toHex(), 16) : str;
   };
 
   var colorAlpha = function colorAlpha(str) {
-    return isNaN(str) ? tinycolor(str).getAlpha() : 1;
+    return isNaN(str) ? tinyColor(str).getAlpha() : 1;
   };
 
-  function _objectWithoutPropertiesLoose(source, excluded) {
+  function _objectWithoutPropertiesLoose$1(source, excluded) {
     if (source == null) return {};
     var target = {};
     var sourceKeys = Object.keys(source);
@@ -4604,10 +5745,10 @@
     return target;
   }
 
-  function _objectWithoutProperties(source, excluded) {
+  function _objectWithoutProperties$1(source, excluded) {
     if (source == null) return {};
 
-    var target = _objectWithoutPropertiesLoose(source, excluded);
+    var target = _objectWithoutPropertiesLoose$1(source, excluded);
 
     var key, i;
 
@@ -4625,42 +5766,38 @@
     return target;
   }
 
-  function _slicedToArray$3(arr, i) {
-    return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _nonIterableRest$3();
+  function _slicedToArray$2(arr, i) {
+    return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$2();
   }
 
-  function _toConsumableArray$1(arr) {
-    return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _nonIterableSpread$1();
+  function _toConsumableArray$2(arr) {
+    return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread$2();
   }
 
-  function _arrayWithoutHoles$1(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+  function _arrayWithoutHoles$2(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
   }
 
-  function _arrayWithHoles$3(arr) {
+  function _arrayWithHoles$2(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArray$1(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  function _iterableToArray$2(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
-  function _iterableToArrayLimit$3(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
+  function _iterableToArrayLimit$2(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
 
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -4679,12 +5816,29 @@
     return _arr;
   }
 
-  function _nonIterableSpread$1() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  function _unsupportedIterableToArray$2(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
   }
 
-  function _nonIterableRest$3() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  function _arrayLikeToArray$2(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread$2() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _nonIterableRest$2() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   function _toPrimitive(input, hint) {
@@ -4706,7 +5860,7 @@
     return typeof key === "symbol" ? key : String(key);
   }
 
-  var index$2 = (function () {
+  var index = (function () {
     var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var keyAccessors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var multiItem = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -4728,7 +5882,7 @@
         if (isProp) {
           var _itemVal = itemVal,
               propVal = _itemVal[keyAccessor],
-              rest = _objectWithoutProperties(_itemVal, [keyAccessor].map(_toPropertyKey));
+              rest = _objectWithoutProperties$1(_itemVal, [keyAccessor].map(_toPropertyKey));
 
           key = propVal;
           itemVal = rest;
@@ -4792,11 +5946,11 @@
           });
         } else {
           Object.entries(node).forEach(function (_ref2) {
-            var _ref3 = _slicedToArray$3(_ref2, 2),
+            var _ref3 = _slicedToArray$2(_ref2, 2),
                 key = _ref3[0],
                 val = _ref3[1];
 
-            return flatten(val, [].concat(_toConsumableArray$1(accKeys), [key]));
+            return flatten(val, [].concat(_toConsumableArray$2(accKeys), [key]));
           });
         }
       })(indexedResult); //IIFE
@@ -4811,7 +5965,45 @@
     return result;
   });
 
-  function _defineProperty$1(obj, key, value) {
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+
+      if (enumerableOnly) {
+        symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value: value,
@@ -4826,41 +6018,7 @@
     return obj;
   }
 
-  function ownKeys$1(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2$1(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys$1(Object(source), true).forEach(function (key) {
-          _defineProperty$1(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys$1(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _objectWithoutPropertiesLoose$1(source, excluded) {
+  function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
     var target = {};
     var sourceKeys = Object.keys(source);
@@ -4875,10 +6033,10 @@
     return target;
   }
 
-  function _objectWithoutProperties$1(source, excluded) {
+  function _objectWithoutProperties(source, excluded) {
     if (source == null) return {};
 
-    var target = _objectWithoutPropertiesLoose$1(source, excluded);
+    var target = _objectWithoutPropertiesLoose(source, excluded);
 
     var key, i;
 
@@ -4896,42 +6054,38 @@
     return target;
   }
 
-  function _slicedToArray$4(arr, i) {
-    return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _nonIterableRest$4();
+  function _slicedToArray$1(arr, i) {
+    return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest$1();
   }
 
-  function _toConsumableArray$2(arr) {
-    return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _nonIterableSpread$2();
+  function _toConsumableArray$1(arr) {
+    return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread$1();
   }
 
-  function _arrayWithoutHoles$2(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+  function _arrayWithoutHoles$1(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
   }
 
-  function _arrayWithHoles$4(arr) {
+  function _arrayWithHoles$1(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArray$2(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  function _iterableToArray$1(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
-  function _iterableToArrayLimit$4(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
+  function _iterableToArrayLimit$1(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
 
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -4950,12 +6104,29 @@
     return _arr;
   }
 
-  function _nonIterableSpread$2() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  function _unsupportedIterableToArray$1(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
   }
 
-  function _nonIterableRest$4() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  function _arrayLikeToArray$1(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread$1() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _nonIterableRest$1() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   function diffArrays(prev, next, idAccessor) {
@@ -4969,17 +6140,17 @@
       // use object references for comparison
       var prevSet = new Set(prev);
       var nextSet = new Set(next);
-      new Set([].concat(_toConsumableArray$2(prevSet), _toConsumableArray$2(nextSet))).forEach(function (item) {
+      new Set([].concat(_toConsumableArray$1(prevSet), _toConsumableArray$1(nextSet))).forEach(function (item) {
         var type = !prevSet.has(item) ? 'enter' : !nextSet.has(item) ? 'exit' : 'update';
         result[type].push(type === 'update' ? [item, item] : item);
       });
     } else {
       // compare by id (duplicate keys are ignored)
-      var prevById = index$2(prev, idAccessor, false);
-      var nextById = index$2(next, idAccessor, false);
+      var prevById = index(prev, idAccessor, false);
+      var nextById = index(next, idAccessor, false);
       var byId = Object.assign({}, prevById, nextById);
       Object.entries(byId).forEach(function (_ref) {
-        var _ref2 = _slicedToArray$4(_ref, 2),
+        var _ref2 = _slicedToArray$1(_ref, 2),
             id = _ref2[0],
             item = _ref2[1];
 
@@ -5018,7 +6189,7 @@
     } // don't diff data in purge mode
     : diffArrays(prevD, nextD, idAccessor);
     diff.update = diff.update.map(function (_ref4) {
-      var _ref5 = _slicedToArray$4(_ref4, 2),
+      var _ref5 = _slicedToArray$1(_ref4, 2),
           prevD = _ref5[0],
           nextD = _ref5[1];
 
@@ -5031,7 +6202,7 @@
       return nextD;
     });
     diff.exit = diff.exit.concat(removeObjs.map(function (obj) {
-      return _defineProperty$1({}, objBindAttr, obj);
+      return _defineProperty({}, objBindAttr, obj);
     }));
     return diff;
   }
@@ -5052,9 +6223,9 @@
         objBindAttr = _ref7$objBindAttr === void 0 ? '__obj' : _ref7$objBindAttr,
         _ref7$dataBindAttr = _ref7.dataBindAttr,
         dataBindAttr = _ref7$dataBindAttr === void 0 ? '__data' : _ref7$dataBindAttr,
-        dataDiffOptions = _objectWithoutProperties$1(_ref7, ["createObj", "updateObj", "exitObj", "objBindAttr", "dataBindAttr"]);
+        dataDiffOptions = _objectWithoutProperties(_ref7, ["createObj", "updateObj", "exitObj", "objBindAttr", "dataBindAttr"]);
 
-    var _dataBindDiff = dataBindDiff(data, existingObjs, _objectSpread2$1({
+    var _dataBindDiff = dataBindDiff(data, existingObjs, _objectSpread2({
       objBindAttr: objBindAttr,
       dataBindAttr: dataBindAttr
     }, dataDiffOptions)),
@@ -5071,7 +6242,7 @@
       removeObj(obj);
     });
     var newObjs = createObjs(enter);
-    var pointsData = [].concat(_toConsumableArray$2(enter), _toConsumableArray$2(update));
+    var pointsData = [].concat(_toConsumableArray$1(enter), _toConsumableArray$1(update));
     updateObjs(pointsData); // Add new points
 
     newObjs.forEach(appendObj); //
@@ -5109,30 +6280,29 @@
     }, function (obj) {
       scene.remove(obj);
       emptyObject(obj);
-    }, _objectSpread2({
+      obj.hasOwnProperty('__data') && delete obj.__data.__currentTargetD;
+    }, _objectSpread2$1({
       objBindAttr: '__threeObj'
     }, options));
   }
 
-  var THREE$2 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE$5 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    BufferGeometry: three.BufferGeometry,
-    Color: three.Color,
-    CylinderGeometry: three.CylinderGeometry,
-    CylinderBufferGeometry: three.CylinderBufferGeometry,
-    FaceColors: three.FaceColors,
-    Geometry: three.Geometry,
-    Matrix4: three.Matrix4,
-    Mesh: three.Mesh,
-    MeshBasicMaterial: three.MeshBasicMaterial,
-    MeshLambertMaterial: three.MeshLambertMaterial,
-    Object3D: three.Object3D,
-    Vector3: three.Vector3
+    BufferAttribute: three$1.BufferAttribute,
+    BufferGeometry: three$1.BufferGeometry,
+    Color: three$1.Color,
+    CylinderBufferGeometry: three$1.CylinderBufferGeometry,
+    Matrix4: three$1.Matrix4,
+    Mesh: three$1.Mesh,
+    MeshBasicMaterial: three$1.MeshBasicMaterial,
+    MeshLambertMaterial: three$1.MeshLambertMaterial,
+    Object3D: three$1.Object3D,
+    Vector3: three$1.Vector3
   };
   // support multiple method names for backwards threejs compatibility
 
-  var applyMatrix4Fn = new THREE$2.BufferGeometry().applyMatrix4 ? 'applyMatrix4' : 'applyMatrix';
-  var PointsLayerKapsule = index({
+  var applyMatrix4Fn = new THREE$5.BufferGeometry().applyMatrix4 ? 'applyMatrix4' : 'applyMatrix';
+  var PointsLayerKapsule = index$2({
     props: {
       pointsData: {
         "default": []
@@ -5185,13 +6355,13 @@
       var radiusAccessor = index$1(state.pointRadius);
       var colorAccessor = index$1(state.pointColor); // shared geometry
 
-      var pointGeometry = new THREE$2[state.pointsMerge ? 'CylinderGeometry' : 'CylinderBufferGeometry'](1, 1, 1, state.pointResolution);
-      pointGeometry[applyMatrix4Fn](new THREE$2.Matrix4().makeRotationX(Math.PI / 2));
-      pointGeometry[applyMatrix4Fn](new THREE$2.Matrix4().makeTranslation(0, 0, -0.5));
+      var pointGeometry = new THREE$5.CylinderBufferGeometry(1, 1, 1, state.pointResolution);
+      pointGeometry[applyMatrix4Fn](new THREE$5.Matrix4().makeRotationX(Math.PI / 2));
+      pointGeometry[applyMatrix4Fn](new THREE$5.Matrix4().makeTranslation(0, 0, -0.5));
       var pxPerDeg = 2 * Math.PI * GLOBE_RADIUS / 360;
       var pointMaterials = {}; // indexed by color
 
-      var scene = state.pointsMerge ? new THREE$2.Object3D() : state.scene; // use fake scene if merging points
+      var scene = state.pointsMerge ? new THREE$5.Object3D() : state.scene; // use fake scene if merging points
 
       threeDigest(state.pointsData, scene, {
         createObj: createObj,
@@ -5200,22 +6370,32 @@
 
       if (state.pointsMerge) {
         // merge points into a single mesh
-        var pointsGeometry = new THREE$2.Geometry();
-        state.pointsData.forEach(function (d) {
+        var pointsGeometry = !state.pointsData.length ? new THREE$5.BufferGeometry() : BufferGeometryUtils.mergeBufferGeometries(state.pointsData.map(function (d) {
           var obj = d.__threeObj;
           d.__threeObj = undefined; // unbind merged points
-          // color faces
 
-          var color = new THREE$2.Color(colorAccessor(d));
-          obj.geometry.faces.forEach(function (face) {
-            return face.color = color;
-          });
+          var geom = obj.geometry.clone(); // apply mesh world transform to vertices
+
           obj.updateMatrix();
-          pointsGeometry.merge(obj.geometry, obj.matrix);
-        });
-        var points = new THREE$2.Mesh(pointsGeometry, new THREE$2.MeshBasicMaterial({
+          geom[applyMatrix4Fn](obj.matrix); // color vertices
+
+          var color = new THREE$5.Color(colorAccessor(d));
+          var nVertices = geom.attributes.position.count;
+          var colors = new Float32Array(nVertices * 3);
+
+          for (var i = 0, len = nVertices; i < len; i++) {
+            var idx = i * 3;
+            colors[idx] = color.r;
+            colors[idx + 1] = color.g;
+            colors[idx + 2] = color.b;
+          }
+
+          geom.setAttribute('color', new THREE$5.BufferAttribute(colors, 3));
+          return geom;
+        }));
+        var points = new THREE$5.Mesh(pointsGeometry, new THREE$5.MeshBasicMaterial({
           color: 0xffffff,
-          vertexColors: THREE$2.FaceColors,
+          vertexColors: true,
           morphTargets: false
         }));
         points.__globeObjType = 'points'; // Add object type
@@ -5228,7 +6408,7 @@
 
 
       function createObj() {
-        var obj = new THREE$2.Mesh(pointGeometry);
+        var obj = new THREE$5.Mesh(pointGeometry);
         obj.__globeObjType = 'point'; // Add object type
 
         return obj;
@@ -5243,9 +6423,9 @@
               lng = _obj$__currentTargetD.lng; // position cylinder ground
 
 
-          Object.assign(obj.position, polar2Cartesian(lat, lng)); // orientate outwards
+          Object.assign(obj.position, polar2Cartesian$2(lat, lng)); // orientate outwards
 
-          var globeCenter = state.pointsMerge ? new THREE$2.Vector3(0, 0, 0) : state.scene.localToWorld(new THREE$2.Vector3(0, 0, 0)); // translate from local to world coords
+          var globeCenter = state.pointsMerge ? new THREE$5.Vector3(0, 0, 0) : state.scene.localToWorld(new THREE$5.Vector3(0, 0, 0)); // translate from local to world coords
 
           obj.lookAt(globeCenter); // scale radius and altitude
 
@@ -5281,7 +6461,7 @@
           var opacity = colorAlpha(color);
 
           if (!pointMaterials.hasOwnProperty(color)) {
-            pointMaterials[color] = new THREE$2.MeshLambertMaterial({
+            pointMaterials[color] = new THREE$5.MeshLambertMaterial({
               color: colorStr2Hex(color),
               transparent: opacity < 1,
               opacity: opacity
@@ -5293,6 +6473,928 @@
       }
     }
   });
+
+  const epsilon$2 = 1.1102230246251565e-16;
+  const splitter = 134217729;
+  const resulterrbound = (3 + 8 * epsilon$2) * epsilon$2;
+
+  // fast_expansion_sum_zeroelim routine from oritinal code
+  function sum$1(elen, e, flen, f, h) {
+      let Q, Qnew, hh, bvirt;
+      let enow = e[0];
+      let fnow = f[0];
+      let eindex = 0;
+      let findex = 0;
+      if ((fnow > enow) === (fnow > -enow)) {
+          Q = enow;
+          enow = e[++eindex];
+      } else {
+          Q = fnow;
+          fnow = f[++findex];
+      }
+      let hindex = 0;
+      if (eindex < elen && findex < flen) {
+          if ((fnow > enow) === (fnow > -enow)) {
+              Qnew = enow + Q;
+              hh = Q - (Qnew - enow);
+              enow = e[++eindex];
+          } else {
+              Qnew = fnow + Q;
+              hh = Q - (Qnew - fnow);
+              fnow = f[++findex];
+          }
+          Q = Qnew;
+          if (hh !== 0) {
+              h[hindex++] = hh;
+          }
+          while (eindex < elen && findex < flen) {
+              if ((fnow > enow) === (fnow > -enow)) {
+                  Qnew = Q + enow;
+                  bvirt = Qnew - Q;
+                  hh = Q - (Qnew - bvirt) + (enow - bvirt);
+                  enow = e[++eindex];
+              } else {
+                  Qnew = Q + fnow;
+                  bvirt = Qnew - Q;
+                  hh = Q - (Qnew - bvirt) + (fnow - bvirt);
+                  fnow = f[++findex];
+              }
+              Q = Qnew;
+              if (hh !== 0) {
+                  h[hindex++] = hh;
+              }
+          }
+      }
+      while (eindex < elen) {
+          Qnew = Q + enow;
+          bvirt = Qnew - Q;
+          hh = Q - (Qnew - bvirt) + (enow - bvirt);
+          enow = e[++eindex];
+          Q = Qnew;
+          if (hh !== 0) {
+              h[hindex++] = hh;
+          }
+      }
+      while (findex < flen) {
+          Qnew = Q + fnow;
+          bvirt = Qnew - Q;
+          hh = Q - (Qnew - bvirt) + (fnow - bvirt);
+          fnow = f[++findex];
+          Q = Qnew;
+          if (hh !== 0) {
+              h[hindex++] = hh;
+          }
+      }
+      if (Q !== 0 || hindex === 0) {
+          h[hindex++] = Q;
+      }
+      return hindex;
+  }
+
+  function estimate(elen, e) {
+      let Q = e[0];
+      for (let i = 1; i < elen; i++) Q += e[i];
+      return Q;
+  }
+
+  function vec(n) {
+      return new Float64Array(n);
+  }
+
+  const ccwerrboundA = (3 + 16 * epsilon$2) * epsilon$2;
+  const ccwerrboundB = (2 + 12 * epsilon$2) * epsilon$2;
+  const ccwerrboundC = (9 + 64 * epsilon$2) * epsilon$2 * epsilon$2;
+
+  const B$1 = vec(4);
+  const C1 = vec(8);
+  const C2 = vec(12);
+  const D$1 = vec(16);
+  const u = vec(4);
+
+  function orient2dadapt(ax, ay, bx, by, cx, cy, detsum) {
+      let acxtail, acytail, bcxtail, bcytail;
+      let bvirt, c, ahi, alo, bhi, blo, _i, _j, _0, s1, s0, t1, t0, u3;
+
+      const acx = ax - cx;
+      const bcx = bx - cx;
+      const acy = ay - cy;
+      const bcy = by - cy;
+
+      s1 = acx * bcy;
+      c = splitter * acx;
+      ahi = c - (c - acx);
+      alo = acx - ahi;
+      c = splitter * bcy;
+      bhi = c - (c - bcy);
+      blo = bcy - bhi;
+      s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+      t1 = acy * bcx;
+      c = splitter * acy;
+      ahi = c - (c - acy);
+      alo = acy - ahi;
+      c = splitter * bcx;
+      bhi = c - (c - bcx);
+      blo = bcx - bhi;
+      t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+      _i = s0 - t0;
+      bvirt = s0 - _i;
+      B$1[0] = s0 - (_i + bvirt) + (bvirt - t0);
+      _j = s1 + _i;
+      bvirt = _j - s1;
+      _0 = s1 - (_j - bvirt) + (_i - bvirt);
+      _i = _0 - t1;
+      bvirt = _0 - _i;
+      B$1[1] = _0 - (_i + bvirt) + (bvirt - t1);
+      u3 = _j + _i;
+      bvirt = u3 - _j;
+      B$1[2] = _j - (u3 - bvirt) + (_i - bvirt);
+      B$1[3] = u3;
+
+      let det = estimate(4, B$1);
+      let errbound = ccwerrboundB * detsum;
+      if (det >= errbound || -det >= errbound) {
+          return det;
+      }
+
+      bvirt = ax - acx;
+      acxtail = ax - (acx + bvirt) + (bvirt - cx);
+      bvirt = bx - bcx;
+      bcxtail = bx - (bcx + bvirt) + (bvirt - cx);
+      bvirt = ay - acy;
+      acytail = ay - (acy + bvirt) + (bvirt - cy);
+      bvirt = by - bcy;
+      bcytail = by - (bcy + bvirt) + (bvirt - cy);
+
+      if (acxtail === 0 && acytail === 0 && bcxtail === 0 && bcytail === 0) {
+          return det;
+      }
+
+      errbound = ccwerrboundC * detsum + resulterrbound * Math.abs(det);
+      det += (acx * bcytail + bcy * acxtail) - (acy * bcxtail + bcx * acytail);
+      if (det >= errbound || -det >= errbound) return det;
+
+      s1 = acxtail * bcy;
+      c = splitter * acxtail;
+      ahi = c - (c - acxtail);
+      alo = acxtail - ahi;
+      c = splitter * bcy;
+      bhi = c - (c - bcy);
+      blo = bcy - bhi;
+      s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+      t1 = acytail * bcx;
+      c = splitter * acytail;
+      ahi = c - (c - acytail);
+      alo = acytail - ahi;
+      c = splitter * bcx;
+      bhi = c - (c - bcx);
+      blo = bcx - bhi;
+      t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+      _i = s0 - t0;
+      bvirt = s0 - _i;
+      u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+      _j = s1 + _i;
+      bvirt = _j - s1;
+      _0 = s1 - (_j - bvirt) + (_i - bvirt);
+      _i = _0 - t1;
+      bvirt = _0 - _i;
+      u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+      u3 = _j + _i;
+      bvirt = u3 - _j;
+      u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+      u[3] = u3;
+      const C1len = sum$1(4, B$1, 4, u, C1);
+
+      s1 = acx * bcytail;
+      c = splitter * acx;
+      ahi = c - (c - acx);
+      alo = acx - ahi;
+      c = splitter * bcytail;
+      bhi = c - (c - bcytail);
+      blo = bcytail - bhi;
+      s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+      t1 = acy * bcxtail;
+      c = splitter * acy;
+      ahi = c - (c - acy);
+      alo = acy - ahi;
+      c = splitter * bcxtail;
+      bhi = c - (c - bcxtail);
+      blo = bcxtail - bhi;
+      t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+      _i = s0 - t0;
+      bvirt = s0 - _i;
+      u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+      _j = s1 + _i;
+      bvirt = _j - s1;
+      _0 = s1 - (_j - bvirt) + (_i - bvirt);
+      _i = _0 - t1;
+      bvirt = _0 - _i;
+      u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+      u3 = _j + _i;
+      bvirt = u3 - _j;
+      u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+      u[3] = u3;
+      const C2len = sum$1(C1len, C1, 4, u, C2);
+
+      s1 = acxtail * bcytail;
+      c = splitter * acxtail;
+      ahi = c - (c - acxtail);
+      alo = acxtail - ahi;
+      c = splitter * bcytail;
+      bhi = c - (c - bcytail);
+      blo = bcytail - bhi;
+      s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+      t1 = acytail * bcxtail;
+      c = splitter * acytail;
+      ahi = c - (c - acytail);
+      alo = acytail - ahi;
+      c = splitter * bcxtail;
+      bhi = c - (c - bcxtail);
+      blo = bcxtail - bhi;
+      t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+      _i = s0 - t0;
+      bvirt = s0 - _i;
+      u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+      _j = s1 + _i;
+      bvirt = _j - s1;
+      _0 = s1 - (_j - bvirt) + (_i - bvirt);
+      _i = _0 - t1;
+      bvirt = _0 - _i;
+      u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+      u3 = _j + _i;
+      bvirt = u3 - _j;
+      u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+      u[3] = u3;
+      const Dlen = sum$1(C2len, C2, 4, u, D$1);
+
+      return D$1[Dlen - 1];
+  }
+
+  function orient2d(ax, ay, bx, by, cx, cy) {
+      const detleft = (ay - cy) * (bx - cx);
+      const detright = (ax - cx) * (by - cy);
+      const det = detleft - detright;
+
+      if (detleft === 0 || detright === 0 || (detleft > 0) !== (detright > 0)) return det;
+
+      const detsum = Math.abs(detleft + detright);
+      if (Math.abs(det) >= ccwerrboundA * detsum) return det;
+
+      return -orient2dadapt(ax, ay, bx, by, cx, cy, detsum);
+  }
+
+  const EPSILON$1 = Math.pow(2, -52);
+  const EDGE_STACK$1 = new Uint32Array(512);
+
+  class Delaunator$1 {
+
+      static from(points, getX = defaultGetX$1, getY = defaultGetY$1) {
+          const n = points.length;
+          const coords = new Float64Array(n * 2);
+
+          for (let i = 0; i < n; i++) {
+              const p = points[i];
+              coords[2 * i] = getX(p);
+              coords[2 * i + 1] = getY(p);
+          }
+
+          return new Delaunator$1(coords);
+      }
+
+      constructor(coords) {
+          const n = coords.length >> 1;
+          if (n > 0 && typeof coords[0] !== 'number') throw new Error('Expected coords to contain numbers.');
+
+          this.coords = coords;
+
+          // arrays that will store the triangulation graph
+          const maxTriangles = Math.max(2 * n - 5, 0);
+          this._triangles = new Uint32Array(maxTriangles * 3);
+          this._halfedges = new Int32Array(maxTriangles * 3);
+
+          // temporary arrays for tracking the edges of the advancing convex hull
+          this._hashSize = Math.ceil(Math.sqrt(n));
+          this._hullPrev = new Uint32Array(n); // edge to prev edge
+          this._hullNext = new Uint32Array(n); // edge to next edge
+          this._hullTri = new Uint32Array(n); // edge to adjacent triangle
+          this._hullHash = new Int32Array(this._hashSize).fill(-1); // angular edge hash
+
+          // temporary arrays for sorting points
+          this._ids = new Uint32Array(n);
+          this._dists = new Float64Array(n);
+
+          this.update();
+      }
+
+      update() {
+          const {coords, _hullPrev: hullPrev, _hullNext: hullNext, _hullTri: hullTri, _hullHash: hullHash} =  this;
+          const n = coords.length >> 1;
+
+          // populate an array of point indices; calculate input data bbox
+          let minX = Infinity;
+          let minY = Infinity;
+          let maxX = -Infinity;
+          let maxY = -Infinity;
+
+          for (let i = 0; i < n; i++) {
+              const x = coords[2 * i];
+              const y = coords[2 * i + 1];
+              if (x < minX) minX = x;
+              if (y < minY) minY = y;
+              if (x > maxX) maxX = x;
+              if (y > maxY) maxY = y;
+              this._ids[i] = i;
+          }
+          const cx = (minX + maxX) / 2;
+          const cy = (minY + maxY) / 2;
+
+          let minDist = Infinity;
+          let i0, i1, i2;
+
+          // pick a seed point close to the center
+          for (let i = 0; i < n; i++) {
+              const d = dist$1(cx, cy, coords[2 * i], coords[2 * i + 1]);
+              if (d < minDist) {
+                  i0 = i;
+                  minDist = d;
+              }
+          }
+          const i0x = coords[2 * i0];
+          const i0y = coords[2 * i0 + 1];
+
+          minDist = Infinity;
+
+          // find the point closest to the seed
+          for (let i = 0; i < n; i++) {
+              if (i === i0) continue;
+              const d = dist$1(i0x, i0y, coords[2 * i], coords[2 * i + 1]);
+              if (d < minDist && d > 0) {
+                  i1 = i;
+                  minDist = d;
+              }
+          }
+          let i1x = coords[2 * i1];
+          let i1y = coords[2 * i1 + 1];
+
+          let minRadius = Infinity;
+
+          // find the third point which forms the smallest circumcircle with the first two
+          for (let i = 0; i < n; i++) {
+              if (i === i0 || i === i1) continue;
+              const r = circumradius$1(i0x, i0y, i1x, i1y, coords[2 * i], coords[2 * i + 1]);
+              if (r < minRadius) {
+                  i2 = i;
+                  minRadius = r;
+              }
+          }
+          let i2x = coords[2 * i2];
+          let i2y = coords[2 * i2 + 1];
+
+          if (minRadius === Infinity) {
+              // order collinear points by dx (or dy if all x are identical)
+              // and return the list as a hull
+              for (let i = 0; i < n; i++) {
+                  this._dists[i] = (coords[2 * i] - coords[0]) || (coords[2 * i + 1] - coords[1]);
+              }
+              quicksort$1(this._ids, this._dists, 0, n - 1);
+              const hull = new Uint32Array(n);
+              let j = 0;
+              for (let i = 0, d0 = -Infinity; i < n; i++) {
+                  const id = this._ids[i];
+                  if (this._dists[id] > d0) {
+                      hull[j++] = id;
+                      d0 = this._dists[id];
+                  }
+              }
+              this.hull = hull.subarray(0, j);
+              this.triangles = new Uint32Array(0);
+              this.halfedges = new Uint32Array(0);
+              return;
+          }
+
+          // swap the order of the seed points for counter-clockwise orientation
+          if (orient2d(i0x, i0y, i1x, i1y, i2x, i2y) < 0) {
+              const i = i1;
+              const x = i1x;
+              const y = i1y;
+              i1 = i2;
+              i1x = i2x;
+              i1y = i2y;
+              i2 = i;
+              i2x = x;
+              i2y = y;
+          }
+
+          const center = circumcenter$1(i0x, i0y, i1x, i1y, i2x, i2y);
+          this._cx = center.x;
+          this._cy = center.y;
+
+          for (let i = 0; i < n; i++) {
+              this._dists[i] = dist$1(coords[2 * i], coords[2 * i + 1], center.x, center.y);
+          }
+
+          // sort the points by distance from the seed triangle circumcenter
+          quicksort$1(this._ids, this._dists, 0, n - 1);
+
+          // set up the seed triangle as the starting hull
+          this._hullStart = i0;
+          let hullSize = 3;
+
+          hullNext[i0] = hullPrev[i2] = i1;
+          hullNext[i1] = hullPrev[i0] = i2;
+          hullNext[i2] = hullPrev[i1] = i0;
+
+          hullTri[i0] = 0;
+          hullTri[i1] = 1;
+          hullTri[i2] = 2;
+
+          hullHash.fill(-1);
+          hullHash[this._hashKey(i0x, i0y)] = i0;
+          hullHash[this._hashKey(i1x, i1y)] = i1;
+          hullHash[this._hashKey(i2x, i2y)] = i2;
+
+          this.trianglesLen = 0;
+          this._addTriangle(i0, i1, i2, -1, -1, -1);
+
+          for (let k = 0, xp, yp; k < this._ids.length; k++) {
+              const i = this._ids[k];
+              const x = coords[2 * i];
+              const y = coords[2 * i + 1];
+
+              // skip near-duplicate points
+              if (k > 0 && Math.abs(x - xp) <= EPSILON$1 && Math.abs(y - yp) <= EPSILON$1) continue;
+              xp = x;
+              yp = y;
+
+              // skip seed triangle points
+              if (i === i0 || i === i1 || i === i2) continue;
+
+              // find a visible edge on the convex hull using edge hash
+              let start = 0;
+              for (let j = 0, key = this._hashKey(x, y); j < this._hashSize; j++) {
+                  start = hullHash[(key + j) % this._hashSize];
+                  if (start !== -1 && start !== hullNext[start]) break;
+              }
+
+              start = hullPrev[start];
+              let e = start, q;
+              while (q = hullNext[e], orient2d(x, y, coords[2 * e], coords[2 * e + 1], coords[2 * q], coords[2 * q + 1]) >= 0) {
+                  e = q;
+                  if (e === start) {
+                      e = -1;
+                      break;
+                  }
+              }
+              if (e === -1) continue; // likely a near-duplicate point; skip it
+
+              // add the first triangle from the point
+              let t = this._addTriangle(e, i, hullNext[e], -1, -1, hullTri[e]);
+
+              // recursively flip triangles from the point until they satisfy the Delaunay condition
+              hullTri[i] = this._legalize(t + 2);
+              hullTri[e] = t; // keep track of boundary triangles on the hull
+              hullSize++;
+
+              // walk forward through the hull, adding more triangles and flipping recursively
+              let n = hullNext[e];
+              while (q = hullNext[n], orient2d(x, y, coords[2 * n], coords[2 * n + 1], coords[2 * q], coords[2 * q + 1]) < 0) {
+                  t = this._addTriangle(n, i, q, hullTri[i], -1, hullTri[n]);
+                  hullTri[i] = this._legalize(t + 2);
+                  hullNext[n] = n; // mark as removed
+                  hullSize--;
+                  n = q;
+              }
+
+              // walk backward from the other side, adding more triangles and flipping
+              if (e === start) {
+                  while (q = hullPrev[e], orient2d(x, y, coords[2 * q], coords[2 * q + 1], coords[2 * e], coords[2 * e + 1]) < 0) {
+                      t = this._addTriangle(q, i, e, -1, hullTri[e], hullTri[q]);
+                      this._legalize(t + 2);
+                      hullTri[q] = t;
+                      hullNext[e] = e; // mark as removed
+                      hullSize--;
+                      e = q;
+                  }
+              }
+
+              // update the hull indices
+              this._hullStart = hullPrev[i] = e;
+              hullNext[e] = hullPrev[n] = i;
+              hullNext[i] = n;
+
+              // save the two new edges in the hash table
+              hullHash[this._hashKey(x, y)] = i;
+              hullHash[this._hashKey(coords[2 * e], coords[2 * e + 1])] = e;
+          }
+
+          this.hull = new Uint32Array(hullSize);
+          for (let i = 0, e = this._hullStart; i < hullSize; i++) {
+              this.hull[i] = e;
+              e = hullNext[e];
+          }
+
+          // trim typed triangle mesh arrays
+          this.triangles = this._triangles.subarray(0, this.trianglesLen);
+          this.halfedges = this._halfedges.subarray(0, this.trianglesLen);
+      }
+
+      _hashKey(x, y) {
+          return Math.floor(pseudoAngle$1(x - this._cx, y - this._cy) * this._hashSize) % this._hashSize;
+      }
+
+      _legalize(a) {
+          const {_triangles: triangles, _halfedges: halfedges, coords} = this;
+
+          let i = 0;
+          let ar = 0;
+
+          // recursion eliminated with a fixed-size stack
+          while (true) {
+              const b = halfedges[a];
+
+              /* if the pair of triangles doesn't satisfy the Delaunay condition
+               * (p1 is inside the circumcircle of [p0, pl, pr]), flip them,
+               * then do the same check/flip recursively for the new pair of triangles
+               *
+               *           pl                    pl
+               *          /||\                  /  \
+               *       al/ || \bl            al/    \a
+               *        /  ||  \              /      \
+               *       /  a||b  \    flip    /___ar___\
+               *     p0\   ||   /p1   =>   p0\---bl---/p1
+               *        \  ||  /              \      /
+               *       ar\ || /br             b\    /br
+               *          \||/                  \  /
+               *           pr                    pr
+               */
+              const a0 = a - a % 3;
+              ar = a0 + (a + 2) % 3;
+
+              if (b === -1) { // convex hull edge
+                  if (i === 0) break;
+                  a = EDGE_STACK$1[--i];
+                  continue;
+              }
+
+              const b0 = b - b % 3;
+              const al = a0 + (a + 1) % 3;
+              const bl = b0 + (b + 2) % 3;
+
+              const p0 = triangles[ar];
+              const pr = triangles[a];
+              const pl = triangles[al];
+              const p1 = triangles[bl];
+
+              const illegal = inCircle$1(
+                  coords[2 * p0], coords[2 * p0 + 1],
+                  coords[2 * pr], coords[2 * pr + 1],
+                  coords[2 * pl], coords[2 * pl + 1],
+                  coords[2 * p1], coords[2 * p1 + 1]);
+
+              if (illegal) {
+                  triangles[a] = p1;
+                  triangles[b] = p0;
+
+                  const hbl = halfedges[bl];
+
+                  // edge swapped on the other side of the hull (rare); fix the halfedge reference
+                  if (hbl === -1) {
+                      let e = this._hullStart;
+                      do {
+                          if (this._hullTri[e] === bl) {
+                              this._hullTri[e] = a;
+                              break;
+                          }
+                          e = this._hullPrev[e];
+                      } while (e !== this._hullStart);
+                  }
+                  this._link(a, hbl);
+                  this._link(b, halfedges[ar]);
+                  this._link(ar, bl);
+
+                  const br = b0 + (b + 1) % 3;
+
+                  // don't worry about hitting the cap: it can only happen on extremely degenerate input
+                  if (i < EDGE_STACK$1.length) {
+                      EDGE_STACK$1[i++] = br;
+                  }
+              } else {
+                  if (i === 0) break;
+                  a = EDGE_STACK$1[--i];
+              }
+          }
+
+          return ar;
+      }
+
+      _link(a, b) {
+          this._halfedges[a] = b;
+          if (b !== -1) this._halfedges[b] = a;
+      }
+
+      // add a new triangle given vertex indices and adjacent half-edge ids
+      _addTriangle(i0, i1, i2, a, b, c) {
+          const t = this.trianglesLen;
+
+          this._triangles[t] = i0;
+          this._triangles[t + 1] = i1;
+          this._triangles[t + 2] = i2;
+
+          this._link(t, a);
+          this._link(t + 1, b);
+          this._link(t + 2, c);
+
+          this.trianglesLen += 3;
+
+          return t;
+      }
+  }
+
+  // monotonically increases with real angle, but doesn't need expensive trigonometry
+  function pseudoAngle$1(dx, dy) {
+      const p = dx / (Math.abs(dx) + Math.abs(dy));
+      return (dy > 0 ? 3 - p : 1 + p) / 4; // [0..1]
+  }
+
+  function dist$1(ax, ay, bx, by) {
+      const dx = ax - bx;
+      const dy = ay - by;
+      return dx * dx + dy * dy;
+  }
+
+  function inCircle$1(ax, ay, bx, by, cx, cy, px, py) {
+      const dx = ax - px;
+      const dy = ay - py;
+      const ex = bx - px;
+      const ey = by - py;
+      const fx = cx - px;
+      const fy = cy - py;
+
+      const ap = dx * dx + dy * dy;
+      const bp = ex * ex + ey * ey;
+      const cp = fx * fx + fy * fy;
+
+      return dx * (ey * cp - bp * fy) -
+             dy * (ex * cp - bp * fx) +
+             ap * (ex * fy - ey * fx) < 0;
+  }
+
+  function circumradius$1(ax, ay, bx, by, cx, cy) {
+      const dx = bx - ax;
+      const dy = by - ay;
+      const ex = cx - ax;
+      const ey = cy - ay;
+
+      const bl = dx * dx + dy * dy;
+      const cl = ex * ex + ey * ey;
+      const d = 0.5 / (dx * ey - dy * ex);
+
+      const x = (ey * bl - dy * cl) * d;
+      const y = (dx * cl - ex * bl) * d;
+
+      return x * x + y * y;
+  }
+
+  function circumcenter$1(ax, ay, bx, by, cx, cy) {
+      const dx = bx - ax;
+      const dy = by - ay;
+      const ex = cx - ax;
+      const ey = cy - ay;
+
+      const bl = dx * dx + dy * dy;
+      const cl = ex * ex + ey * ey;
+      const d = 0.5 / (dx * ey - dy * ex);
+
+      const x = ax + (ey * bl - dy * cl) * d;
+      const y = ay + (dx * cl - ex * bl) * d;
+
+      return {x, y};
+  }
+
+  function quicksort$1(ids, dists, left, right) {
+      if (right - left <= 20) {
+          for (let i = left + 1; i <= right; i++) {
+              const temp = ids[i];
+              const tempDist = dists[temp];
+              let j = i - 1;
+              while (j >= left && dists[ids[j]] > tempDist) ids[j + 1] = ids[j--];
+              ids[j + 1] = temp;
+          }
+      } else {
+          const median = (left + right) >> 1;
+          let i = left + 1;
+          let j = right;
+          swap$1(ids, median, i);
+          if (dists[ids[left]] > dists[ids[right]]) swap$1(ids, left, right);
+          if (dists[ids[i]] > dists[ids[right]]) swap$1(ids, i, right);
+          if (dists[ids[left]] > dists[ids[i]]) swap$1(ids, left, i);
+
+          const temp = ids[i];
+          const tempDist = dists[temp];
+          while (true) {
+              do i++; while (dists[ids[i]] < tempDist);
+              do j--; while (dists[ids[j]] > tempDist);
+              if (j < i) break;
+              swap$1(ids, i, j);
+          }
+          ids[left + 1] = ids[j];
+          ids[j] = temp;
+
+          if (right - i + 1 >= j - left) {
+              quicksort$1(ids, dists, i, right);
+              quicksort$1(ids, dists, left, j - 1);
+          } else {
+              quicksort$1(ids, dists, left, j - 1);
+              quicksort$1(ids, dists, i, right);
+          }
+      }
+  }
+
+  function swap$1(arr, i, j) {
+      const tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
+  }
+
+  function defaultGetX$1(p) {
+      return p[0];
+  }
+  function defaultGetY$1(p) {
+      return p[1];
+  }
+
+  /**
+   * Unwrap a coordinate from a Point Feature, Geometry or a single coordinate.
+   *
+   * @name getCoord
+   * @param {Array<number>|Geometry<Point>|Feature<Point>} coord GeoJSON Point or an Array of numbers
+   * @returns {Array<number>} coordinates
+   * @example
+   * var pt = turf.point([10, 10]);
+   *
+   * var coord = turf.getCoord(pt);
+   * //= [10, 10]
+   */
+  function getCoord(coord) {
+      if (!coord) {
+          throw new Error("coord is required");
+      }
+      if (!Array.isArray(coord)) {
+          if (coord.type === "Feature" &&
+              coord.geometry !== null &&
+              coord.geometry.type === "Point") {
+              return coord.geometry.coordinates;
+          }
+          if (coord.type === "Point") {
+              return coord.coordinates;
+          }
+      }
+      if (Array.isArray(coord) &&
+          coord.length >= 2 &&
+          !Array.isArray(coord[0]) &&
+          !Array.isArray(coord[1])) {
+          return coord;
+      }
+      throw new Error("coord must be GeoJSON Point or an Array of numbers");
+  }
+  /**
+   * Get Geometry from Feature or Geometry Object
+   *
+   * @param {Feature|Geometry} geojson GeoJSON Feature or Geometry Object
+   * @returns {Geometry|null} GeoJSON Geometry Object
+   * @throws {Error} if geojson is not a Feature or Geometry Object
+   * @example
+   * var point = {
+   *   "type": "Feature",
+   *   "properties": {},
+   *   "geometry": {
+   *     "type": "Point",
+   *     "coordinates": [110, 40]
+   *   }
+   * }
+   * var geom = turf.getGeom(point)
+   * //={"type": "Point", "coordinates": [110, 40]}
+   */
+  function getGeom(geojson) {
+      if (geojson.type === "Feature") {
+          return geojson.geometry;
+      }
+      return geojson;
+  }
+
+  // http://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
+  // modified from: https://github.com/substack/point-in-polygon/blob/master/index.js
+  // which was modified from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+  /**
+   * Takes a {@link Point} and a {@link Polygon} or {@link MultiPolygon} and determines if the point
+   * resides inside the polygon. The polygon can be convex or concave. The function accounts for holes.
+   *
+   * @name booleanPointInPolygon
+   * @param {Coord} point input point
+   * @param {Feature<Polygon|MultiPolygon>} polygon input polygon or multipolygon
+   * @param {Object} [options={}] Optional parameters
+   * @param {boolean} [options.ignoreBoundary=false] True if polygon boundary should be ignored when determining if
+   * the point is inside the polygon otherwise false.
+   * @returns {boolean} `true` if the Point is inside the Polygon; `false` if the Point is not inside the Polygon
+   * @example
+   * var pt = turf.point([-77, 44]);
+   * var poly = turf.polygon([[
+   *   [-81, 41],
+   *   [-81, 47],
+   *   [-72, 47],
+   *   [-72, 41],
+   *   [-81, 41]
+   * ]]);
+   *
+   * turf.booleanPointInPolygon(pt, poly);
+   * //= true
+   */
+  function booleanPointInPolygon(point, polygon, options) {
+      if (options === void 0) { options = {}; }
+      // validation
+      if (!point) {
+          throw new Error("point is required");
+      }
+      if (!polygon) {
+          throw new Error("polygon is required");
+      }
+      var pt = getCoord(point);
+      var geom = getGeom(polygon);
+      var type = geom.type;
+      var bbox = polygon.bbox;
+      var polys = geom.coordinates;
+      // Quick elimination if point is not inside bbox
+      if (bbox && inBBox(pt, bbox) === false) {
+          return false;
+      }
+      // normalize to multipolygon
+      if (type === "Polygon") {
+          polys = [polys];
+      }
+      var insidePoly = false;
+      for (var i = 0; i < polys.length && !insidePoly; i++) {
+          // check if it is in the outer ring first
+          if (inRing(pt, polys[i][0], options.ignoreBoundary)) {
+              var inHole = false;
+              var k = 1;
+              // check for the point in any of the holes
+              while (k < polys[i].length && !inHole) {
+                  if (inRing(pt, polys[i][k], !options.ignoreBoundary)) {
+                      inHole = true;
+                  }
+                  k++;
+              }
+              if (!inHole) {
+                  insidePoly = true;
+              }
+          }
+      }
+      return insidePoly;
+  }
+  /**
+   * inRing
+   *
+   * @private
+   * @param {Array<number>} pt [x,y]
+   * @param {Array<Array<number>>} ring [[x,y], [x,y],..]
+   * @param {boolean} ignoreBoundary ignoreBoundary
+   * @returns {boolean} inRing
+   */
+  function inRing(pt, ring, ignoreBoundary) {
+      var isInside = false;
+      if (ring[0][0] === ring[ring.length - 1][0] &&
+          ring[0][1] === ring[ring.length - 1][1]) {
+          ring = ring.slice(0, ring.length - 1);
+      }
+      for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+          var xi = ring[i][0];
+          var yi = ring[i][1];
+          var xj = ring[j][0];
+          var yj = ring[j][1];
+          var onBoundary = pt[1] * (xi - xj) + yi * (xj - pt[0]) + yj * (pt[0] - xi) === 0 &&
+              (xi - pt[0]) * (xj - pt[0]) <= 0 &&
+              (yi - pt[1]) * (yj - pt[1]) <= 0;
+          if (onBoundary) {
+              return !ignoreBoundary;
+          }
+          var intersect = yi > pt[1] !== yj > pt[1] &&
+              pt[0] < ((xj - xi) * (pt[1] - yi)) / (yj - yi) + xi;
+          if (intersect) {
+              isInside = !isInside;
+          }
+      }
+      return isInside;
+  }
+  /**
+   * inBBox
+   *
+   * @private
+   * @param {Position} pt point [x,y]
+   * @param {BBox} bbox BBox [west, south, east, north]
+   * @returns {boolean} true/false if point is inside BBox
+   */
+  function inBBox(pt, bbox) {
+      return (bbox[0] <= pt[0] && bbox[1] <= pt[1] && bbox[2] >= pt[0] && bbox[3] >= pt[1]);
+  }
 
   const EPSILON = Math.pow(2, -52);
   const EDGE_STACK = new Uint32Array(512);
@@ -5787,1077 +7889,6 @@
   }
   function defaultGetY(p) {
       return p[1];
-  }
-
-  var helpers = createCommonjsModule(function (module, exports) {
-  Object.defineProperty(exports, "__esModule", { value: true });
-  /**
-   * @module helpers
-   */
-  /**
-   * Earth Radius used with the Harvesine formula and approximates using a spherical (non-ellipsoid) Earth.
-   *
-   * @memberof helpers
-   * @type {number}
-   */
-  exports.earthRadius = 6371008.8;
-  /**
-   * Unit of measurement factors using a spherical (non-ellipsoid) earth radius.
-   *
-   * @memberof helpers
-   * @type {Object}
-   */
-  exports.factors = {
-      centimeters: exports.earthRadius * 100,
-      centimetres: exports.earthRadius * 100,
-      degrees: exports.earthRadius / 111325,
-      feet: exports.earthRadius * 3.28084,
-      inches: exports.earthRadius * 39.370,
-      kilometers: exports.earthRadius / 1000,
-      kilometres: exports.earthRadius / 1000,
-      meters: exports.earthRadius,
-      metres: exports.earthRadius,
-      miles: exports.earthRadius / 1609.344,
-      millimeters: exports.earthRadius * 1000,
-      millimetres: exports.earthRadius * 1000,
-      nauticalmiles: exports.earthRadius / 1852,
-      radians: 1,
-      yards: exports.earthRadius / 1.0936,
-  };
-  /**
-   * Units of measurement factors based on 1 meter.
-   *
-   * @memberof helpers
-   * @type {Object}
-   */
-  exports.unitsFactors = {
-      centimeters: 100,
-      centimetres: 100,
-      degrees: 1 / 111325,
-      feet: 3.28084,
-      inches: 39.370,
-      kilometers: 1 / 1000,
-      kilometres: 1 / 1000,
-      meters: 1,
-      metres: 1,
-      miles: 1 / 1609.344,
-      millimeters: 1000,
-      millimetres: 1000,
-      nauticalmiles: 1 / 1852,
-      radians: 1 / exports.earthRadius,
-      yards: 1 / 1.0936,
-  };
-  /**
-   * Area of measurement factors based on 1 square meter.
-   *
-   * @memberof helpers
-   * @type {Object}
-   */
-  exports.areaFactors = {
-      acres: 0.000247105,
-      centimeters: 10000,
-      centimetres: 10000,
-      feet: 10.763910417,
-      inches: 1550.003100006,
-      kilometers: 0.000001,
-      kilometres: 0.000001,
-      meters: 1,
-      metres: 1,
-      miles: 3.86e-7,
-      millimeters: 1000000,
-      millimetres: 1000000,
-      yards: 1.195990046,
-  };
-  /**
-   * Wraps a GeoJSON {@link Geometry} in a GeoJSON {@link Feature}.
-   *
-   * @name feature
-   * @param {Geometry} geometry input geometry
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature} a GeoJSON Feature
-   * @example
-   * var geometry = {
-   *   "type": "Point",
-   *   "coordinates": [110, 50]
-   * };
-   *
-   * var feature = turf.feature(geometry);
-   *
-   * //=feature
-   */
-  function feature(geom, properties, options) {
-      if (options === void 0) { options = {}; }
-      var feat = { type: "Feature" };
-      if (options.id === 0 || options.id) {
-          feat.id = options.id;
-      }
-      if (options.bbox) {
-          feat.bbox = options.bbox;
-      }
-      feat.properties = properties || {};
-      feat.geometry = geom;
-      return feat;
-  }
-  exports.feature = feature;
-  /**
-   * Creates a GeoJSON {@link Geometry} from a Geometry string type & coordinates.
-   * For GeometryCollection type use `helpers.geometryCollection`
-   *
-   * @name geometry
-   * @param {string} type Geometry Type
-   * @param {Array<any>} coordinates Coordinates
-   * @param {Object} [options={}] Optional Parameters
-   * @returns {Geometry} a GeoJSON Geometry
-   * @example
-   * var type = "Point";
-   * var coordinates = [110, 50];
-   * var geometry = turf.geometry(type, coordinates);
-   * // => geometry
-   */
-  function geometry(type, coordinates, options) {
-      switch (type) {
-          case "Point": return point(coordinates).geometry;
-          case "LineString": return lineString(coordinates).geometry;
-          case "Polygon": return polygon(coordinates).geometry;
-          case "MultiPoint": return multiPoint(coordinates).geometry;
-          case "MultiLineString": return multiLineString(coordinates).geometry;
-          case "MultiPolygon": return multiPolygon(coordinates).geometry;
-          default: throw new Error(type + " is invalid");
-      }
-  }
-  exports.geometry = geometry;
-  /**
-   * Creates a {@link Point} {@link Feature} from a Position.
-   *
-   * @name point
-   * @param {Array<number>} coordinates longitude, latitude position (each in decimal degrees)
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<Point>} a Point feature
-   * @example
-   * var point = turf.point([-75.343, 39.984]);
-   *
-   * //=point
-   */
-  function point(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      var geom = {
-          type: "Point",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.point = point;
-  /**
-   * Creates a {@link Point} {@link FeatureCollection} from an Array of Point coordinates.
-   *
-   * @name points
-   * @param {Array<Array<number>>} coordinates an array of Points
-   * @param {Object} [properties={}] Translate these properties to each Feature
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north]
-   * associated with the FeatureCollection
-   * @param {string|number} [options.id] Identifier associated with the FeatureCollection
-   * @returns {FeatureCollection<Point>} Point Feature
-   * @example
-   * var points = turf.points([
-   *   [-75, 39],
-   *   [-80, 45],
-   *   [-78, 50]
-   * ]);
-   *
-   * //=points
-   */
-  function points(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      return featureCollection(coordinates.map(function (coords) {
-          return point(coords, properties);
-      }), options);
-  }
-  exports.points = points;
-  /**
-   * Creates a {@link Polygon} {@link Feature} from an Array of LinearRings.
-   *
-   * @name polygon
-   * @param {Array<Array<Array<number>>>} coordinates an array of LinearRings
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<Polygon>} Polygon Feature
-   * @example
-   * var polygon = turf.polygon([[[-5, 52], [-4, 56], [-2, 51], [-7, 54], [-5, 52]]], { name: 'poly1' });
-   *
-   * //=polygon
-   */
-  function polygon(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      for (var _i = 0, coordinates_1 = coordinates; _i < coordinates_1.length; _i++) {
-          var ring = coordinates_1[_i];
-          if (ring.length < 4) {
-              throw new Error("Each LinearRing of a Polygon must have 4 or more Positions.");
-          }
-          for (var j = 0; j < ring[ring.length - 1].length; j++) {
-              // Check if first point of Polygon contains two numbers
-              if (ring[ring.length - 1][j] !== ring[0][j]) {
-                  throw new Error("First and last Position are not equivalent.");
-              }
-          }
-      }
-      var geom = {
-          type: "Polygon",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.polygon = polygon;
-  /**
-   * Creates a {@link Polygon} {@link FeatureCollection} from an Array of Polygon coordinates.
-   *
-   * @name polygons
-   * @param {Array<Array<Array<Array<number>>>>} coordinates an array of Polygon coordinates
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the FeatureCollection
-   * @returns {FeatureCollection<Polygon>} Polygon FeatureCollection
-   * @example
-   * var polygons = turf.polygons([
-   *   [[[-5, 52], [-4, 56], [-2, 51], [-7, 54], [-5, 52]]],
-   *   [[[-15, 42], [-14, 46], [-12, 41], [-17, 44], [-15, 42]]],
-   * ]);
-   *
-   * //=polygons
-   */
-  function polygons(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      return featureCollection(coordinates.map(function (coords) {
-          return polygon(coords, properties);
-      }), options);
-  }
-  exports.polygons = polygons;
-  /**
-   * Creates a {@link LineString} {@link Feature} from an Array of Positions.
-   *
-   * @name lineString
-   * @param {Array<Array<number>>} coordinates an array of Positions
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<LineString>} LineString Feature
-   * @example
-   * var linestring1 = turf.lineString([[-24, 63], [-23, 60], [-25, 65], [-20, 69]], {name: 'line 1'});
-   * var linestring2 = turf.lineString([[-14, 43], [-13, 40], [-15, 45], [-10, 49]], {name: 'line 2'});
-   *
-   * //=linestring1
-   * //=linestring2
-   */
-  function lineString(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      if (coordinates.length < 2) {
-          throw new Error("coordinates must be an array of two or more positions");
-      }
-      var geom = {
-          type: "LineString",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.lineString = lineString;
-  /**
-   * Creates a {@link LineString} {@link FeatureCollection} from an Array of LineString coordinates.
-   *
-   * @name lineStrings
-   * @param {Array<Array<Array<number>>>} coordinates an array of LinearRings
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north]
-   * associated with the FeatureCollection
-   * @param {string|number} [options.id] Identifier associated with the FeatureCollection
-   * @returns {FeatureCollection<LineString>} LineString FeatureCollection
-   * @example
-   * var linestrings = turf.lineStrings([
-   *   [[-24, 63], [-23, 60], [-25, 65], [-20, 69]],
-   *   [[-14, 43], [-13, 40], [-15, 45], [-10, 49]]
-   * ]);
-   *
-   * //=linestrings
-   */
-  function lineStrings(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      return featureCollection(coordinates.map(function (coords) {
-          return lineString(coords, properties);
-      }), options);
-  }
-  exports.lineStrings = lineStrings;
-  /**
-   * Takes one or more {@link Feature|Features} and creates a {@link FeatureCollection}.
-   *
-   * @name featureCollection
-   * @param {Feature[]} features input features
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {FeatureCollection} FeatureCollection of Features
-   * @example
-   * var locationA = turf.point([-75.343, 39.984], {name: 'Location A'});
-   * var locationB = turf.point([-75.833, 39.284], {name: 'Location B'});
-   * var locationC = turf.point([-75.534, 39.123], {name: 'Location C'});
-   *
-   * var collection = turf.featureCollection([
-   *   locationA,
-   *   locationB,
-   *   locationC
-   * ]);
-   *
-   * //=collection
-   */
-  function featureCollection(features, options) {
-      if (options === void 0) { options = {}; }
-      var fc = { type: "FeatureCollection" };
-      if (options.id) {
-          fc.id = options.id;
-      }
-      if (options.bbox) {
-          fc.bbox = options.bbox;
-      }
-      fc.features = features;
-      return fc;
-  }
-  exports.featureCollection = featureCollection;
-  /**
-   * Creates a {@link Feature<MultiLineString>} based on a
-   * coordinate array. Properties can be added optionally.
-   *
-   * @name multiLineString
-   * @param {Array<Array<Array<number>>>} coordinates an array of LineStrings
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<MultiLineString>} a MultiLineString feature
-   * @throws {Error} if no coordinates are passed
-   * @example
-   * var multiLine = turf.multiLineString([[[0,0],[10,10]]]);
-   *
-   * //=multiLine
-   */
-  function multiLineString(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      var geom = {
-          type: "MultiLineString",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.multiLineString = multiLineString;
-  /**
-   * Creates a {@link Feature<MultiPoint>} based on a
-   * coordinate array. Properties can be added optionally.
-   *
-   * @name multiPoint
-   * @param {Array<Array<number>>} coordinates an array of Positions
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<MultiPoint>} a MultiPoint feature
-   * @throws {Error} if no coordinates are passed
-   * @example
-   * var multiPt = turf.multiPoint([[0,0],[10,10]]);
-   *
-   * //=multiPt
-   */
-  function multiPoint(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      var geom = {
-          type: "MultiPoint",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.multiPoint = multiPoint;
-  /**
-   * Creates a {@link Feature<MultiPolygon>} based on a
-   * coordinate array. Properties can be added optionally.
-   *
-   * @name multiPolygon
-   * @param {Array<Array<Array<Array<number>>>>} coordinates an array of Polygons
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<MultiPolygon>} a multipolygon feature
-   * @throws {Error} if no coordinates are passed
-   * @example
-   * var multiPoly = turf.multiPolygon([[[[0,0],[0,10],[10,10],[10,0],[0,0]]]]);
-   *
-   * //=multiPoly
-   *
-   */
-  function multiPolygon(coordinates, properties, options) {
-      if (options === void 0) { options = {}; }
-      var geom = {
-          type: "MultiPolygon",
-          coordinates: coordinates,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.multiPolygon = multiPolygon;
-  /**
-   * Creates a {@link Feature<GeometryCollection>} based on a
-   * coordinate array. Properties can be added optionally.
-   *
-   * @name geometryCollection
-   * @param {Array<Geometry>} geometries an array of GeoJSON Geometries
-   * @param {Object} [properties={}] an Object of key-value pairs to add as properties
-   * @param {Object} [options={}] Optional Parameters
-   * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
-   * @param {string|number} [options.id] Identifier associated with the Feature
-   * @returns {Feature<GeometryCollection>} a GeoJSON GeometryCollection Feature
-   * @example
-   * var pt = turf.geometry("Point", [100, 0]);
-   * var line = turf.geometry("LineString", [[101, 0], [102, 1]]);
-   * var collection = turf.geometryCollection([pt, line]);
-   *
-   * // => collection
-   */
-  function geometryCollection(geometries, properties, options) {
-      if (options === void 0) { options = {}; }
-      var geom = {
-          type: "GeometryCollection",
-          geometries: geometries,
-      };
-      return feature(geom, properties, options);
-  }
-  exports.geometryCollection = geometryCollection;
-  /**
-   * Round number to precision
-   *
-   * @param {number} num Number
-   * @param {number} [precision=0] Precision
-   * @returns {number} rounded number
-   * @example
-   * turf.round(120.4321)
-   * //=120
-   *
-   * turf.round(120.4321, 2)
-   * //=120.43
-   */
-  function round(num, precision) {
-      if (precision === void 0) { precision = 0; }
-      if (precision && !(precision >= 0)) {
-          throw new Error("precision must be a positive number");
-      }
-      var multiplier = Math.pow(10, precision || 0);
-      return Math.round(num * multiplier) / multiplier;
-  }
-  exports.round = round;
-  /**
-   * Convert a distance measurement (assuming a spherical Earth) from radians to a more friendly unit.
-   * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
-   *
-   * @name radiansToLength
-   * @param {number} radians in radians across the sphere
-   * @param {string} [units="kilometers"] can be degrees, radians, miles, or kilometers inches, yards, metres,
-   * meters, kilometres, kilometers.
-   * @returns {number} distance
-   */
-  function radiansToLength(radians, units) {
-      if (units === void 0) { units = "kilometers"; }
-      var factor = exports.factors[units];
-      if (!factor) {
-          throw new Error(units + " units is invalid");
-      }
-      return radians * factor;
-  }
-  exports.radiansToLength = radiansToLength;
-  /**
-   * Convert a distance measurement (assuming a spherical Earth) from a real-world unit into radians
-   * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
-   *
-   * @name lengthToRadians
-   * @param {number} distance in real units
-   * @param {string} [units="kilometers"] can be degrees, radians, miles, or kilometers inches, yards, metres,
-   * meters, kilometres, kilometers.
-   * @returns {number} radians
-   */
-  function lengthToRadians(distance, units) {
-      if (units === void 0) { units = "kilometers"; }
-      var factor = exports.factors[units];
-      if (!factor) {
-          throw new Error(units + " units is invalid");
-      }
-      return distance / factor;
-  }
-  exports.lengthToRadians = lengthToRadians;
-  /**
-   * Convert a distance measurement (assuming a spherical Earth) from a real-world unit into degrees
-   * Valid units: miles, nauticalmiles, inches, yards, meters, metres, centimeters, kilometres, feet
-   *
-   * @name lengthToDegrees
-   * @param {number} distance in real units
-   * @param {string} [units="kilometers"] can be degrees, radians, miles, or kilometers inches, yards, metres,
-   * meters, kilometres, kilometers.
-   * @returns {number} degrees
-   */
-  function lengthToDegrees(distance, units) {
-      return radiansToDegrees(lengthToRadians(distance, units));
-  }
-  exports.lengthToDegrees = lengthToDegrees;
-  /**
-   * Converts any bearing angle from the north line direction (positive clockwise)
-   * and returns an angle between 0-360 degrees (positive clockwise), 0 being the north line
-   *
-   * @name bearingToAzimuth
-   * @param {number} bearing angle, between -180 and +180 degrees
-   * @returns {number} angle between 0 and 360 degrees
-   */
-  function bearingToAzimuth(bearing) {
-      var angle = bearing % 360;
-      if (angle < 0) {
-          angle += 360;
-      }
-      return angle;
-  }
-  exports.bearingToAzimuth = bearingToAzimuth;
-  /**
-   * Converts an angle in radians to degrees
-   *
-   * @name radiansToDegrees
-   * @param {number} radians angle in radians
-   * @returns {number} degrees between 0 and 360 degrees
-   */
-  function radiansToDegrees(radians) {
-      var degrees = radians % (2 * Math.PI);
-      return degrees * 180 / Math.PI;
-  }
-  exports.radiansToDegrees = radiansToDegrees;
-  /**
-   * Converts an angle in degrees to radians
-   *
-   * @name degreesToRadians
-   * @param {number} degrees angle between 0 and 360 degrees
-   * @returns {number} angle in radians
-   */
-  function degreesToRadians(degrees) {
-      var radians = degrees % 360;
-      return radians * Math.PI / 180;
-  }
-  exports.degreesToRadians = degreesToRadians;
-  /**
-   * Converts a length to the requested unit.
-   * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
-   *
-   * @param {number} length to be converted
-   * @param {Units} [originalUnit="kilometers"] of the length
-   * @param {Units} [finalUnit="kilometers"] returned unit
-   * @returns {number} the converted length
-   */
-  function convertLength(length, originalUnit, finalUnit) {
-      if (originalUnit === void 0) { originalUnit = "kilometers"; }
-      if (finalUnit === void 0) { finalUnit = "kilometers"; }
-      if (!(length >= 0)) {
-          throw new Error("length must be a positive number");
-      }
-      return radiansToLength(lengthToRadians(length, originalUnit), finalUnit);
-  }
-  exports.convertLength = convertLength;
-  /**
-   * Converts a area to the requested unit.
-   * Valid units: kilometers, kilometres, meters, metres, centimetres, millimeters, acres, miles, yards, feet, inches
-   * @param {number} area to be converted
-   * @param {Units} [originalUnit="meters"] of the distance
-   * @param {Units} [finalUnit="kilometers"] returned unit
-   * @returns {number} the converted distance
-   */
-  function convertArea(area, originalUnit, finalUnit) {
-      if (originalUnit === void 0) { originalUnit = "meters"; }
-      if (finalUnit === void 0) { finalUnit = "kilometers"; }
-      if (!(area >= 0)) {
-          throw new Error("area must be a positive number");
-      }
-      var startFactor = exports.areaFactors[originalUnit];
-      if (!startFactor) {
-          throw new Error("invalid original units");
-      }
-      var finalFactor = exports.areaFactors[finalUnit];
-      if (!finalFactor) {
-          throw new Error("invalid final units");
-      }
-      return (area / startFactor) * finalFactor;
-  }
-  exports.convertArea = convertArea;
-  /**
-   * isNumber
-   *
-   * @param {*} num Number to validate
-   * @returns {boolean} true/false
-   * @example
-   * turf.isNumber(123)
-   * //=true
-   * turf.isNumber('foo')
-   * //=false
-   */
-  function isNumber(num) {
-      return !isNaN(num) && num !== null && !Array.isArray(num) && !/^\s*$/.test(num);
-  }
-  exports.isNumber = isNumber;
-  /**
-   * isObject
-   *
-   * @param {*} input variable to validate
-   * @returns {boolean} true/false
-   * @example
-   * turf.isObject({elevation: 10})
-   * //=true
-   * turf.isObject('foo')
-   * //=false
-   */
-  function isObject(input) {
-      return (!!input) && (input.constructor === Object);
-  }
-  exports.isObject = isObject;
-  /**
-   * Validate BBox
-   *
-   * @private
-   * @param {Array<number>} bbox BBox to validate
-   * @returns {void}
-   * @throws Error if BBox is not valid
-   * @example
-   * validateBBox([-180, -40, 110, 50])
-   * //=OK
-   * validateBBox([-180, -40])
-   * //=Error
-   * validateBBox('Foo')
-   * //=Error
-   * validateBBox(5)
-   * //=Error
-   * validateBBox(null)
-   * //=Error
-   * validateBBox(undefined)
-   * //=Error
-   */
-  function validateBBox(bbox) {
-      if (!bbox) {
-          throw new Error("bbox is required");
-      }
-      if (!Array.isArray(bbox)) {
-          throw new Error("bbox must be an Array");
-      }
-      if (bbox.length !== 4 && bbox.length !== 6) {
-          throw new Error("bbox must be an Array of 4 or 6 numbers");
-      }
-      bbox.forEach(function (num) {
-          if (!isNumber(num)) {
-              throw new Error("bbox must only contain numbers");
-          }
-      });
-  }
-  exports.validateBBox = validateBBox;
-  /**
-   * Validate Id
-   *
-   * @private
-   * @param {string|number} id Id to validate
-   * @returns {void}
-   * @throws Error if Id is not valid
-   * @example
-   * validateId([-180, -40, 110, 50])
-   * //=Error
-   * validateId([-180, -40])
-   * //=Error
-   * validateId('Foo')
-   * //=OK
-   * validateId(5)
-   * //=OK
-   * validateId(null)
-   * //=Error
-   * validateId(undefined)
-   * //=Error
-   */
-  function validateId(id) {
-      if (!id) {
-          throw new Error("id is required");
-      }
-      if (["string", "number"].indexOf(typeof id) === -1) {
-          throw new Error("id must be a number or a string");
-      }
-  }
-  exports.validateId = validateId;
-  // Deprecated methods
-  function radians2degrees() {
-      throw new Error("method has been renamed to `radiansToDegrees`");
-  }
-  exports.radians2degrees = radians2degrees;
-  function degrees2radians() {
-      throw new Error("method has been renamed to `degreesToRadians`");
-  }
-  exports.degrees2radians = degrees2radians;
-  function distanceToDegrees() {
-      throw new Error("method has been renamed to `lengthToDegrees`");
-  }
-  exports.distanceToDegrees = distanceToDegrees;
-  function distanceToRadians() {
-      throw new Error("method has been renamed to `lengthToRadians`");
-  }
-  exports.distanceToRadians = distanceToRadians;
-  function radiansToDistance() {
-      throw new Error("method has been renamed to `radiansToLength`");
-  }
-  exports.radiansToDistance = radiansToDistance;
-  function bearingToAngle() {
-      throw new Error("method has been renamed to `bearingToAzimuth`");
-  }
-  exports.bearingToAngle = bearingToAngle;
-  function convertDistance() {
-      throw new Error("method has been renamed to `convertLength`");
-  }
-  exports.convertDistance = convertDistance;
-  });
-
-  /**
-   * Unwrap a coordinate from a Point Feature, Geometry or a single coordinate.
-   *
-   * @name getCoord
-   * @param {Array<number>|Geometry<Point>|Feature<Point>} coord GeoJSON Point or an Array of numbers
-   * @returns {Array<number>} coordinates
-   * @example
-   * var pt = turf.point([10, 10]);
-   *
-   * var coord = turf.getCoord(pt);
-   * //= [10, 10]
-   */
-  function getCoord(coord) {
-      if (!coord) {
-          throw new Error("coord is required");
-      }
-      if (!Array.isArray(coord)) {
-          if (coord.type === "Feature" && coord.geometry !== null && coord.geometry.type === "Point") {
-              return coord.geometry.coordinates;
-          }
-          if (coord.type === "Point") {
-              return coord.coordinates;
-          }
-      }
-      if (Array.isArray(coord) && coord.length >= 2 && !Array.isArray(coord[0]) && !Array.isArray(coord[1])) {
-          return coord;
-      }
-      throw new Error("coord must be GeoJSON Point or an Array of numbers");
-  }
-  var getCoord_1 = getCoord;
-  /**
-   * Unwrap coordinates from a Feature, Geometry Object or an Array
-   *
-   * @name getCoords
-   * @param {Array<any>|Geometry|Feature} coords Feature, Geometry Object or an Array
-   * @returns {Array<any>} coordinates
-   * @example
-   * var poly = turf.polygon([[[119.32, -8.7], [119.55, -8.69], [119.51, -8.54], [119.32, -8.7]]]);
-   *
-   * var coords = turf.getCoords(poly);
-   * //= [[[119.32, -8.7], [119.55, -8.69], [119.51, -8.54], [119.32, -8.7]]]
-   */
-  function getCoords(coords) {
-      if (Array.isArray(coords)) {
-          return coords;
-      }
-      // Feature
-      if (coords.type === "Feature") {
-          if (coords.geometry !== null) {
-              return coords.geometry.coordinates;
-          }
-      }
-      else {
-          // Geometry
-          if (coords.coordinates) {
-              return coords.coordinates;
-          }
-      }
-      throw new Error("coords must be GeoJSON Feature, Geometry Object or an Array");
-  }
-  var getCoords_1 = getCoords;
-  /**
-   * Checks if coordinates contains a number
-   *
-   * @name containsNumber
-   * @param {Array<any>} coordinates GeoJSON Coordinates
-   * @returns {boolean} true if Array contains a number
-   */
-  function containsNumber(coordinates) {
-      if (coordinates.length > 1 && helpers.isNumber(coordinates[0]) && helpers.isNumber(coordinates[1])) {
-          return true;
-      }
-      if (Array.isArray(coordinates[0]) && coordinates[0].length) {
-          return containsNumber(coordinates[0]);
-      }
-      throw new Error("coordinates must only contain numbers");
-  }
-  var containsNumber_1 = containsNumber;
-  /**
-   * Enforce expectations about types of GeoJSON objects for Turf.
-   *
-   * @name geojsonType
-   * @param {GeoJSON} value any GeoJSON object
-   * @param {string} type expected GeoJSON type
-   * @param {string} name name of calling function
-   * @throws {Error} if value is not the expected type.
-   */
-  function geojsonType(value, type, name) {
-      if (!type || !name) {
-          throw new Error("type and name required");
-      }
-      if (!value || value.type !== type) {
-          throw new Error("Invalid input to " + name + ": must be a " + type + ", given " + value.type);
-      }
-  }
-  var geojsonType_1 = geojsonType;
-  /**
-   * Enforce expectations about types of {@link Feature} inputs for Turf.
-   * Internally this uses {@link geojsonType} to judge geometry types.
-   *
-   * @name featureOf
-   * @param {Feature} feature a feature with an expected geometry type
-   * @param {string} type expected GeoJSON type
-   * @param {string} name name of calling function
-   * @throws {Error} error if value is not the expected type.
-   */
-  function featureOf(feature, type, name) {
-      if (!feature) {
-          throw new Error("No feature passed");
-      }
-      if (!name) {
-          throw new Error(".featureOf() requires a name");
-      }
-      if (!feature || feature.type !== "Feature" || !feature.geometry) {
-          throw new Error("Invalid input to " + name + ", Feature with geometry required");
-      }
-      if (!feature.geometry || feature.geometry.type !== type) {
-          throw new Error("Invalid input to " + name + ": must be a " + type + ", given " + feature.geometry.type);
-      }
-  }
-  var featureOf_1 = featureOf;
-  /**
-   * Enforce expectations about types of {@link FeatureCollection} inputs for Turf.
-   * Internally this uses {@link geojsonType} to judge geometry types.
-   *
-   * @name collectionOf
-   * @param {FeatureCollection} featureCollection a FeatureCollection for which features will be judged
-   * @param {string} type expected GeoJSON type
-   * @param {string} name name of calling function
-   * @throws {Error} if value is not the expected type.
-   */
-  function collectionOf(featureCollection, type, name) {
-      if (!featureCollection) {
-          throw new Error("No featureCollection passed");
-      }
-      if (!name) {
-          throw new Error(".collectionOf() requires a name");
-      }
-      if (!featureCollection || featureCollection.type !== "FeatureCollection") {
-          throw new Error("Invalid input to " + name + ", FeatureCollection required");
-      }
-      for (var _i = 0, _a = featureCollection.features; _i < _a.length; _i++) {
-          var feature = _a[_i];
-          if (!feature || feature.type !== "Feature" || !feature.geometry) {
-              throw new Error("Invalid input to " + name + ", Feature with geometry required");
-          }
-          if (!feature.geometry || feature.geometry.type !== type) {
-              throw new Error("Invalid input to " + name + ": must be a " + type + ", given " + feature.geometry.type);
-          }
-      }
-  }
-  var collectionOf_1 = collectionOf;
-  /**
-   * Get Geometry from Feature or Geometry Object
-   *
-   * @param {Feature|Geometry} geojson GeoJSON Feature or Geometry Object
-   * @returns {Geometry|null} GeoJSON Geometry Object
-   * @throws {Error} if geojson is not a Feature or Geometry Object
-   * @example
-   * var point = {
-   *   "type": "Feature",
-   *   "properties": {},
-   *   "geometry": {
-   *     "type": "Point",
-   *     "coordinates": [110, 40]
-   *   }
-   * }
-   * var geom = turf.getGeom(point)
-   * //={"type": "Point", "coordinates": [110, 40]}
-   */
-  function getGeom(geojson) {
-      if (geojson.type === "Feature") {
-          return geojson.geometry;
-      }
-      return geojson;
-  }
-  var getGeom_1 = getGeom;
-  /**
-   * Get GeoJSON object's type, Geometry type is prioritize.
-   *
-   * @param {GeoJSON} geojson GeoJSON object
-   * @param {string} [name="geojson"] name of the variable to display in error message
-   * @returns {string} GeoJSON type
-   * @example
-   * var point = {
-   *   "type": "Feature",
-   *   "properties": {},
-   *   "geometry": {
-   *     "type": "Point",
-   *     "coordinates": [110, 40]
-   *   }
-   * }
-   * var geom = turf.getType(point)
-   * //="Point"
-   */
-  function getType(geojson, name) {
-      if (geojson.type === "FeatureCollection") {
-          return "FeatureCollection";
-      }
-      if (geojson.type === "GeometryCollection") {
-          return "GeometryCollection";
-      }
-      if (geojson.type === "Feature" && geojson.geometry !== null) {
-          return geojson.geometry.type;
-      }
-      return geojson.type;
-  }
-  var getType_1 = getType;
-
-  var invariant = /*#__PURE__*/Object.defineProperty({
-  	getCoord: getCoord_1,
-  	getCoords: getCoords_1,
-  	containsNumber: containsNumber_1,
-  	geojsonType: geojsonType_1,
-  	featureOf: featureOf_1,
-  	collectionOf: collectionOf_1,
-  	getGeom: getGeom_1,
-  	getType: getType_1
-  }, '__esModule', {value: true});
-
-  // http://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
-  // modified from: https://github.com/substack/point-in-polygon/blob/master/index.js
-  // which was modified from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-  /**
-   * Takes a {@link Point} and a {@link Polygon} or {@link MultiPolygon} and determines if the point
-   * resides inside the polygon. The polygon can be convex or concave. The function accounts for holes.
-   *
-   * @name booleanPointInPolygon
-   * @param {Coord} point input point
-   * @param {Feature<Polygon|MultiPolygon>} polygon input polygon or multipolygon
-   * @param {Object} [options={}] Optional parameters
-   * @param {boolean} [options.ignoreBoundary=false] True if polygon boundary should be ignored when determining if
-   * the point is inside the polygon otherwise false.
-   * @returns {boolean} `true` if the Point is inside the Polygon; `false` if the Point is not inside the Polygon
-   * @example
-   * var pt = turf.point([-77, 44]);
-   * var poly = turf.polygon([[
-   *   [-81, 41],
-   *   [-81, 47],
-   *   [-72, 47],
-   *   [-72, 41],
-   *   [-81, 41]
-   * ]]);
-   *
-   * turf.booleanPointInPolygon(pt, poly);
-   * //= true
-   */
-  function booleanPointInPolygon(point, polygon, options) {
-      if (options === void 0) { options = {}; }
-      // validation
-      if (!point) {
-          throw new Error("point is required");
-      }
-      if (!polygon) {
-          throw new Error("polygon is required");
-      }
-      var pt = invariant.getCoord(point);
-      var geom = invariant.getGeom(polygon);
-      var type = geom.type;
-      var bbox = polygon.bbox;
-      var polys = geom.coordinates;
-      // Quick elimination if point is not inside bbox
-      if (bbox && inBBox(pt, bbox) === false) {
-          return false;
-      }
-      // normalize to multipolygon
-      if (type === "Polygon") {
-          polys = [polys];
-      }
-      var insidePoly = false;
-      for (var i = 0; i < polys.length && !insidePoly; i++) {
-          // check if it is in the outer ring first
-          if (inRing(pt, polys[i][0], options.ignoreBoundary)) {
-              var inHole = false;
-              var k = 1;
-              // check for the point in any of the holes
-              while (k < polys[i].length && !inHole) {
-                  if (inRing(pt, polys[i][k], !options.ignoreBoundary)) {
-                      inHole = true;
-                  }
-                  k++;
-              }
-              if (!inHole) {
-                  insidePoly = true;
-              }
-          }
-      }
-      return insidePoly;
-  }
-  var _default$1 = booleanPointInPolygon;
-  /**
-   * inRing
-   *
-   * @private
-   * @param {Array<number>} pt [x,y]
-   * @param {Array<Array<number>>} ring [[x,y], [x,y],..]
-   * @param {boolean} ignoreBoundary ignoreBoundary
-   * @returns {boolean} inRing
-   */
-  function inRing(pt, ring, ignoreBoundary) {
-      var isInside = false;
-      if (ring[0][0] === ring[ring.length - 1][0] && ring[0][1] === ring[ring.length - 1][1]) {
-          ring = ring.slice(0, ring.length - 1);
-      }
-      for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-          var xi = ring[i][0];
-          var yi = ring[i][1];
-          var xj = ring[j][0];
-          var yj = ring[j][1];
-          var onBoundary = (pt[1] * (xi - xj) + yi * (xj - pt[0]) + yj * (pt[0] - xi) === 0) &&
-              ((xi - pt[0]) * (xj - pt[0]) <= 0) && ((yi - pt[1]) * (yj - pt[1]) <= 0);
-          if (onBoundary) {
-              return !ignoreBoundary;
-          }
-          var intersect = ((yi > pt[1]) !== (yj > pt[1])) &&
-              (pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi);
-          if (intersect) {
-              isInside = !isInside;
-          }
-      }
-      return isInside;
-  }
-  /**
-   * inBBox
-   *
-   * @private
-   * @param {Position} pt point [x,y]
-   * @param {BBox} bbox BBox [west, south, east, north]
-   * @returns {boolean} true/false if point is inside BBox
-   */
-  function inBBox(pt, bbox) {
-      return bbox[0] <= pt[0] &&
-          bbox[1] <= pt[1] &&
-          bbox[2] >= pt[0] &&
-          bbox[3] >= pt[1];
   }
 
   const epsilon$1 = 1e-6;
@@ -7482,22 +8513,22 @@
   // http://geographiclib.sourceforge.net/
 
   function adder() {
-    return new Adder$1;
+    return new Adder;
   }
 
-  function Adder$1() {
+  function Adder() {
     this.reset();
   }
 
-  Adder$1.prototype = {
-    constructor: Adder$1,
+  Adder.prototype = {
+    constructor: Adder,
     reset: function() {
       this.s = // rounded value
       this.t = 0; // exact error
     },
     add: function(y) {
-      add$1(temp, y, this.t);
-      add$1(this, temp.s, this.s);
+      add(temp, y, this.t);
+      add(this, temp.s, this.s);
       if (this.s) this.t += temp.t;
       else this.s = temp.t;
     },
@@ -7506,31 +8537,31 @@
     }
   };
 
-  var temp = new Adder$1;
+  var temp = new Adder;
 
-  function add$1(adder, a, b) {
+  function add(adder, a, b) {
     var x = adder.s = a + b,
         bv = x - a,
         av = x - bv;
     adder.t = (a - av) + (b - bv);
   }
 
-  var epsilon$2 = 1e-6;
-  var epsilon2$1 = 1e-12;
+  var epsilon = 1e-6;
+  var epsilon2 = 1e-12;
   var pi$1 = Math.PI;
   var halfPi$1 = pi$1 / 2;
-  var quarterPi$1 = pi$1 / 4;
-  var tau$2 = pi$1 * 2;
+  var quarterPi = pi$1 / 4;
+  var tau = pi$1 * 2;
 
   var degrees$1 = 180 / pi$1;
   var radians$1 = pi$1 / 180;
 
-  var abs$1 = Math.abs;
+  var abs = Math.abs;
   var atan = Math.atan;
   var atan2$1 = Math.atan2;
   var cos$1 = Math.cos;
   var sin$1 = Math.sin;
-  var sign$2 = Math.sign || function(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; };
+  var sign$1 = Math.sign || function(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; };
   var sqrt$1 = Math.sqrt;
 
   function acos(x) {
@@ -7541,25 +8572,25 @@
     return x > 1 ? halfPi$1 : x < -1 ? -halfPi$1 : Math.asin(x);
   }
 
-  function noop$1() {}
+  function noop() {}
 
-  function streamGeometry$1(geometry, stream) {
-    if (geometry && streamGeometryType$1.hasOwnProperty(geometry.type)) {
-      streamGeometryType$1[geometry.type](geometry, stream);
+  function streamGeometry(geometry, stream) {
+    if (geometry && streamGeometryType.hasOwnProperty(geometry.type)) {
+      streamGeometryType[geometry.type](geometry, stream);
     }
   }
 
-  var streamObjectType$1 = {
+  var streamObjectType = {
     Feature: function(object, stream) {
-      streamGeometry$1(object.geometry, stream);
+      streamGeometry(object.geometry, stream);
     },
     FeatureCollection: function(object, stream) {
       var features = object.features, i = -1, n = features.length;
-      while (++i < n) streamGeometry$1(features[i].geometry, stream);
+      while (++i < n) streamGeometry(features[i].geometry, stream);
     }
   };
 
-  var streamGeometryType$1 = {
+  var streamGeometryType = {
     Sphere: function(object, stream) {
       stream.sphere();
     },
@@ -7572,44 +8603,44 @@
       while (++i < n) object = coordinates[i], stream.point(object[0], object[1], object[2]);
     },
     LineString: function(object, stream) {
-      streamLine$1(object.coordinates, stream, 0);
+      streamLine(object.coordinates, stream, 0);
     },
     MultiLineString: function(object, stream) {
       var coordinates = object.coordinates, i = -1, n = coordinates.length;
-      while (++i < n) streamLine$1(coordinates[i], stream, 0);
+      while (++i < n) streamLine(coordinates[i], stream, 0);
     },
     Polygon: function(object, stream) {
-      streamPolygon$1(object.coordinates, stream);
+      streamPolygon(object.coordinates, stream);
     },
     MultiPolygon: function(object, stream) {
       var coordinates = object.coordinates, i = -1, n = coordinates.length;
-      while (++i < n) streamPolygon$1(coordinates[i], stream);
+      while (++i < n) streamPolygon(coordinates[i], stream);
     },
     GeometryCollection: function(object, stream) {
       var geometries = object.geometries, i = -1, n = geometries.length;
-      while (++i < n) streamGeometry$1(geometries[i], stream);
+      while (++i < n) streamGeometry(geometries[i], stream);
     }
   };
 
-  function streamLine$1(coordinates, stream, closed) {
+  function streamLine(coordinates, stream, closed) {
     var i = -1, n = coordinates.length - closed, coordinate;
     stream.lineStart();
     while (++i < n) coordinate = coordinates[i], stream.point(coordinate[0], coordinate[1], coordinate[2]);
     stream.lineEnd();
   }
 
-  function streamPolygon$1(coordinates, stream) {
+  function streamPolygon(coordinates, stream) {
     var i = -1, n = coordinates.length;
     stream.polygonStart();
-    while (++i < n) streamLine$1(coordinates[i], stream, 1);
+    while (++i < n) streamLine(coordinates[i], stream, 1);
     stream.polygonEnd();
   }
 
-  function geoStream$1(object, stream) {
-    if (object && streamObjectType$1.hasOwnProperty(object.type)) {
-      streamObjectType$1[object.type](object, stream);
+  function geoStream(object, stream) {
+    if (object && streamObjectType.hasOwnProperty(object.type)) {
+      streamObjectType[object.type](object, stream);
     } else {
-      streamGeometry$1(object, stream);
+      streamGeometry(object, stream);
     }
   }
 
@@ -7622,7 +8653,7 @@
     return [cosPhi * cos$1(lambda), cosPhi * sin$1(lambda), sin$1(phi)];
   }
 
-  function cartesianDot(a, b) {
+  function cartesianDot$1(a, b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   }
 
@@ -7640,7 +8671,7 @@
   }
 
   // TODO return d
-  function cartesianNormalizeInPlace$1(d) {
+  function cartesianNormalizeInPlace(d) {
     var l = sqrt$1(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
     d[0] /= l, d[1] /= l, d[2] /= l;
   }
@@ -7649,11 +8680,11 @@
       X0, Y0, Z0,
       X1, Y1, Z1,
       X2, Y2, Z2,
-      lambda00$2, phi00$2, // first point
-      x0, y0, z0; // previous point
+      lambda00, phi00, // first point
+      x0$1, y0$1, z0; // previous point
 
   var centroidStream = {
-    sphere: noop$1,
+    sphere: noop,
     point: centroidPoint,
     lineStart: centroidLineStart,
     lineEnd: centroidLineEnd,
@@ -7688,11 +8719,11 @@
   function centroidLinePointFirst(lambda, phi) {
     lambda *= radians$1, phi *= radians$1;
     var cosPhi = cos$1(phi);
-    x0 = cosPhi * cos$1(lambda);
-    y0 = cosPhi * sin$1(lambda);
+    x0$1 = cosPhi * cos$1(lambda);
+    y0$1 = cosPhi * sin$1(lambda);
     z0 = sin$1(phi);
     centroidStream.point = centroidLinePoint;
-    centroidPointCartesian(x0, y0, z0);
+    centroidPointCartesian(x0$1, y0$1, z0);
   }
 
   function centroidLinePoint(lambda, phi) {
@@ -7701,12 +8732,12 @@
         x = cosPhi * cos$1(lambda),
         y = cosPhi * sin$1(lambda),
         z = sin$1(phi),
-        w = atan2$1(sqrt$1((w = y0 * z - z0 * y) * w + (w = z0 * x - x0 * z) * w + (w = x0 * y - y0 * x) * w), x0 * x + y0 * y + z0 * z);
+        w = atan2$1(sqrt$1((w = y0$1 * z - z0 * y) * w + (w = z0 * x - x0$1 * z) * w + (w = x0$1 * y - y0$1 * x) * w), x0$1 * x + y0$1 * y + z0 * z);
     W1 += w;
-    X1 += w * (x0 + (x0 = x));
-    Y1 += w * (y0 + (y0 = y));
+    X1 += w * (x0$1 + (x0$1 = x));
+    Y1 += w * (y0$1 + (y0$1 = y));
     Z1 += w * (z0 + (z0 = z));
-    centroidPointCartesian(x0, y0, z0);
+    centroidPointCartesian(x0$1, y0$1, z0);
   }
 
   function centroidLineEnd() {
@@ -7720,19 +8751,19 @@
   }
 
   function centroidRingEnd() {
-    centroidRingPoint(lambda00$2, phi00$2);
+    centroidRingPoint(lambda00, phi00);
     centroidStream.point = centroidPoint;
   }
 
   function centroidRingPointFirst(lambda, phi) {
-    lambda00$2 = lambda, phi00$2 = phi;
+    lambda00 = lambda, phi00 = phi;
     lambda *= radians$1, phi *= radians$1;
     centroidStream.point = centroidRingPoint;
     var cosPhi = cos$1(phi);
-    x0 = cosPhi * cos$1(lambda);
-    y0 = cosPhi * sin$1(lambda);
+    x0$1 = cosPhi * cos$1(lambda);
+    y0$1 = cosPhi * sin$1(lambda);
     z0 = sin$1(phi);
-    centroidPointCartesian(x0, y0, z0);
+    centroidPointCartesian(x0$1, y0$1, z0);
   }
 
   function centroidRingPoint(lambda, phi) {
@@ -7741,9 +8772,9 @@
         x = cosPhi * cos$1(lambda),
         y = cosPhi * sin$1(lambda),
         z = sin$1(phi),
-        cx = y0 * z - z0 * y,
-        cy = z0 * x - x0 * z,
-        cz = x0 * y - y0 * x,
+        cx = y0$1 * z - z0 * y,
+        cy = z0 * x - x0$1 * z,
+        cz = x0$1 * y - y0$1 * x,
         m = sqrt$1(cx * cx + cy * cy + cz * cz),
         w = asin$1(m), // line weight = angle
         v = m && -w / m; // area weight multiplier
@@ -7751,10 +8782,10 @@
     Y2 += v * cy;
     Z2 += v * cz;
     W1 += w;
-    X1 += w * (x0 + (x0 = x));
-    Y1 += w * (y0 + (y0 = y));
+    X1 += w * (x0$1 + (x0$1 = x));
+    Y1 += w * (y0$1 + (y0$1 = y));
     Z1 += w * (z0 + (z0 = z));
-    centroidPointCartesian(x0, y0, z0);
+    centroidPointCartesian(x0$1, y0$1, z0);
   }
 
   function geoCentroid(object) {
@@ -7762,7 +8793,7 @@
     X0 = Y0 = Z0 =
     X1 = Y1 = Z1 =
     X2 = Y2 = Z2 = 0;
-    geoStream$1(object, centroidStream);
+    geoStream(object, centroidStream);
 
     var x = X2,
         y = Y2,
@@ -7770,13 +8801,13 @@
         m = x * x + y * y + z * z;
 
     // If the area-weighted ccentroid is undefined, fall back to length-weighted ccentroid.
-    if (m < epsilon2$1) {
+    if (m < epsilon2) {
       x = X1, y = Y1, z = Z1;
       // If the feature has zero length, fall back to arithmetic mean of point vectors.
-      if (W1 < epsilon$2) x = X0, y = Y0, z = Z0;
+      if (W1 < epsilon) x = X0, y = Y0, z = Z0;
       m = x * x + y * y + z * z;
       // If the feature still has an undefined ccentroid, then return.
-      if (m < epsilon2$1) return [NaN, NaN];
+      if (m < epsilon2) return [NaN, NaN];
     }
 
     return [atan2$1(y, x) * degrees$1, asin$1(z / sqrt$1(m)) * degrees$1];
@@ -7796,13 +8827,13 @@
   }
 
   function rotationIdentity(lambda, phi) {
-    return [abs$1(lambda) > pi$1 ? lambda + Math.round(-lambda / tau$2) * tau$2 : lambda, phi];
+    return [abs(lambda) > pi$1 ? lambda + Math.round(-lambda / tau) * tau : lambda, phi];
   }
 
   rotationIdentity.invert = rotationIdentity;
 
   function rotateRadians(deltaLambda, deltaPhi, deltaGamma) {
-    return (deltaLambda %= tau$2) ? (deltaPhi || deltaGamma ? compose(rotationLambda(deltaLambda), rotationPhiGamma(deltaPhi, deltaGamma))
+    return (deltaLambda %= tau) ? (deltaPhi || deltaGamma ? compose(rotationLambda(deltaLambda), rotationPhiGamma(deltaPhi, deltaGamma))
       : rotationLambda(deltaLambda))
       : (deltaPhi || deltaGamma ? rotationPhiGamma(deltaPhi, deltaGamma)
       : rotationIdentity);
@@ -7810,7 +8841,7 @@
 
   function forwardRotationLambda(deltaLambda) {
     return function(lambda, phi) {
-      return lambda += deltaLambda, [lambda > pi$1 ? lambda - tau$2 : lambda < -pi$1 ? lambda + tau$2 : lambda, phi];
+      return lambda += deltaLambda, [lambda > pi$1 ? lambda - tau : lambda < -pi$1 ? lambda + tau : lambda, phi];
     };
   }
 
@@ -7876,12 +8907,12 @@
         sinRadius = sin$1(radius),
         step = direction * delta;
     if (t0 == null) {
-      t0 = radius + direction * tau$2;
+      t0 = radius + direction * tau;
       t1 = radius - step / 2;
     } else {
       t0 = circleRadius(cosRadius, t0);
       t1 = circleRadius(cosRadius, t1);
-      if (direction > 0 ? t0 < t1 : t0 > t1) t0 += direction * tau$2;
+      if (direction > 0 ? t0 < t1 : t0 > t1) t0 += direction * tau;
     }
     for (var point, t = t0; direction > 0 ? t > t1 : t < t1; t -= step) {
       point = spherical$1([cosRadius, -sinRadius * cos$1(t), -sinRadius * sin$1(t)]);
@@ -7892,9 +8923,9 @@
   // Returns the signed angle of a cartesian point relative to [cosRadius, 0, 0].
   function circleRadius(cosRadius, point) {
     point = cartesian$1(point), point[0] -= cosRadius;
-    cartesianNormalizeInPlace$1(point);
+    cartesianNormalizeInPlace(point);
     var radius = acos(-point[1]);
-    return ((-point[2] < 0 ? -radius : radius) + tau$2 - epsilon$2) % tau$2;
+    return ((-point[2] < 0 ? -radius : radius) + tau - epsilon) % tau;
   }
 
   function clipBuffer() {
@@ -7907,7 +8938,7 @@
       lineStart: function() {
         lines.push(line = []);
       },
-      lineEnd: noop$1,
+      lineEnd: noop,
       rejoin: function() {
         if (lines.length > 1) lines.push(lines.pop().concat(lines.shift()));
       },
@@ -7921,7 +8952,7 @@
   }
 
   function pointEqual(a, b) {
-    return abs$1(a[0] - b[0]) < epsilon$2 && abs$1(a[1] - b[1]) < epsilon$2;
+    return abs(a[0] - b[0]) < epsilon && abs(a[1] - b[1]) < epsilon;
   }
 
   function Intersection(point, points, other, entry) {
@@ -7954,7 +8985,7 @@
           return;
         }
         // handle degenerate cases by moving the point
-        p1[0] += 2 * epsilon$2;
+        p1[0] += 2 * epsilon;
       }
 
       subject.push(x = new Intersection(p0, segment, null, true));
@@ -8027,15 +9058,15 @@
 
   var sum = adder();
 
-  function longitude$1(point) {
-    if (abs$1(point[0]) <= pi$1)
+  function longitude(point) {
+    if (abs(point[0]) <= pi$1)
       return point[0];
     else
-      return sign$2(point[0]) * ((abs$1(point[0]) + pi$1) % tau$2 - pi$1);
+      return sign$1(point[0]) * ((abs(point[0]) + pi$1) % tau - pi$1);
   }
 
-  function polygonContains$1(polygon, point) {
-    var lambda = longitude$1(point),
+  function polygonContains(polygon, point) {
+    var lambda = longitude(point),
         phi = point[1],
         sinPhi = sin$1(phi),
         normal = [sin$1(lambda), -cos$1(lambda), 0],
@@ -8044,23 +9075,23 @@
 
     sum.reset();
 
-    if (sinPhi === 1) phi = halfPi$1 + epsilon$2;
-    else if (sinPhi === -1) phi = -halfPi$1 - epsilon$2;
+    if (sinPhi === 1) phi = halfPi$1 + epsilon;
+    else if (sinPhi === -1) phi = -halfPi$1 - epsilon;
 
     for (var i = 0, n = polygon.length; i < n; ++i) {
       if (!(m = (ring = polygon[i]).length)) continue;
       var ring,
           m,
           point0 = ring[m - 1],
-          lambda0 = longitude$1(point0),
-          phi0 = point0[1] / 2 + quarterPi$1,
+          lambda0 = longitude(point0),
+          phi0 = point0[1] / 2 + quarterPi,
           sinPhi0 = sin$1(phi0),
           cosPhi0 = cos$1(phi0);
 
       for (var j = 0; j < m; ++j, lambda0 = lambda1, sinPhi0 = sinPhi1, cosPhi0 = cosPhi1, point0 = point1) {
         var point1 = ring[j],
-            lambda1 = longitude$1(point1),
-            phi1 = point1[1] / 2 + quarterPi$1,
+            lambda1 = longitude(point1),
+            phi1 = point1[1] / 2 + quarterPi,
             sinPhi1 = sin$1(phi1),
             cosPhi1 = cos$1(phi1),
             delta = lambda1 - lambda0,
@@ -8070,15 +9101,15 @@
             k = sinPhi0 * sinPhi1;
 
         sum.add(atan2$1(k * sign * sin$1(absDelta), cosPhi0 * cosPhi1 + k * cos$1(absDelta)));
-        angle += antimeridian ? delta + sign * tau$2 : delta;
+        angle += antimeridian ? delta + sign * tau : delta;
 
         // Are the longitudes either side of the point’s meridian (lambda),
         // and are the latitudes smaller than the parallel (phi)?
         if (antimeridian ^ lambda0 >= lambda ^ lambda1 >= lambda) {
           var arc = cartesianCross$1(cartesian$1(point0), cartesian$1(point1));
-          cartesianNormalizeInPlace$1(arc);
+          cartesianNormalizeInPlace(arc);
           var intersection = cartesianCross$1(normal, arc);
-          cartesianNormalizeInPlace$1(intersection);
+          cartesianNormalizeInPlace(intersection);
           var phiArc = (antimeridian ^ delta >= 0 ? -1 : 1) * asin$1(intersection[2]);
           if (phi > phiArc || phi === phiArc && (arc[0] || arc[1])) {
             winding += antimeridian ^ delta >= 0 ? 1 : -1;
@@ -8098,15 +9129,15 @@
     // from the point to the South pole.  If it is zero, then the point is the
     // same side as the South pole.
 
-    return (angle < -epsilon$2 || angle < epsilon$2 && sum < -epsilon$2) ^ (winding & 1);
+    return (angle < -epsilon || angle < epsilon && sum < -epsilon) ^ (winding & 1);
   }
 
-  function ascending(a, b) {
+  function ascending$1(a, b) {
     return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
   }
 
-  function bisector(compare) {
-    if (compare.length === 1) compare = ascendingComparator(compare);
+  function bisector$1(compare) {
+    if (compare.length === 1) compare = ascendingComparator$1(compare);
     return {
       left: function(a, x, lo, hi) {
         if (lo == null) lo = 0;
@@ -8131,15 +9162,15 @@
     };
   }
 
-  function ascendingComparator(f) {
+  function ascendingComparator$1(f) {
     return function(d, x) {
-      return ascending(f(d), x);
+      return ascending$1(f(d), x);
     };
   }
 
-  var ascendingBisect = bisector(ascending);
+  bisector$1(ascending$1);
 
-  function merge$1(arrays) {
+  function merge(arrays) {
     var n = arrays.length,
         m,
         i = -1,
@@ -8186,8 +9217,8 @@
           clip.point = point;
           clip.lineStart = lineStart;
           clip.lineEnd = lineEnd;
-          segments = merge$1(segments);
-          var startInside = polygonContains$1(polygon, start);
+          segments = merge(segments);
+          var startInside = polygonContains(polygon, start);
           if (segments.length) {
             if (!polygonStarted) sink.polygonStart(), polygonStarted = true;
             clipRejoin(segments, compareIntersection, startInside, interpolate, sink);
@@ -8283,8 +9314,8 @@
   // Intersections are sorted along the clip edge. For both antimeridian cutting
   // and circle clipping, the same comparison is used.
   function compareIntersection(a, b) {
-    return ((a = a.x)[0] < 0 ? a[1] - halfPi$1 - epsilon$2 : halfPi$1 - a[1])
-         - ((b = b.x)[0] < 0 ? b[1] - halfPi$1 - epsilon$2 : halfPi$1 - b[1]);
+    return ((a = a.x)[0] < 0 ? a[1] - halfPi$1 - epsilon : halfPi$1 - a[1])
+         - ((b = b.x)[0] < 0 ? b[1] - halfPi$1 - epsilon : halfPi$1 - b[1]);
   }
 
   var clipAntimeridian = clip(
@@ -8310,8 +9341,8 @@
       },
       point: function(lambda1, phi1) {
         var sign1 = lambda1 > 0 ? pi$1 : -pi$1,
-            delta = abs$1(lambda1 - lambda0);
-        if (abs$1(delta - pi$1) < epsilon$2) { // line crosses a pole
+            delta = abs(lambda1 - lambda0);
+        if (abs(delta - pi$1) < epsilon) { // line crosses a pole
           stream.point(lambda0, phi0 = (phi0 + phi1) / 2 > 0 ? halfPi$1 : -halfPi$1);
           stream.point(sign0, phi0);
           stream.lineEnd();
@@ -8320,8 +9351,8 @@
           stream.point(lambda1, phi0);
           clean = 0;
         } else if (sign0 !== sign1 && delta >= pi$1) { // line crosses antimeridian
-          if (abs$1(lambda0 - sign0) < epsilon$2) lambda0 -= sign0 * epsilon$2; // handle degeneracies
-          if (abs$1(lambda1 - sign1) < epsilon$2) lambda1 -= sign1 * epsilon$2;
+          if (abs(lambda0 - sign0) < epsilon) lambda0 -= sign0 * epsilon; // handle degeneracies
+          if (abs(lambda1 - sign1) < epsilon) lambda1 -= sign1 * epsilon;
           phi0 = clipAntimeridianIntersect(lambda0, phi0, lambda1, phi1);
           stream.point(sign0, phi0);
           stream.lineEnd();
@@ -8346,7 +9377,7 @@
     var cosPhi0,
         cosPhi1,
         sinLambda0Lambda1 = sin$1(lambda0 - lambda1);
-    return abs$1(sinLambda0Lambda1) > epsilon$2
+    return abs(sinLambda0Lambda1) > epsilon
         ? atan((sin$1(phi0) * (cosPhi1 = cos$1(phi1)) * sin$1(lambda1)
             - sin$1(phi1) * (cosPhi0 = cos$1(phi0)) * sin$1(lambda0))
             / (cosPhi0 * cosPhi1 * sinLambda0Lambda1))
@@ -8366,7 +9397,7 @@
       stream.point(-pi$1, -phi);
       stream.point(-pi$1, 0);
       stream.point(-pi$1, phi);
-    } else if (abs$1(from[0] - to[0]) > epsilon$2) {
+    } else if (abs(from[0] - to[0]) > epsilon) {
       var lambda = from[0] < to[0] ? pi$1 : -pi$1;
       phi = direction * lambda / 2;
       stream.point(-lambda, phi);
@@ -8381,7 +9412,7 @@
     var cr = cos$1(radius),
         delta = 6 * radians$1,
         smallRadius = cr > 0,
-        notHemisphere = abs$1(cr) > epsilon$2; // TODO optimise for this common case
+        notHemisphere = abs(cr) > epsilon; // TODO optimise for this common case
 
     function interpolate(from, to, direction, stream) {
       circleStream(stream, radius, delta, direction, from, to);
@@ -8478,7 +9509,7 @@
       // Find intersection line p(t) = c1 n1 + c2 n2 + t (n1 ⨯ n2).
       var n1 = [1, 0, 0], // normal
           n2 = cartesianCross$1(pa, pb),
-          n2n2 = cartesianDot(n2, n2),
+          n2n2 = cartesianDot$1(n2, n2),
           n1n2 = n2[0], // cartesianDot(n1, n2),
           determinant = n2n2 - n1n2 * n1n2;
 
@@ -8494,9 +9525,9 @@
 
       // Solve |p(t)|^2 = 1.
       var u = n1xn2,
-          w = cartesianDot(A, u),
-          uu = cartesianDot(u, u),
-          t2 = w * w - uu * (cartesianDot(A, A) - 1);
+          w = cartesianDot$1(A, u),
+          uu = cartesianDot$1(u, u),
+          t2 = w * w - uu * (cartesianDot$1(A, A) - 1);
 
       if (t2 < 0) return;
 
@@ -8517,15 +9548,15 @@
       if (lambda1 < lambda0) z = lambda0, lambda0 = lambda1, lambda1 = z;
 
       var delta = lambda1 - lambda0,
-          polar = abs$1(delta - pi$1) < epsilon$2,
-          meridian = polar || delta < epsilon$2;
+          polar = abs(delta - pi$1) < epsilon,
+          meridian = polar || delta < epsilon;
 
       if (!polar && phi1 < phi0) z = phi0, phi0 = phi1, phi1 = z;
 
       // Check that the first point is between a and b.
       if (meridian
           ? polar
-            ? phi0 + phi1 > 0 ^ q[1] < (abs$1(q[0] - lambda0) < epsilon$2 ? phi0 : phi1)
+            ? phi0 + phi1 > 0 ^ q[1] < (abs(q[0] - lambda0) < epsilon ? phi0 : phi1)
             : phi0 <= q[1] && q[1] <= phi1
           : delta > pi$1 ^ (lambda0 <= q[0] && q[0] <= lambda1)) {
         var q1 = cartesianScale(u, (-w + t) / uu);
@@ -8633,9 +9664,9 @@
     }
 
     function corner(p, direction) {
-      return abs$1(p[0] - x0) < epsilon$2 ? direction > 0 ? 0 : 3
-          : abs$1(p[0] - x1) < epsilon$2 ? direction > 0 ? 2 : 1
-          : abs$1(p[1] - y0) < epsilon$2 ? direction > 0 ? 1 : 0
+      return abs(p[0] - x0) < epsilon ? direction > 0 ? 0 : 3
+          : abs(p[0] - x1) < epsilon ? direction > 0 ? 2 : 1
+          : abs(p[1] - y0) < epsilon ? direction > 0 ? 1 : 0
           : direction > 0 ? 3 : 2; // abs(p[1] - y1) < epsilon
     }
 
@@ -8698,7 +9729,7 @@
       function polygonEnd() {
         var startInside = polygonInside(),
             cleanInside = clean && startInside,
-            visible = (segments = merge$1(segments)).length;
+            visible = (segments = merge(segments)).length;
         if (cleanInside || visible) {
           stream.polygonStart();
           if (cleanInside) {
@@ -8772,90 +9803,90 @@
     };
   }
 
-  var lengthSum$1 = adder(),
-      lambda0$3,
-      sinPhi0$2,
-      cosPhi0$2;
+  var lengthSum = adder(),
+      lambda0,
+      sinPhi0,
+      cosPhi0;
 
-  var lengthStream$1 = {
-    sphere: noop$1,
-    point: noop$1,
-    lineStart: lengthLineStart$1,
-    lineEnd: noop$1,
-    polygonStart: noop$1,
-    polygonEnd: noop$1
+  var lengthStream = {
+    sphere: noop,
+    point: noop,
+    lineStart: lengthLineStart,
+    lineEnd: noop,
+    polygonStart: noop,
+    polygonEnd: noop
   };
 
-  function lengthLineStart$1() {
-    lengthStream$1.point = lengthPointFirst$1;
-    lengthStream$1.lineEnd = lengthLineEnd$1;
+  function lengthLineStart() {
+    lengthStream.point = lengthPointFirst;
+    lengthStream.lineEnd = lengthLineEnd;
   }
 
-  function lengthLineEnd$1() {
-    lengthStream$1.point = lengthStream$1.lineEnd = noop$1;
+  function lengthLineEnd() {
+    lengthStream.point = lengthStream.lineEnd = noop;
   }
 
-  function lengthPointFirst$1(lambda, phi) {
+  function lengthPointFirst(lambda, phi) {
     lambda *= radians$1, phi *= radians$1;
-    lambda0$3 = lambda, sinPhi0$2 = sin$1(phi), cosPhi0$2 = cos$1(phi);
-    lengthStream$1.point = lengthPoint$1;
+    lambda0 = lambda, sinPhi0 = sin$1(phi), cosPhi0 = cos$1(phi);
+    lengthStream.point = lengthPoint;
   }
 
-  function lengthPoint$1(lambda, phi) {
+  function lengthPoint(lambda, phi) {
     lambda *= radians$1, phi *= radians$1;
     var sinPhi = sin$1(phi),
         cosPhi = cos$1(phi),
-        delta = abs$1(lambda - lambda0$3),
+        delta = abs(lambda - lambda0),
         cosDelta = cos$1(delta),
         sinDelta = sin$1(delta),
         x = cosPhi * sinDelta,
-        y = cosPhi0$2 * sinPhi - sinPhi0$2 * cosPhi * cosDelta,
-        z = sinPhi0$2 * sinPhi + cosPhi0$2 * cosPhi * cosDelta;
-    lengthSum$1.add(atan2$1(sqrt$1(x * x + y * y), z));
-    lambda0$3 = lambda, sinPhi0$2 = sinPhi, cosPhi0$2 = cosPhi;
+        y = cosPhi0 * sinPhi - sinPhi0 * cosPhi * cosDelta,
+        z = sinPhi0 * sinPhi + cosPhi0 * cosPhi * cosDelta;
+    lengthSum.add(atan2$1(sqrt$1(x * x + y * y), z));
+    lambda0 = lambda, sinPhi0 = sinPhi, cosPhi0 = cosPhi;
   }
 
-  function length$1(object) {
-    lengthSum$1.reset();
-    geoStream$1(object, lengthStream$1);
-    return +lengthSum$1;
+  function length(object) {
+    lengthSum.reset();
+    geoStream(object, lengthStream);
+    return +lengthSum;
   }
 
-  var coordinates$1 = [null, null],
-      object$1 = {type: "LineString", coordinates: coordinates$1};
+  var coordinates = [null, null],
+      object = {type: "LineString", coordinates: coordinates};
 
-  function geoDistance$1(a, b) {
-    coordinates$1[0] = a;
-    coordinates$1[1] = b;
-    return length$1(object$1);
+  function geoDistance(a, b) {
+    coordinates[0] = a;
+    coordinates[1] = b;
+    return length(object);
   }
 
   function identity(x) {
     return x;
   }
 
-  var x0$1 = Infinity,
-      y0$1 = x0$1,
-      x1 = -x0$1,
+  var x0 = Infinity,
+      y0 = x0,
+      x1 = -x0,
       y1 = x1;
 
-  var boundsStream$1 = {
-    point: boundsPoint$1,
-    lineStart: noop$1,
-    lineEnd: noop$1,
-    polygonStart: noop$1,
-    polygonEnd: noop$1,
+  var boundsStream = {
+    point: boundsPoint,
+    lineStart: noop,
+    lineEnd: noop,
+    polygonStart: noop,
+    polygonEnd: noop,
     result: function() {
-      var bounds = [[x0$1, y0$1], [x1, y1]];
-      x1 = y1 = -(y0$1 = x0$1 = Infinity);
+      var bounds = [[x0, y0], [x1, y1]];
+      x1 = y1 = -(y0 = x0 = Infinity);
       return bounds;
     }
   };
 
-  function boundsPoint$1(x, y) {
-    if (x < x0$1) x0$1 = x;
+  function boundsPoint(x, y) {
+    if (x < x0) x0 = x;
     if (x > x1) x1 = x;
-    if (y < y0$1) y0$1 = y;
+    if (y < y0) y0 = y;
     if (y > y1) y1 = y;
   }
 
@@ -8884,8 +9915,8 @@
     var clip = projection.clipExtent && projection.clipExtent();
     projection.scale(150).translate([0, 0]);
     if (clip != null) projection.clipExtent(null);
-    geoStream$1(object, projection.stream(boundsStream$1));
-    fitBounds(boundsStream$1.result());
+    geoStream(object, projection.stream(boundsStream));
+    fitBounds(boundsStream.result());
     if (clip != null) projection.clipExtent(clip);
     return projection;
   }
@@ -8953,7 +9984,7 @@
             c = c0 + c1,
             m = sqrt$1(a * a + b * b + c * c),
             phi2 = asin$1(c /= m),
-            lambda2 = abs$1(abs$1(c) - 1) < epsilon$2 || abs$1(lambda0 - lambda1) < epsilon$2 ? (lambda0 + lambda1) / 2 : atan2$1(b, a),
+            lambda2 = abs(abs(c) - 1) < epsilon || abs(lambda0 - lambda1) < epsilon ? (lambda0 + lambda1) / 2 : atan2$1(b, a),
             p = project(lambda2, phi2),
             x2 = p[0],
             y2 = p[1],
@@ -8961,7 +9992,7 @@
             dy2 = y2 - y0,
             dz = dy * dx2 - dx * dy2;
         if (dz * dz / d2 > delta2 // perpendicular projected distance
-            || abs$1((dx * dx2 + dy * dy2) / d2 - 0.5) > 0.3 // midpoint close to an end
+            || abs((dx * dx2 + dy * dy2) / d2 - 0.5) > 0.3 // midpoint close to an end
             || a0 * a1 + b0 * b1 + c0 * c1 < cosMinDistance) { // angular distance
           resampleLineTo(x0, y0, lambda0, a0, b0, c0, x2, y2, lambda2, a /= m, b /= m, c, depth, stream);
           stream.point(x2, y2);
@@ -9218,32 +10249,32 @@
         .clipAngle(142);
   }
 
-  var pi$2 = Math.PI;
-  var halfPi$2 = pi$2 / 2;
+  var pi = Math.PI;
+  var halfPi = pi / 2;
 
-  var degrees$2 = 180 / pi$2;
-  var radians$2 = pi$2 / 180;
-  var atan2$2 = Math.atan2;
-  var cos$2 = Math.cos;
+  var degrees = 180 / pi;
+  var radians = pi / 180;
+  var atan2 = Math.atan2;
+  var cos = Math.cos;
   var max = Math.max;
   var min = Math.min;
-  var sin$2 = Math.sin;
-  var sign$3 =
+  var sin = Math.sin;
+  var sign =
     Math.sign ||
     function(x) {
       return x > 0 ? 1 : x < 0 ? -1 : 0;
     };
-  var sqrt$2 = Math.sqrt;
+  var sqrt = Math.sqrt;
 
-  function asin$2(x) {
-    return x > 1 ? halfPi$2 : x < -1 ? -halfPi$2 : Math.asin(x);
+  function asin(x) {
+    return x > 1 ? halfPi : x < -1 ? -halfPi : Math.asin(x);
   }
 
-  function cartesianDot$1(a, b) {
+  function cartesianDot(a, b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   }
 
-  function cartesianCross$2(a, b) {
+  function cartesianCross(a, b) {
     return [
       a[1] * b[2] - a[2] * b[1],
       a[2] * b[0] - a[0] * b[2],
@@ -9256,32 +10287,32 @@
   }
 
   function cartesianNormalize(d) {
-    var l = sqrt$2(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
+    var l = sqrt(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
     return [d[0] / l, d[1] / l, d[2] / l];
   }
 
   //
 
   // Converts 3D Cartesian to spherical coordinates (degrees).
-  function spherical$2(cartesian) {
+  function spherical(cartesian) {
     return [
-      atan2$2(cartesian[1], cartesian[0]) * degrees$2,
-      asin$2(max(-1, min(1, cartesian[2]))) * degrees$2
+      atan2(cartesian[1], cartesian[0]) * degrees,
+      asin(max(-1, min(1, cartesian[2]))) * degrees
     ];
   }
 
   // Converts spherical coordinates (degrees) to 3D Cartesian.
-  function cartesian$2(coordinates) {
-    var lambda = coordinates[0] * radians$2,
-      phi = coordinates[1] * radians$2,
-      cosphi = cos$2(phi);
-    return [cosphi * cos$2(lambda), cosphi * sin$2(lambda), sin$2(phi)];
+  function cartesian(coordinates) {
+    var lambda = coordinates[0] * radians,
+      phi = coordinates[1] * radians,
+      cosphi = cos(phi);
+    return [cosphi * cos(lambda), cosphi * sin(lambda), sin(phi)];
   }
 
   // Spherical excess of a triangle (in spherical coordinates)
   function excess(triangle) {
-    triangle = triangle.map(p => cartesian$2(p));
-    return cartesianDot$1(triangle[0], cartesianCross$2(triangle[2], triangle[1]));
+    triangle = triangle.map(p => cartesian(p));
+    return cartesianDot(triangle[0], cartesianCross(triangle[2], triangle[1]));
   }
 
   function geoDelaunay(points) {
@@ -9324,13 +10355,13 @@
       let cell,
         dist,
         found = next;
-      const xyz = cartesian$2([x, y]);
+      const xyz = cartesian([x, y]);
       do {
         cell = next;
         next = null;
-        dist = distance2(xyz, cartesian$2(points[cell]));
+        dist = distance2(xyz, cartesian(points[cell]));
         neighbors[cell].forEach(i => {
-          let ndist = distance2(xyz, cartesian$2(points[i]));
+          let ndist = distance2(xyz, cartesian(points[i]));
           if (ndist < dist) {
             dist = ndist;
             next = i;
@@ -9366,7 +10397,7 @@
       else if (m > max2) max2 = m;
     }
 
-    const FAR = 1e6 * sqrt$2(max2);
+    const FAR = 1e6 * sqrt(max2);
 
     zeros.forEach(i => (points[i] = [FAR, 0]));
 
@@ -9437,12 +10468,12 @@
   function geo_circumcenters(triangles, points) {
     // if (!use_centroids) {
     return triangles.map(tri => {
-      const c = tri.map(i => points[i]).map(cartesian$2),
+      const c = tri.map(i => points[i]).map(cartesian),
         V = cartesianAdd(
-          cartesianAdd(cartesianCross$2(c[1], c[0]), cartesianCross$2(c[2], c[1])),
-          cartesianCross$2(c[0], c[2])
+          cartesianAdd(cartesianCross(c[1], c[0]), cartesianCross(c[2], c[1])),
+          cartesianCross(c[0], c[2])
         );
-      return spherical$2(cartesianNormalize(V));
+      return spherical(cartesianNormalize(V));
     });
     /*} else {
       return triangles.map(tri => {
@@ -9459,8 +10490,8 @@
     triangles.forEach((tri, i) => {
       for (let j = 0; j < 3; j++) {
         const a = tri[j],
-          b = tri[(j + 1) % 3],
-          c = tri[(j + 2) % 3];
+          b = tri[(j + 1) % 3];
+          tri[(j + 2) % 3];
         neighbors[a] = neighbors[a] || [];
         neighbors[a].push(b);
       }
@@ -9484,18 +10515,18 @@
       if (points.length < 2) return { polygons, centers };
       if (points.length === 2) {
         // two hemispheres
-        const a = cartesian$2(points[0]),
-          b = cartesian$2(points[1]),
+        const a = cartesian(points[0]),
+          b = cartesian(points[1]),
           m = cartesianNormalize(cartesianAdd(a, b)),
-          d = cartesianNormalize(cartesianCross$2(a, b)),
-          c = cartesianCross$2(m, d);
+          d = cartesianNormalize(cartesianCross(a, b)),
+          c = cartesianCross(m, d);
         const poly = [
           m,
-          cartesianCross$2(m, c),
-          cartesianCross$2(cartesianCross$2(m, c), c),
-          cartesianCross$2(cartesianCross$2(cartesianCross$2(m, c), c), c)
+          cartesianCross(m, c),
+          cartesianCross(cartesianCross(m, c), c),
+          cartesianCross(cartesianCross(cartesianCross(m, c), c), c)
         ]
-          .map(spherical$2)
+          .map(spherical)
           .map(supplement);
         return (
           polygons.push(poly),
@@ -9562,11 +10593,11 @@
   }
 
   function o_midpoint(a, b, c) {
-    a = cartesian$2(a);
-    b = cartesian$2(b);
-    c = cartesian$2(c);
-    const s = sign$3(cartesianDot$1(cartesianCross$2(b, a), c));
-    return spherical$2(cartesianNormalize(cartesianAdd(a, b)).map(d => s * d));
+    a = cartesian(a);
+    b = cartesian(b);
+    c = cartesian(c);
+    const s = sign(cartesianDot(cartesianCross(b, a), c));
+    return spherical(cartesianNormalize(cartesianAdd(a, b)).map(d => s * d));
   }
 
   function geo_mesh(polygons) {
@@ -9762,7 +10793,7 @@
       }
       if (!v.delaunay) return false;
       const _distances = v.delaunay.edges.map(e =>
-          geoDistance$1(v.points[e[0]], v.points[e[1]])
+          geoDistance(v.points[e[0]], v.points[e[1]])
         ),
         _urquart = v.delaunay.urquhart(_distances);
       return {
@@ -9822,7 +10853,7 @@
     v._found = undefined;
     v.find = function(x, y, radius) {
       v._found = v.delaunay.find(x, y, v._found);
-      if (!radius || geoDistance$1([x, y], v.points[v._found]) < radius)
+      if (!radius || geoDistance([x, y], v.points[v._found]) < radius)
         return v._found;
     };
 
@@ -9843,12 +10874,12 @@
     return data ? v(data) : v;
   }
 
-  function ascending$1(a, b) {
+  function ascending(a, b) {
     return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
   }
 
-  function bisector$1(compare) {
-    if (compare.length === 1) compare = ascendingComparator$1(compare);
+  function bisector(compare) {
+    if (compare.length === 1) compare = ascendingComparator(compare);
     return {
       left: function(a, x, lo, hi) {
         if (lo == null) lo = 0;
@@ -9873,13 +10904,13 @@
     };
   }
 
-  function ascendingComparator$1(f) {
+  function ascendingComparator(f) {
     return function(d, x) {
-      return ascending$1(f(d), x);
+      return ascending(f(d), x);
     };
   }
 
-  var ascendingBisect$1 = bisector$1(ascending$1);
+  bisector(ascending);
 
   var prefix = "$";
 
@@ -9959,7 +10990,7 @@
 
   var proto = map.prototype;
 
-  Set$1.prototype = set.prototype = {
+  Set$1.prototype = {
     constructor: Set$1,
     has: proto.has,
     add: function(value) {
@@ -9974,22 +11005,6 @@
     empty: proto.empty,
     each: proto.each
   };
-
-  function set(object, f) {
-    var set = new Set$1;
-
-    // Copy constructor.
-    if (object instanceof Set$1) object.each(function(value) { set.add(value); });
-
-    // Otherwise, assume it’s an array.
-    else if (object) {
-      var i = -1, n = object.length;
-      if (f == null) while (++i < n) set.add(object[i]);
-      else while (++i < n) set.add(f(object[i], i, object));
-    }
-
-    return set;
-  }
 
   function define(constructor, factory, prototype) {
     constructor.prototype = factory.prototype = prototype;
@@ -10398,7 +11413,7 @@
     return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
   }
 
-  function cubehelix(h, s, l, opacity) {
+  function cubehelix$1(h, s, l, opacity) {
     return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
   }
 
@@ -10409,7 +11424,7 @@
     this.opacity = +opacity;
   }
 
-  define(Cubehelix, cubehelix, extend(Color, {
+  define(Cubehelix, cubehelix$1, extend(Color, {
     brighter: function(k) {
       k = k == null ? brighter : Math.pow(brighter, k);
       return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
@@ -10455,12 +11470,12 @@
     return d ? linear(a, d) : constant(isNaN(a) ? b : a);
   }
 
-  function cubehelix$1(hue) {
+  function cubehelix(hue) {
     return (function cubehelixGamma(y) {
       y = +y;
 
-      function cubehelix$1(start, end) {
-        var h = hue((start = cubehelix(start)).h, (end = cubehelix(end)).h),
+      function cubehelix(start, end) {
+        var h = hue((start = cubehelix$1(start)).h, (end = cubehelix$1(end)).h),
             s = nogamma(start.s, end.s),
             l = nogamma(start.l, end.l),
             opacity = nogamma(start.opacity, end.opacity);
@@ -10473,14 +11488,14 @@
         };
       }
 
-      cubehelix$1.gamma = cubehelixGamma;
+      cubehelix.gamma = cubehelixGamma;
 
-      return cubehelix$1;
+      return cubehelix;
     })(1);
   }
 
-  cubehelix$1(hue);
-  var cubehelixLong = cubehelix$1(nogamma);
+  cubehelix(hue);
+  var cubehelixLong = cubehelix(nogamma);
 
   function colors(s) {
     return s.match(/.{6}/g).map(function(x) {
@@ -10496,13 +11511,13 @@
 
   colors("1f77b4aec7e8ff7f0effbb782ca02c98df8ad62728ff98969467bdc5b0d58c564bc49c94e377c2f7b6d27f7f7fc7c7c7bcbd22dbdb8d17becf9edae5");
 
-  cubehelixLong(cubehelix(300, 0.5, 0.0), cubehelix(-240, 0.5, 1.0));
+  cubehelixLong(cubehelix$1(300, 0.5, 0.0), cubehelix$1(-240, 0.5, 1.0));
 
-  var warm = cubehelixLong(cubehelix(-100, 0.75, 0.35), cubehelix(80, 1.50, 0.8));
+  cubehelixLong(cubehelix$1(-100, 0.75, 0.35), cubehelix$1(80, 1.50, 0.8));
 
-  var cool = cubehelixLong(cubehelix(260, 0.75, 0.35), cubehelix(80, 1.50, 0.8));
+  cubehelixLong(cubehelix$1(260, 0.75, 0.35), cubehelix$1(80, 1.50, 0.8));
 
-  var rainbow = cubehelix();
+  cubehelix$1();
 
   function ramp(range) {
     var n = range.length;
@@ -10513,41 +11528,129 @@
 
   ramp(colors("44015444025645045745055946075a46085c460a5d460b5e470d60470e6147106347116447136548146748166848176948186a481a6c481b6d481c6e481d6f481f70482071482173482374482475482576482677482878482979472a7a472c7a472d7b472e7c472f7d46307e46327e46337f463480453581453781453882443983443a83443b84433d84433e85423f854240864241864142874144874045884046883f47883f48893e49893e4a893e4c8a3d4d8a3d4e8a3c4f8a3c508b3b518b3b528b3a538b3a548c39558c39568c38588c38598c375a8c375b8d365c8d365d8d355e8d355f8d34608d34618d33628d33638d32648e32658e31668e31678e31688e30698e306a8e2f6b8e2f6c8e2e6d8e2e6e8e2e6f8e2d708e2d718e2c718e2c728e2c738e2b748e2b758e2a768e2a778e2a788e29798e297a8e297b8e287c8e287d8e277e8e277f8e27808e26818e26828e26828e25838e25848e25858e24868e24878e23888e23898e238a8d228b8d228c8d228d8d218e8d218f8d21908d21918c20928c20928c20938c1f948c1f958b1f968b1f978b1f988b1f998a1f9a8a1e9b8a1e9c891e9d891f9e891f9f881fa0881fa1881fa1871fa28720a38620a48621a58521a68522a78522a88423a98324aa8325ab8225ac8226ad8127ad8128ae8029af7f2ab07f2cb17e2db27d2eb37c2fb47c31b57b32b67a34b67935b77937b87838b9773aba763bbb753dbc743fbc7340bd7242be7144bf7046c06f48c16e4ac16d4cc26c4ec36b50c46a52c56954c56856c66758c7655ac8645cc8635ec96260ca6063cb5f65cb5e67cc5c69cd5b6ccd5a6ece5870cf5773d05675d05477d1537ad1517cd2507fd34e81d34d84d44b86d54989d5488bd6468ed64590d74393d74195d84098d83e9bd93c9dd93ba0da39a2da37a5db36a8db34aadc32addc30b0dd2fb2dd2db5de2bb8de29bade28bddf26c0df25c2df23c5e021c8e020cae11fcde11dd0e11cd2e21bd5e21ad8e219dae319dde318dfe318e2e418e5e419e7e419eae51aece51befe51cf1e51df4e61ef6e620f8e621fbe723fde725"));
 
-  var magma = ramp(colors("00000401000501010601010802010902020b02020d03030f03031204041405041606051806051a07061c08071e0907200a08220b09240c09260d0a290e0b2b100b2d110c2f120d31130d34140e36150e38160f3b180f3d19103f1a10421c10441d11471e114920114b21114e22115024125325125527125829115a2a115c2c115f2d11612f116331116533106734106936106b38106c390f6e3b0f703d0f713f0f72400f74420f75440f764510774710784910784a10794c117a4e117b4f127b51127c52137c54137d56147d57157e59157e5a167e5c167f5d177f5f187f601880621980641a80651a80671b80681c816a1c816b1d816d1d816e1e81701f81721f817320817521817621817822817922827b23827c23827e24828025828125818326818426818627818827818928818b29818c29818e2a81902a81912b81932b80942c80962c80982d80992d809b2e7f9c2e7f9e2f7fa02f7fa1307ea3307ea5317ea6317da8327daa337dab337cad347cae347bb0357bb2357bb3367ab5367ab73779b83779ba3878bc3978bd3977bf3a77c03a76c23b75c43c75c53c74c73d73c83e73ca3e72cc3f71cd4071cf4070d0416fd2426fd3436ed5446dd6456cd8456cd9466bdb476adc4869de4968df4a68e04c67e24d66e34e65e44f64e55064e75263e85362e95462ea5661eb5760ec5860ed5a5fee5b5eef5d5ef05f5ef1605df2625df2645cf3655cf4675cf4695cf56b5cf66c5cf66e5cf7705cf7725cf8745cf8765cf9785df9795df97b5dfa7d5efa7f5efa815ffb835ffb8560fb8761fc8961fc8a62fc8c63fc8e64fc9065fd9266fd9467fd9668fd9869fd9a6afd9b6bfe9d6cfe9f6dfea16efea36ffea571fea772fea973feaa74feac76feae77feb078feb27afeb47bfeb67cfeb77efeb97ffebb81febd82febf84fec185fec287fec488fec68afec88cfeca8dfecc8ffecd90fecf92fed194fed395fed597fed799fed89afdda9cfddc9efddea0fde0a1fde2a3fde3a5fde5a7fde7a9fde9aafdebacfcecaefceeb0fcf0b2fcf2b4fcf4b6fcf6b8fcf7b9fcf9bbfcfbbdfcfdbf"));
+  ramp(colors("00000401000501010601010802010902020b02020d03030f03031204041405041606051806051a07061c08071e0907200a08220b09240c09260d0a290e0b2b100b2d110c2f120d31130d34140e36150e38160f3b180f3d19103f1a10421c10441d11471e114920114b21114e22115024125325125527125829115a2a115c2c115f2d11612f116331116533106734106936106b38106c390f6e3b0f703d0f713f0f72400f74420f75440f764510774710784910784a10794c117a4e117b4f127b51127c52137c54137d56147d57157e59157e5a167e5c167f5d177f5f187f601880621980641a80651a80671b80681c816a1c816b1d816d1d816e1e81701f81721f817320817521817621817822817922827b23827c23827e24828025828125818326818426818627818827818928818b29818c29818e2a81902a81912b81932b80942c80962c80982d80992d809b2e7f9c2e7f9e2f7fa02f7fa1307ea3307ea5317ea6317da8327daa337dab337cad347cae347bb0357bb2357bb3367ab5367ab73779b83779ba3878bc3978bd3977bf3a77c03a76c23b75c43c75c53c74c73d73c83e73ca3e72cc3f71cd4071cf4070d0416fd2426fd3436ed5446dd6456cd8456cd9466bdb476adc4869de4968df4a68e04c67e24d66e34e65e44f64e55064e75263e85362e95462ea5661eb5760ec5860ed5a5fee5b5eef5d5ef05f5ef1605df2625df2645cf3655cf4675cf4695cf56b5cf66c5cf66e5cf7705cf7725cf8745cf8765cf9785df9795df97b5dfa7d5efa7f5efa815ffb835ffb8560fb8761fc8961fc8a62fc8c63fc8e64fc9065fd9266fd9467fd9668fd9869fd9a6afd9b6bfe9d6cfe9f6dfea16efea36ffea571fea772fea973feaa74feac76feae77feb078feb27afeb47bfeb67cfeb77efeb97ffebb81febd82febf84fec185fec287fec488fec68afec88cfeca8dfecc8ffecd90fecf92fed194fed395fed597fed799fed89afdda9cfddc9efddea0fde0a1fde2a3fde3a5fde5a7fde7a9fde9aafdebacfcecaefceeb0fcf0b2fcf2b4fcf4b6fcf6b8fcf7b9fcf9bbfcfbbdfcfdbf"));
 
-  var inferno = ramp(colors("00000401000501010601010802010a02020c02020e03021004031204031405041706041907051b08051d09061f0a07220b07240c08260d08290e092b10092d110a30120a32140b34150b37160b39180c3c190c3e1b0c411c0c431e0c451f0c48210c4a230c4c240c4f260c51280b53290b552b0b572d0b592f0a5b310a5c320a5e340a5f3609613809623909633b09643d09653e0966400a67420a68440a68450a69470b6a490b6a4a0c6b4c0c6b4d0d6c4f0d6c510e6c520e6d540f6d550f6d57106e59106e5a116e5c126e5d126e5f136e61136e62146e64156e65156e67166e69166e6a176e6c186e6d186e6f196e71196e721a6e741a6e751b6e771c6d781c6d7a1d6d7c1d6d7d1e6d7f1e6c801f6c82206c84206b85216b87216b88226a8a226a8c23698d23698f24699025689225689326679526679727669827669a28659b29649d29649f2a63a02a63a22b62a32c61a52c60a62d60a82e5fa92e5eab2f5ead305dae305cb0315bb1325ab3325ab43359b63458b73557b93556ba3655bc3754bd3853bf3952c03a51c13a50c33b4fc43c4ec63d4dc73e4cc83f4bca404acb4149cc4248ce4347cf4446d04545d24644d34743d44842d54a41d74b3fd84c3ed94d3dda4e3cdb503bdd513ade5238df5337e05536e15635e25734e35933e45a31e55c30e65d2fe75e2ee8602de9612bea632aeb6429eb6628ec6726ed6925ee6a24ef6c23ef6e21f06f20f1711ff1731df2741cf3761bf37819f47918f57b17f57d15f67e14f68013f78212f78410f8850ff8870ef8890cf98b0bf98c0af98e09fa9008fa9207fa9407fb9606fb9706fb9906fb9b06fb9d07fc9f07fca108fca309fca50afca60cfca80dfcaa0ffcac11fcae12fcb014fcb216fcb418fbb61afbb81dfbba1ffbbc21fbbe23fac026fac228fac42afac62df9c72ff9c932f9cb35f8cd37f8cf3af7d13df7d340f6d543f6d746f5d949f5db4cf4dd4ff4df53f4e156f3e35af3e55df2e661f2e865f2ea69f1ec6df1ed71f1ef75f1f179f2f27df2f482f3f586f3f68af4f88ef5f992f6fa96f8fb9af9fc9dfafda1fcffa4"));
+  ramp(colors("00000401000501010601010802010a02020c02020e03021004031204031405041706041907051b08051d09061f0a07220b07240c08260d08290e092b10092d110a30120a32140b34150b37160b39180c3c190c3e1b0c411c0c431e0c451f0c48210c4a230c4c240c4f260c51280b53290b552b0b572d0b592f0a5b310a5c320a5e340a5f3609613809623909633b09643d09653e0966400a67420a68440a68450a69470b6a490b6a4a0c6b4c0c6b4d0d6c4f0d6c510e6c520e6d540f6d550f6d57106e59106e5a116e5c126e5d126e5f136e61136e62146e64156e65156e67166e69166e6a176e6c186e6d186e6f196e71196e721a6e741a6e751b6e771c6d781c6d7a1d6d7c1d6d7d1e6d7f1e6c801f6c82206c84206b85216b87216b88226a8a226a8c23698d23698f24699025689225689326679526679727669827669a28659b29649d29649f2a63a02a63a22b62a32c61a52c60a62d60a82e5fa92e5eab2f5ead305dae305cb0315bb1325ab3325ab43359b63458b73557b93556ba3655bc3754bd3853bf3952c03a51c13a50c33b4fc43c4ec63d4dc73e4cc83f4bca404acb4149cc4248ce4347cf4446d04545d24644d34743d44842d54a41d74b3fd84c3ed94d3dda4e3cdb503bdd513ade5238df5337e05536e15635e25734e35933e45a31e55c30e65d2fe75e2ee8602de9612bea632aeb6429eb6628ec6726ed6925ee6a24ef6c23ef6e21f06f20f1711ff1731df2741cf3761bf37819f47918f57b17f57d15f67e14f68013f78212f78410f8850ff8870ef8890cf98b0bf98c0af98e09fa9008fa9207fa9407fb9606fb9706fb9906fb9b06fb9d07fc9f07fca108fca309fca50afca60cfca80dfcaa0ffcac11fcae12fcb014fcb216fcb418fbb61afbb81dfbba1ffbbc21fbbe23fac026fac228fac42afac62df9c72ff9c932f9cb35f8cd37f8cf3af7d13df7d340f6d543f6d746f5d949f5db4cf4dd4ff4df53f4e156f3e35af3e55df2e661f2e865f2ea69f1ec6df1ed71f1ef75f1f179f2f27df2f482f3f586f3f68af4f88ef5f992f6fa96f8fb9af9fc9dfafda1fcffa4"));
 
-  var plasma = ramp(colors("0d088710078813078916078a19068c1b068d1d068e20068f2206902406912605912805922a05932c05942e05952f059631059733059735049837049938049a3a049a3c049b3e049c3f049c41049d43039e44039e46039f48039f4903a04b03a14c02a14e02a25002a25102a35302a35502a45601a45801a45901a55b01a55c01a65e01a66001a66100a76300a76400a76600a76700a86900a86a00a86c00a86e00a86f00a87100a87201a87401a87501a87701a87801a87a02a87b02a87d03a87e03a88004a88104a78305a78405a78606a68707a68808a68a09a58b0aa58d0ba58e0ca48f0da4910ea3920fa39410a29511a19613a19814a099159f9a169f9c179e9d189d9e199da01a9ca11b9ba21d9aa31e9aa51f99a62098a72197a82296aa2395ab2494ac2694ad2793ae2892b02991b12a90b22b8fb32c8eb42e8db52f8cb6308bb7318ab83289ba3388bb3488bc3587bd3786be3885bf3984c03a83c13b82c23c81c33d80c43e7fc5407ec6417dc7427cc8437bc9447aca457acb4679cc4778cc4977cd4a76ce4b75cf4c74d04d73d14e72d24f71d35171d45270d5536fd5546ed6556dd7566cd8576bd9586ada5a6ada5b69db5c68dc5d67dd5e66de5f65de6164df6263e06363e16462e26561e26660e3685fe4695ee56a5de56b5de66c5ce76e5be76f5ae87059e97158e97257ea7457eb7556eb7655ec7754ed7953ed7a52ee7b51ef7c51ef7e50f07f4ff0804ef1814df1834cf2844bf3854bf3874af48849f48948f58b47f58c46f68d45f68f44f79044f79143f79342f89441f89540f9973ff9983ef99a3efa9b3dfa9c3cfa9e3bfb9f3afba139fba238fca338fca537fca636fca835fca934fdab33fdac33fdae32fdaf31fdb130fdb22ffdb42ffdb52efeb72dfeb82cfeba2cfebb2bfebd2afebe2afec029fdc229fdc328fdc527fdc627fdc827fdca26fdcb26fccd25fcce25fcd025fcd225fbd324fbd524fbd724fad824fada24f9dc24f9dd25f8df25f8e125f7e225f7e425f6e626f6e826f5e926f5eb27f4ed27f3ee27f3f027f2f227f1f426f1f525f0f724f0f921"));
+  ramp(colors("0d088710078813078916078a19068c1b068d1d068e20068f2206902406912605912805922a05932c05942e05952f059631059733059735049837049938049a3a049a3c049b3e049c3f049c41049d43039e44039e46039f48039f4903a04b03a14c02a14e02a25002a25102a35302a35502a45601a45801a45901a55b01a55c01a65e01a66001a66100a76300a76400a76600a76700a86900a86a00a86c00a86e00a86f00a87100a87201a87401a87501a87701a87801a87a02a87b02a87d03a87e03a88004a88104a78305a78405a78606a68707a68808a68a09a58b0aa58d0ba58e0ca48f0da4910ea3920fa39410a29511a19613a19814a099159f9a169f9c179e9d189d9e199da01a9ca11b9ba21d9aa31e9aa51f99a62098a72197a82296aa2395ab2494ac2694ad2793ae2892b02991b12a90b22b8fb32c8eb42e8db52f8cb6308bb7318ab83289ba3388bb3488bc3587bd3786be3885bf3984c03a83c13b82c23c81c33d80c43e7fc5407ec6417dc7427cc8437bc9447aca457acb4679cc4778cc4977cd4a76ce4b75cf4c74d04d73d14e72d24f71d35171d45270d5536fd5546ed6556dd7566cd8576bd9586ada5a6ada5b69db5c68dc5d67dd5e66de5f65de6164df6263e06363e16462e26561e26660e3685fe4695ee56a5de56b5de66c5ce76e5be76f5ae87059e97158e97257ea7457eb7556eb7655ec7754ed7953ed7a52ee7b51ef7c51ef7e50f07f4ff0804ef1814df1834cf2844bf3854bf3874af48849f48948f58b47f58c46f68d45f68f44f79044f79143f79342f89441f89540f9973ff9983ef99a3efa9b3dfa9c3cfa9e3bfb9f3afba139fba238fca338fca537fca636fca835fca934fdab33fdac33fdae32fdaf31fdb130fdb22ffdb42ffdb52efeb72dfeb82cfeba2cfebb2bfebd2afebe2afec029fdc229fdc328fdc527fdc627fdc827fdca26fdcb26fccd25fcce25fcd025fcd225fbd324fbd524fbd724fad824fada24f9dc24f9dd25f8df25f8e125f7e225f7e425f6e626f6e826f5e926f5eb27f4ed27f3ee27f3f027f2f227f1f426f1f525f0f724f0f921"));
 
-  function _slicedToArray$5(arr, i) {
-    return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$5();
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
   }
 
-  function _toConsumableArray$3(arr) {
-    return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$2(arr) || _nonIterableSpread$3();
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
   }
 
-  function _arrayWithoutHoles$3(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray$2(arr);
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
   }
 
-  function _arrayWithHoles$5(arr) {
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
   }
 
-  function _iterableToArray$3(iter) {
-    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
-  function _iterableToArrayLimit$5(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -10566,16 +11669,16 @@
     return _arr;
   }
 
-  function _unsupportedIterableToArray$2(o, minLen) {
+  function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray$2(o, minLen);
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor) n = o.constructor.name;
     if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
 
-  function _arrayLikeToArray$2(arr, len) {
+  function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
 
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
@@ -10583,11 +11686,11 @@
     return arr2;
   }
 
-  function _nonIterableSpread$3() {
+  function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  function _nonIterableRest$5() {
+  function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
@@ -10597,20 +11700,20 @@
         resolution = _ref$resolution === void 0 ? Infinity : _ref$resolution;
 
     var contour = interpolateContourPoints(polygon, resolution);
-    var edgePoints = merge(contour);
+    var edgePoints = merge$1(contour);
     var innerPoints = getInnerGeoPoints(polygon, resolution);
-    var points = [].concat(_toConsumableArray$3(edgePoints), _toConsumableArray$3(innerPoints));
+    var points = [].concat(_toConsumableArray(edgePoints), _toConsumableArray(innerPoints));
     var boundariesGeojson = {
       type: 'Polygon',
       coordinates: polygon
     };
 
     var _geoBounds = geoBounds(boundariesGeojson),
-        _geoBounds2 = _slicedToArray$5(_geoBounds, 2),
-        _geoBounds2$ = _slicedToArray$5(_geoBounds2[0], 2),
+        _geoBounds2 = _slicedToArray(_geoBounds, 2),
+        _geoBounds2$ = _slicedToArray(_geoBounds2[0], 2),
         minLng = _geoBounds2$[0],
         minLat = _geoBounds2$[1],
-        _geoBounds2$2 = _slicedToArray$5(_geoBounds2[1], 2),
+        _geoBounds2$2 = _slicedToArray(_geoBounds2[1], 2),
         maxLng = _geoBounds2$2[0],
         maxLat = _geoBounds2$2[1];
 
@@ -10625,7 +11728,7 @@
       var vt = geoVoronoi(points).triangles(); // geoDelaunay generates more triangles than needed
 
       var pntMap = new Map(points.map(function (_ref2, idx) {
-        var _ref3 = _slicedToArray$5(_ref2, 2),
+        var _ref3 = _slicedToArray(_ref2, 2),
             lng = _ref3[0],
             lat = _ref3[1];
 
@@ -10638,7 +11741,7 @@
 
         var inds = [];
         triangle.forEach(function (_ref4) {
-          var _ref5 = _slicedToArray$5(_ref4, 2),
+          var _ref5 = _slicedToArray(_ref4, 2),
               lng = _ref5[0],
               lat = _ref5[1];
 
@@ -10659,16 +11762,16 @@
       });
     } else if (!innerPoints.length) {
       // earcut triangulation slightly more performing if it's only using the polygon perimeter
-      var _earcut$flatten = earcut_1.flatten(contour),
+      var _earcut$flatten = earcut$1.flatten(contour),
           vertices = _earcut$flatten.vertices,
           _earcut$flatten$holes = _earcut$flatten.holes,
           holes = _earcut$flatten$holes === void 0 ? [] : _earcut$flatten$holes;
 
-      indices = earcut_1(vertices, holes, 2);
+      indices = earcut$1(vertices, holes, 2);
     } else {
       (function () {
         // use delaunator
-        var delaunay = Delaunator.from(points);
+        var delaunay = Delaunator$1.from(points);
 
         var _loop = function _loop(i, len) {
           var _indices2;
@@ -10692,7 +11795,7 @@
             if (!pointInside(triangleCentroid, boundariesGeojson, crossesPoleOrAntimeridian)) return "continue";
           }
 
-          (_indices2 = indices).push.apply(_indices2, _toConsumableArray$3(inds));
+          (_indices2 = indices).push.apply(_indices2, _toConsumableArray(inds));
         };
 
         for (var i = 0, len = delaunay.triangles.length; i < len; i += 3) {
@@ -10720,7 +11823,7 @@
       var prevPnt;
       coords.forEach(function (pnt) {
         if (prevPnt) {
-          var dist = geoDistance(pnt, prevPnt) * 180 / Math.PI;
+          var dist = geoDistance$1(pnt, prevPnt) * 180 / Math.PI;
 
           if (dist > maxDistance) {
             var interpol = geoInterpolate(prevPnt, pnt);
@@ -10747,11 +11850,11 @@
     };
 
     var _geoBounds3 = geoBounds(boundariesGeojson),
-        _geoBounds4 = _slicedToArray$5(_geoBounds3, 2),
-        _geoBounds4$ = _slicedToArray$5(_geoBounds4[0], 2),
+        _geoBounds4 = _slicedToArray(_geoBounds3, 2),
+        _geoBounds4$ = _slicedToArray(_geoBounds4[0], 2),
         minLng = _geoBounds4$[0],
         minLat = _geoBounds4$[1],
-        _geoBounds4$2 = _slicedToArray$5(_geoBounds4[1], 2),
+        _geoBounds4$2 = _slicedToArray(_geoBounds4[1], 2),
         maxLng = _geoBounds4$2[0],
         maxLat = _geoBounds4$2[1]; // polygon smaller than maxDistance -> no inner points
 
@@ -10817,156 +11920,150 @@
   function pointInside(pnt, polygon) {
     var crossesPoleOrAntimeridian = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
     // turf method is more performing but malfunctions if polygon includes a pole (lat = 90 | -90) or crosses the antimeridian (lng = 180 | -180)
-    return crossesPoleOrAntimeridian ? geoContains(polygon, pnt) : _default$1(pnt, polygon);
+    return crossesPoleOrAntimeridian ? geoContains(polygon, pnt) : booleanPointInPolygon(pnt, polygon);
   }
 
-  var THREE$3 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE$4 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    BufferGeometry: three.BufferGeometry,
-    Float32BufferAttribute: three.Float32BufferAttribute,
-    Geometry: three.Geometry
+    BufferGeometry: three$1.BufferGeometry,
+    Float32BufferAttribute: three$1.Float32BufferAttribute
   };
 
-  var setAttributeFn$1 = new THREE$3.BufferGeometry().setAttribute ? 'setAttribute' : 'addAttribute';
+  var setAttributeFn = new THREE$4.BufferGeometry().setAttribute ? 'setAttribute' : 'addAttribute';
 
-  function ConicPolygonGeometry(polygonGeoJson, startHeight, endHeight, closedBottom, closedTop, includeSides, curvatureResolution) {
-    THREE$3.Geometry.call(this);
-    this.type = 'ConicPolygonGeometry';
-    this.parameters = {
-      polygonGeoJson: polygonGeoJson,
-      startHeight: startHeight,
-      endHeight: endHeight,
-      closedBottom: closedBottom,
-      closedTop: closedTop,
-      includeSides: includeSides,
-      curvatureResolution: curvatureResolution
-    };
-    this.fromBufferGeometry(new ConicPolygonBufferGeometry(polygonGeoJson, startHeight, endHeight, closedBottom, closedTop, includeSides, curvatureResolution));
-    this.mergeVertices();
-  }
+  var ConicPolygonBufferGeometry = /*#__PURE__*/function (_THREE$BufferGeometry) {
+    _inherits(ConicPolygonBufferGeometry, _THREE$BufferGeometry);
 
-  ConicPolygonGeometry.prototype = Object.create(THREE$3.Geometry.prototype);
-  ConicPolygonGeometry.prototype.constructor = ConicPolygonGeometry;
+    var _super = _createSuper(ConicPolygonBufferGeometry);
 
-  function ConicPolygonBufferGeometry(polygonGeoJson, startHeight, endHeight, closedBottom, closedTop, includeSides, curvatureResolution) {
-    var _this = this;
+    function ConicPolygonBufferGeometry(polygonGeoJson, startHeight, endHeight, closedBottom, closedTop, includeSides, curvatureResolution) {
+      var _this;
 
-    THREE$3.BufferGeometry.call(this);
-    this.type = 'ConicPolygonBufferGeometry';
-    this.parameters = {
-      polygonGeoJson: polygonGeoJson,
-      startHeight: startHeight,
-      endHeight: endHeight,
-      closedBottom: closedBottom,
-      closedTop: closedTop,
-      includeSides: includeSides,
-      curvatureResolution: curvatureResolution
-    }; // defaults
+      _classCallCheck(this, ConicPolygonBufferGeometry);
 
-    startHeight = startHeight || 0;
-    endHeight = endHeight || 1;
-    closedBottom = closedBottom !== undefined ? closedBottom : true;
-    closedTop = closedTop !== undefined ? closedTop : true;
-    includeSides = includeSides !== undefined ? includeSides : true;
-    curvatureResolution = curvatureResolution || 5; // in angular degrees
-    // pre-calculate contour and triangulation
+      _this = _super.call(this);
+      _this.type = 'ConicPolygonBufferGeometry';
+      _this.parameters = {
+        polygonGeoJson: polygonGeoJson,
+        startHeight: startHeight,
+        endHeight: endHeight,
+        closedBottom: closedBottom,
+        closedTop: closedTop,
+        includeSides: includeSides,
+        curvatureResolution: curvatureResolution
+      }; // defaults
 
-    var _geoPolygonTriangulat = geoPolygonTriangulate(polygonGeoJson, {
-      resolution: curvatureResolution
-    }),
-        contour = _geoPolygonTriangulat.contour,
-        triangles = _geoPolygonTriangulat.triangles;
+      startHeight = startHeight || 0;
+      endHeight = endHeight || 1;
+      closedBottom = closedBottom !== undefined ? closedBottom : true;
+      closedTop = closedTop !== undefined ? closedTop : true;
+      includeSides = includeSides !== undefined ? includeSides : true;
+      curvatureResolution = curvatureResolution || 5; // in angular degrees
+      // pre-calculate contour and triangulation
 
-    var vertices = [];
-    var indices = [];
-    var groupCnt = 0; // add groups to apply different materials to torso / caps
+      var _geoPolygonTriangulat = geoPolygonTriangulate(polygonGeoJson, {
+        resolution: curvatureResolution
+      }),
+          contour = _geoPolygonTriangulat.contour,
+          triangles = _geoPolygonTriangulat.triangles;
 
-    var addGroup = function addGroup(groupData) {
-      var prevVertCnt = Math.round(vertices.length / 3);
-      var prevIndCnt = indices.length;
-      vertices = vertices.concat(groupData.vertices);
-      indices = indices.concat(!prevVertCnt ? groupData.indices : groupData.indices.map(function (ind) {
-        return ind + prevVertCnt;
-      }));
-
-      _this.addGroup(prevIndCnt, indices.length - prevIndCnt, groupCnt++);
-    };
-
-    includeSides && addGroup(generateTorso());
-    closedBottom && addGroup(generateCap(startHeight, false));
-    closedTop && addGroup(generateCap(endHeight, true)); // build geometry
-
-    this.setIndex(indices);
-    this[setAttributeFn$1]('position', new THREE$3.Float32BufferAttribute(vertices, 3)); // auto-calculate normals
-
-    this.computeFaceNormals();
-    this.computeVertexNormals(); //
-
-    function generateVertices(polygon, altitude) {
-      var coords3d = polygon.map(function (coords) {
-        return coords.map(function (_ref) {
-          var _ref2 = _slicedToArray$5(_ref, 2),
-              lng = _ref2[0],
-              lat = _ref2[1];
-
-          return polar2Cartesian$2(lat, lng, altitude);
-        });
-      }); // returns { vertices, holes, coordinates }. Each point generates 3 vertice items (x,y,z).
-
-      return earcut_1.flatten(coords3d);
-    }
-
-    function generateTorso() {
-      var _generateVertices = generateVertices(contour, startHeight),
-          bottomVerts = _generateVertices.vertices,
-          holes = _generateVertices.holes;
-
-      var _generateVertices2 = generateVertices(contour, endHeight),
-          topVerts = _generateVertices2.vertices;
-
-      var vertices = merge([topVerts, bottomVerts]);
-      var numPoints = Math.round(topVerts.length / 3);
-      var holesIdx = new Set(holes);
-      var lastHoleIdx = 0;
+      var vertices = [];
       var indices = [];
+      var groupCnt = 0; // add groups to apply different materials to torso / caps
 
-      for (var v0Idx = 0; v0Idx < numPoints; v0Idx++) {
-        var v1Idx = v0Idx + 1; // next point
+      var addGroup = function addGroup(groupData) {
+        var prevVertCnt = Math.round(vertices.length / 3);
+        var prevIndCnt = indices.length;
+        vertices = vertices.concat(groupData.vertices);
+        indices = indices.concat(!prevVertCnt ? groupData.indices : groupData.indices.map(function (ind) {
+          return ind + prevVertCnt;
+        }));
 
-        if (v1Idx === numPoints) {
-          v1Idx = lastHoleIdx; // close final loop
-        } else if (holesIdx.has(v1Idx)) {
-          var holeIdx = v1Idx;
-          v1Idx = lastHoleIdx; // close hole loop
+        _this.addGroup(prevIndCnt, indices.length - prevIndCnt, groupCnt++);
+      };
 
-          lastHoleIdx = holeIdx;
-        } // Each pair of coords generates two triangles (faces)
+      includeSides && addGroup(generateTorso());
+      closedBottom && addGroup(generateCap(startHeight, false));
+      closedTop && addGroup(generateCap(endHeight, true)); // build geometry
+
+      _this.setIndex(indices);
+
+      _this[setAttributeFn]('position', new THREE$4.Float32BufferAttribute(vertices, 3)); // auto-calculate normals
 
 
-        indices.push(v0Idx, v0Idx + numPoints, v1Idx + numPoints);
-        indices.push(v1Idx + numPoints, v1Idx, v0Idx);
+      _this.computeFaceNormals();
+
+      _this.computeVertexNormals(); //
+
+
+      function generateVertices(polygon, altitude) {
+        var coords3d = polygon.map(function (coords) {
+          return coords.map(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                lng = _ref2[0],
+                lat = _ref2[1];
+
+            return polar2Cartesian(lat, lng, altitude);
+          });
+        }); // returns { vertices, holes, coordinates }. Each point generates 3 vertice items (x,y,z).
+
+        return earcut$1.flatten(coords3d);
       }
 
-      return {
-        indices: indices,
-        vertices: vertices
-      };
+      function generateTorso() {
+        var _generateVertices = generateVertices(contour, startHeight),
+            bottomVerts = _generateVertices.vertices,
+            holes = _generateVertices.holes;
+
+        var _generateVertices2 = generateVertices(contour, endHeight),
+            topVerts = _generateVertices2.vertices;
+
+        var vertices = merge$1([topVerts, bottomVerts]);
+        var numPoints = Math.round(topVerts.length / 3);
+        var holesIdx = new Set(holes);
+        var lastHoleIdx = 0;
+        var indices = [];
+
+        for (var v0Idx = 0; v0Idx < numPoints; v0Idx++) {
+          var v1Idx = v0Idx + 1; // next point
+
+          if (v1Idx === numPoints) {
+            v1Idx = lastHoleIdx; // close final loop
+          } else if (holesIdx.has(v1Idx)) {
+            var holeIdx = v1Idx;
+            v1Idx = lastHoleIdx; // close hole loop
+
+            lastHoleIdx = holeIdx;
+          } // Each pair of coords generates two triangles (faces)
+
+
+          indices.push(v0Idx, v0Idx + numPoints, v1Idx + numPoints);
+          indices.push(v1Idx + numPoints, v1Idx, v0Idx);
+        }
+
+        return {
+          indices: indices,
+          vertices: vertices
+        };
+      }
+
+      function generateCap(radius) {
+        var isTop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+        return {
+          // need to reverse-wind the bottom triangles to make them face outwards
+          indices: isTop ? triangles.indices : triangles.indices.slice().reverse(),
+          vertices: generateVertices([triangles.points], radius).vertices
+        };
+      }
+
+      return _this;
     }
 
-    function generateCap(radius) {
-      var isTop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      return {
-        // need to reverse-wind the bottom triangles to make them face outwards
-        indices: isTop ? triangles.indices : triangles.indices.slice().reverse(),
-        vertices: generateVertices([triangles.points], radius).vertices
-      };
-    }
-  }
+    return ConicPolygonBufferGeometry;
+  }(THREE$4.BufferGeometry); //
 
-  ConicPolygonBufferGeometry.prototype = Object.create(THREE$3.BufferGeometry.prototype);
-  ConicPolygonBufferGeometry.prototype.constructor = ConicPolygonBufferGeometry; //
 
-  function polar2Cartesian$2(lat, lng) {
+  function polar2Cartesian(lat, lng) {
     var r = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
     var phi = (90 - lat) * Math.PI / 180;
     var theta = (90 - lng) * Math.PI / 180;
@@ -10976,17 +12073,17 @@
     ];
   }
 
-  var THREE$4 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE$3 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    DoubleSide: three.DoubleSide,
-    Group: three.Group,
-    Line: three.Line,
-    LineBasicMaterial: three.LineBasicMaterial,
-    Mesh: three.Mesh,
-    MeshBasicMaterial: three.MeshBasicMaterial
+    DoubleSide: three$1.DoubleSide,
+    Group: three$1.Group,
+    Line: three$1.Line,
+    LineBasicMaterial: three$1.LineBasicMaterial,
+    Mesh: three$1.Mesh,
+    MeshBasicMaterial: three$1.MeshBasicMaterial
   };
 
-  var PolygonsLayerKapsule = index({
+  var PolygonsLayerKapsule = index$2({
     props: {
       polygonsData: {
         "default": []
@@ -10999,11 +12096,13 @@
           return '#ffffaa';
         }
       },
+      polygonSideMaterial: {},
       polygonCapColor: {
         "default": function _default() {
           return '#ffffaa';
         }
       },
+      polygonCapMaterial: {},
       polygonStrokeColor: {},
       polygonAltitude: {
         "default": 0.01
@@ -11031,14 +12130,18 @@
       var altitudeAccessor = index$1(state.polygonAltitude);
       var capCurvatureResolutionAccessor = index$1(state.polygonCapCurvatureResolution);
       var capColorAccessor = index$1(state.polygonCapColor);
+      var capMaterialAccessor = index$1(state.polygonCapMaterial);
       var sideColorAccessor = index$1(state.polygonSideColor);
+      var sideMaterialAccessor = index$1(state.polygonSideMaterial);
       var strokeColorAccessor = index$1(state.polygonStrokeColor);
       var singlePolygons = [];
       state.polygonsData.forEach(function (polygon) {
         var objAttrs = {
           data: polygon,
           capColor: capColorAccessor(polygon),
+          capMaterial: capMaterialAccessor(polygon),
           sideColor: sideColorAccessor(polygon),
+          sideMaterial: sideMaterialAccessor(polygon),
           strokeColor: strokeColorAccessor(polygon),
           altitude: +altitudeAccessor(polygon),
           capCurvatureResolution: +capCurvatureResolutionAccessor(polygon)
@@ -11049,13 +12152,13 @@
         polygon.__id = geoId;
 
         if (geoJson.type === 'Polygon') {
-          singlePolygons.push(_objectSpread2({
+          singlePolygons.push(_objectSpread2$1({
             id: "".concat(geoId, "_0"),
             coords: geoJson.coordinates
           }, objAttrs));
         } else if (geoJson.type === 'MultiPolygon') {
-          singlePolygons.push.apply(singlePolygons, _toConsumableArray(geoJson.coordinates.map(function (coords, idx) {
-            return _objectSpread2({
+          singlePolygons.push.apply(singlePolygons, _toConsumableArray$3(geoJson.coordinates.map(function (coords, idx) {
+            return _objectSpread2$1({
               id: "".concat(geoId, "_").concat(idx),
               coords: coords
             }, objAttrs);
@@ -11069,19 +12172,21 @@
           return d.id;
         },
         createObj: function createObj() {
-          var obj = new THREE$4.Group(); // conic geometry
+          var obj = new THREE$3.Group();
+          obj.__defaultSideMaterial = new THREE$3.MeshBasicMaterial({
+            side: THREE$3.DoubleSide,
+            depthWrite: true
+          });
+          obj.__defaultCapMaterial = new THREE$3.MeshBasicMaterial({
+            side: THREE$3.DoubleSide,
+            depthWrite: true
+          }); // conic geometry
 
-          obj.add(new THREE$4.Mesh(undefined, [new THREE$4.MeshBasicMaterial({
-            side: THREE$4.DoubleSide,
-            depthWrite: true
-          }), // side material
-          new THREE$4.MeshBasicMaterial({
-            side: THREE$4.DoubleSide,
-            depthWrite: true
-          }) // cap material
+          obj.add(new THREE$3.Mesh(undefined, [obj.__defaultSideMaterial, // side material
+          obj.__defaultCapMaterial // cap material
           ])); // polygon stroke
 
-          obj.add(new THREE$4.Line(undefined, new THREE$4.LineBasicMaterial()));
+          obj.add(new THREE$3.Line(undefined, new THREE$3.LineBasicMaterial()));
           obj.__globeObjType = 'polygon'; // Add object type
 
           return obj;
@@ -11089,21 +12194,37 @@
         updateObj: function updateObj(obj, _ref) {
           var coords = _ref.coords,
               capColor = _ref.capColor,
+              capMaterial = _ref.capMaterial,
               sideColor = _ref.sideColor,
+              sideMaterial = _ref.sideMaterial,
               strokeColor = _ref.strokeColor,
               altitude = _ref.altitude,
               capCurvatureResolution = _ref.capCurvatureResolution;
 
-          var _obj$children = _slicedToArray(obj.children, 2),
+          var _obj$children = _slicedToArray$5(obj.children, 2),
               conicObj = _obj$children[0],
               strokeObj = _obj$children[1]; // hide stroke if no color set
 
 
           var addStroke = !!strokeColor;
-          strokeObj.visible = addStroke; // update materials
+          strokeObj.visible = addStroke; // regenerate geometries if needed
 
-          [sideColor, capColor].forEach(function (color, materialIdx) {
+          !objMatch(conicObj.geometry.parameters || {}, {
+            polygonGeoJson: coords,
+            curvatureResolution: capCurvatureResolution
+          }) && (conicObj.geometry = new ConicPolygonBufferGeometry(coords, 0, GLOBE_RADIUS, false, true, true, capCurvatureResolution));
+          addStroke && (!strokeObj.geometry.parameters || strokeObj.geometry.parameters.geoJson.coordinates !== coords || strokeObj.geometry.parameters.resolution !== capCurvatureResolution) && (strokeObj.geometry = new GeoJsonGeometry({
+            type: 'Polygon',
+            coordinates: coords
+          }, GLOBE_RADIUS, capCurvatureResolution)); // replace side/cap materials if defined
+
+          conicObj.material[0] = sideMaterial || obj.__defaultSideMaterial;
+          conicObj.material[1] = capMaterial || obj.__defaultCapMaterial; // update default material colors
+
+          [!sideMaterial && sideColor, !capMaterial && capColor].forEach(function (color, materialIdx) {
+            if (!color) return; // skip custom materials
             // conic object
+
             var material = conicObj.material[materialIdx];
             var opacity = colorAlpha(color);
             material.color.set(colorStr2Hex(color));
@@ -11120,25 +12241,16 @@
             material.opacity = opacity;
           }
 
-          var geoJsonGeometry = {
-            type: 'Polygon',
-            coordinates: coords
-          };
           var targetD = {
-            alt: altitude,
-            capCurvatureResolution: capCurvatureResolution
+            alt: altitude
           };
 
           var applyUpdate = function applyUpdate(td) {
             var _obj$__currentTargetD = obj.__currentTargetD = td,
-                alt = _obj$__currentTargetD.alt,
-                capCurvatureResolution = _obj$__currentTargetD.capCurvatureResolution; // const final = Math.abs(alt - targetD.alt) < 1e-9;
-            // const res = final ? capCurvatureResolution : 180; // use lower resolution for transitory states
+                alt = _obj$__currentTargetD.alt;
 
-
-            var res = capCurvatureResolution;
-            conicObj.geometry = new ConicPolygonBufferGeometry(coords, GLOBE_RADIUS, GLOBE_RADIUS * (1 + alt), false, true, true, res);
-            addStroke && (strokeObj.geometry = new GeoJsonGeometry(geoJsonGeometry, GLOBE_RADIUS * (1 + alt + 1e-4), res)); // stroke slightly above the conic mesh
+            conicObj.scale.x = conicObj.scale.y = conicObj.scale.z = 1 + alt;
+            addStroke && (strokeObj.scale.x = strokeObj.scale.y = strokeObj.scale.z = 1 + alt + 1e-4); // stroke slightly above the conic mesh
           };
 
           var currentTargetD = obj.__currentTargetD || Object.assign({}, targetD, {
@@ -11161,15 +12273,30 @@
     }
   });
 
-  var THREE$5 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  function objMatch(obj, attrs) {
+    var compFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {
+      return function (a, b) {
+        return a === b;
+      };
+    };
+    return Object.entries(attrs).every(function (_ref2) {
+      var _ref3 = _slicedToArray$5(_ref2, 2),
+          k = _ref3[0],
+          v = _ref3[1];
+
+      return obj.hasOwnProperty(k) && compFn(k)(obj[k], v);
+    });
+  }
+
+  var THREE$2 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    Euler: three.Euler,
-    Mesh: three.Mesh,
-    MeshLambertMaterial: three.MeshLambertMaterial,
-    SphereBufferGeometry: three.SphereBufferGeometry
+    Euler: three$1.Euler,
+    Mesh: three$1.Mesh,
+    MeshLambertMaterial: three$1.MeshLambertMaterial,
+    SphereBufferGeometry: three$1.SphereBufferGeometry
   };
 
-  var TilesLayerKapsule = index({
+  var TilesLayerKapsule = index$2({
     props: {
       tilesData: {
         "default": []
@@ -11199,7 +12326,7 @@
       // whether to size tiles relative to the globe coordinate system, or independently
       tileMaterial: {
         "default": function _default() {
-          return new THREE$5.MeshLambertMaterial({
+          return new THREE$2.MeshLambertMaterial({
             color: '#ffbb88',
             opacity: 0.4,
             transparent: true
@@ -11234,7 +12361,7 @@
       var curvatureResolutionAccessor = index$1(state.tileCurvatureResolution);
       threeDigest(state.tilesData, state.scene, {
         createObj: function createObj() {
-          var obj = new THREE$5.Mesh();
+          var obj = new THREE$2.Mesh();
           obj.__globeObjType = 'tile'; // Add object type
 
           return obj;
@@ -11255,11 +12382,11 @@
 
             var rotLng = deg2Rad(lng);
             var rotLat = deg2Rad(-lat);
-            obj.geometry = new THREE$5.SphereBufferGeometry(GLOBE_RADIUS * (1 + alt), Math.ceil(width / curvatureResolution), Math.ceil(height / curvatureResolution), deg2Rad(90 - width / 2) + (useGlobeProjection ? rotLng : 0), deg2Rad(width), deg2Rad(90 - height / 2) + (useGlobeProjection ? rotLat : 0), deg2Rad(height));
+            obj.geometry = new THREE$2.SphereBufferGeometry(GLOBE_RADIUS * (1 + alt), Math.ceil(width / curvatureResolution), Math.ceil(height / curvatureResolution), deg2Rad(90 - width / 2) + (useGlobeProjection ? rotLng : 0), deg2Rad(width), deg2Rad(90 - height / 2) + (useGlobeProjection ? rotLat : 0), deg2Rad(height));
 
             if (!useGlobeProjection) {
               // rotate obj instead. order matters, rotate longitudinally first.
-              obj.setRotationFromEuler(new THREE$5.Euler(rotLat, rotLng, 0, 'YXZ'));
+              obj.setRotationFromEuler(new THREE$2.Euler(rotLat, rotLng, 0, 'YXZ'));
             }
           };
 
@@ -11297,18 +12424,18 @@
 
   var glyphs={"0":{x_min:73,x_max:715,ha:792,o:"m 394 -29 q 153 129 242 -29 q 73 479 73 272 q 152 829 73 687 q 394 989 241 989 q 634 829 545 989 q 715 479 715 684 q 635 129 715 270 q 394 -29 546 -29 m 394 89 q 546 211 489 89 q 598 479 598 322 q 548 748 598 640 q 394 871 491 871 q 241 748 298 871 q 190 479 190 637 q 239 211 190 319 q 394 89 296 89 "},"1":{x_min:215.671875,x_max:574,ha:792,o:"m 574 0 l 442 0 l 442 697 l 215 697 l 215 796 q 386 833 330 796 q 475 986 447 875 l 574 986 l 574 0 "},"2":{x_min:59,x_max:731,ha:792,o:"m 731 0 l 59 0 q 197 314 59 188 q 457 487 199 315 q 598 691 598 580 q 543 819 598 772 q 411 867 488 867 q 272 811 328 867 q 209 630 209 747 l 81 630 q 182 901 81 805 q 408 986 271 986 q 629 909 536 986 q 731 694 731 826 q 613 449 731 541 q 378 316 495 383 q 201 122 235 234 l 731 122 l 731 0 "},"3":{x_min:54,x_max:737,ha:792,o:"m 737 284 q 635 55 737 141 q 399 -25 541 -25 q 156 52 248 -25 q 54 308 54 140 l 185 308 q 245 147 185 202 q 395 96 302 96 q 539 140 484 96 q 602 280 602 190 q 510 429 602 390 q 324 454 451 454 l 324 565 q 487 584 441 565 q 565 719 565 617 q 515 835 565 791 q 395 879 466 879 q 255 824 307 879 q 203 661 203 769 l 78 661 q 166 909 78 822 q 387 992 250 992 q 603 921 513 992 q 701 723 701 844 q 669 607 701 656 q 578 524 637 558 q 696 434 655 499 q 737 284 737 369 "},"4":{x_min:48,x_max:742.453125,ha:792,o:"m 742 243 l 602 243 l 602 0 l 476 0 l 476 243 l 48 243 l 48 368 l 476 958 l 602 958 l 602 354 l 742 354 l 742 243 m 476 354 l 476 792 l 162 354 l 476 354 "},"5":{x_min:54.171875,x_max:738,ha:792,o:"m 738 314 q 626 60 738 153 q 382 -23 526 -23 q 155 47 248 -23 q 54 256 54 125 l 183 256 q 259 132 204 174 q 382 91 314 91 q 533 149 471 91 q 602 314 602 213 q 538 469 602 411 q 386 528 475 528 q 284 506 332 528 q 197 439 237 484 l 81 439 l 159 958 l 684 958 l 684 840 l 254 840 l 214 579 q 306 627 258 612 q 407 643 354 643 q 636 552 540 643 q 738 314 738 457 "},"6":{x_min:53,x_max:739,ha:792,o:"m 739 312 q 633 62 739 162 q 400 -31 534 -31 q 162 78 257 -31 q 53 439 53 206 q 178 859 53 712 q 441 986 284 986 q 643 912 559 986 q 732 713 732 833 l 601 713 q 544 830 594 786 q 426 875 494 875 q 268 793 331 875 q 193 517 193 697 q 301 597 240 570 q 427 624 362 624 q 643 540 552 624 q 739 312 739 451 m 603 298 q 540 461 603 400 q 404 516 484 516 q 268 461 323 516 q 207 300 207 401 q 269 137 207 198 q 405 83 325 83 q 541 137 486 83 q 603 298 603 197 "},"7":{x_min:58.71875,x_max:730.953125,ha:792,o:"m 730 839 q 469 448 560 641 q 335 0 378 255 l 192 0 q 328 441 235 252 q 593 830 421 630 l 58 830 l 58 958 l 730 958 l 730 839 "},"8":{x_min:55,x_max:736,ha:792,o:"m 571 527 q 694 424 652 491 q 736 280 736 358 q 648 71 736 158 q 395 -26 551 -26 q 142 69 238 -26 q 55 279 55 157 q 96 425 55 359 q 220 527 138 491 q 120 615 153 562 q 88 726 88 668 q 171 904 88 827 q 395 986 261 986 q 618 905 529 986 q 702 727 702 830 q 670 616 702 667 q 571 527 638 565 m 394 565 q 519 610 475 565 q 563 717 563 655 q 521 823 563 781 q 392 872 474 872 q 265 824 312 872 q 224 720 224 783 q 265 613 224 656 q 394 565 312 565 m 395 91 q 545 150 488 91 q 597 280 597 204 q 546 408 597 355 q 395 465 492 465 q 244 408 299 465 q 194 280 194 356 q 244 150 194 203 q 395 91 299 91 "},"9":{x_min:53,x_max:739,ha:792,o:"m 739 524 q 619 94 739 241 q 362 -32 516 -32 q 150 47 242 -32 q 59 244 59 126 l 191 244 q 246 129 191 176 q 373 82 301 82 q 526 161 466 82 q 597 440 597 255 q 363 334 501 334 q 130 432 216 334 q 53 650 53 521 q 134 880 53 786 q 383 986 226 986 q 659 841 566 986 q 739 524 739 719 m 388 449 q 535 514 480 449 q 585 658 585 573 q 535 805 585 744 q 388 873 480 873 q 242 809 294 873 q 191 658 191 745 q 239 514 191 572 q 388 449 292 449 "},"ο":{x_min:0,x_max:712,ha:815,o:"m 356 -25 q 96 88 192 -25 q 0 368 0 201 q 92 642 0 533 q 356 761 192 761 q 617 644 517 761 q 712 368 712 533 q 619 91 712 201 q 356 -25 520 -25 m 356 85 q 527 175 465 85 q 583 369 583 255 q 528 562 583 484 q 356 651 466 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 356 85 250 85 "},S:{x_min:0,x_max:788,ha:890,o:"m 788 291 q 662 54 788 144 q 397 -26 550 -26 q 116 68 226 -26 q 0 337 0 168 l 131 337 q 200 152 131 220 q 384 85 269 85 q 557 129 479 85 q 650 270 650 183 q 490 429 650 379 q 194 513 341 470 q 33 739 33 584 q 142 964 33 881 q 388 1041 242 1041 q 644 957 543 1041 q 756 716 756 867 l 625 716 q 561 874 625 816 q 395 933 497 933 q 243 891 309 933 q 164 759 164 841 q 325 609 164 656 q 625 526 475 568 q 788 291 788 454 "},"¦":{x_min:343,x_max:449,ha:792,o:"m 449 462 l 343 462 l 343 986 l 449 986 l 449 462 m 449 -242 l 343 -242 l 343 280 l 449 280 l 449 -242 "},"/":{x_min:183.25,x_max:608.328125,ha:792,o:"m 608 1041 l 266 -129 l 183 -129 l 520 1041 l 608 1041 "},"Τ":{x_min:-0.4375,x_max:777.453125,ha:839,o:"m 777 893 l 458 893 l 458 0 l 319 0 l 319 892 l 0 892 l 0 1013 l 777 1013 l 777 893 "},y:{x_min:0,x_max:684.78125,ha:771,o:"m 684 738 l 388 -83 q 311 -216 356 -167 q 173 -279 252 -279 q 97 -266 133 -279 l 97 -149 q 132 -155 109 -151 q 168 -160 155 -160 q 240 -114 213 -160 q 274 -26 248 -98 l 0 738 l 137 737 l 341 139 l 548 737 l 684 738 "},"Π":{x_min:0,x_max:803,ha:917,o:"m 803 0 l 667 0 l 667 886 l 140 886 l 140 0 l 0 0 l 0 1012 l 803 1012 l 803 0 "},"ΐ":{x_min:-111,x_max:339,ha:361,o:"m 339 800 l 229 800 l 229 925 l 339 925 l 339 800 m -1 800 l -111 800 l -111 925 l -1 925 l -1 800 m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 737 l 167 737 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 103 239 101 q 284 112 257 104 l 284 3 m 302 1040 l 113 819 l 30 819 l 165 1040 l 302 1040 "},g:{x_min:0,x_max:686,ha:838,o:"m 686 34 q 586 -213 686 -121 q 331 -306 487 -306 q 131 -252 216 -306 q 31 -84 31 -190 l 155 -84 q 228 -174 166 -138 q 345 -207 284 -207 q 514 -109 454 -207 q 564 89 564 -27 q 461 6 521 36 q 335 -23 401 -23 q 88 100 184 -23 q 0 370 0 215 q 87 634 0 522 q 330 758 183 758 q 457 728 398 758 q 564 644 515 699 l 564 737 l 686 737 l 686 34 m 582 367 q 529 560 582 481 q 358 652 468 652 q 189 561 250 652 q 135 369 135 482 q 189 176 135 255 q 361 85 251 85 q 529 176 468 85 q 582 367 582 255 "},"²":{x_min:0,x_max:442,ha:539,o:"m 442 383 l 0 383 q 91 566 0 492 q 260 668 176 617 q 354 798 354 727 q 315 875 354 845 q 227 905 277 905 q 136 869 173 905 q 99 761 99 833 l 14 761 q 82 922 14 864 q 232 974 141 974 q 379 926 316 974 q 442 797 442 878 q 351 635 442 704 q 183 539 321 611 q 92 455 92 491 l 442 455 l 442 383 "},"–":{x_min:0,x_max:705.5625,ha:803,o:"m 705 334 l 0 334 l 0 410 l 705 410 l 705 334 "},"Κ":{x_min:0,x_max:819.5625,ha:893,o:"m 819 0 l 650 0 l 294 509 l 139 356 l 139 0 l 0 0 l 0 1013 l 139 1013 l 139 526 l 626 1013 l 809 1013 l 395 600 l 819 0 "},"ƒ":{x_min:-46.265625,x_max:392,ha:513,o:"m 392 651 l 259 651 l 79 -279 l -46 -278 l 134 651 l 14 651 l 14 751 l 135 751 q 151 948 135 900 q 304 1041 185 1041 q 334 1040 319 1041 q 392 1034 348 1039 l 392 922 q 337 931 360 931 q 271 883 287 931 q 260 793 260 853 l 260 751 l 392 751 l 392 651 "},e:{x_min:0,x_max:714,ha:813,o:"m 714 326 l 140 326 q 200 157 140 227 q 359 87 260 87 q 488 130 431 87 q 561 245 545 174 l 697 245 q 577 48 670 123 q 358 -26 484 -26 q 97 85 195 -26 q 0 363 0 197 q 94 642 0 529 q 358 765 195 765 q 626 627 529 765 q 714 326 714 503 m 576 429 q 507 583 564 522 q 355 650 445 650 q 206 583 266 650 q 140 429 152 522 l 576 429 "},"ό":{x_min:0,x_max:712,ha:815,o:"m 356 -25 q 94 91 194 -25 q 0 368 0 202 q 92 642 0 533 q 356 761 192 761 q 617 644 517 761 q 712 368 712 533 q 619 91 712 201 q 356 -25 520 -25 m 356 85 q 527 175 465 85 q 583 369 583 255 q 528 562 583 484 q 356 651 466 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 356 85 250 85 m 576 1040 l 387 819 l 303 819 l 438 1040 l 576 1040 "},J:{x_min:0,x_max:588,ha:699,o:"m 588 279 q 287 -26 588 -26 q 58 73 126 -26 q 0 327 0 158 l 133 327 q 160 172 133 227 q 288 96 198 96 q 426 171 391 96 q 449 336 449 219 l 449 1013 l 588 1013 l 588 279 "},"»":{x_min:-1,x_max:503,ha:601,o:"m 503 302 l 280 136 l 281 256 l 429 373 l 281 486 l 280 608 l 503 440 l 503 302 m 221 302 l 0 136 l 0 255 l 145 372 l 0 486 l -1 608 l 221 440 l 221 302 "},"©":{x_min:-3,x_max:1008,ha:1106,o:"m 502 -7 q 123 151 263 -7 q -3 501 -3 294 q 123 851 -3 706 q 502 1011 263 1011 q 881 851 739 1011 q 1008 501 1008 708 q 883 151 1008 292 q 502 -7 744 -7 m 502 60 q 830 197 709 60 q 940 501 940 322 q 831 805 940 681 q 502 944 709 944 q 174 805 296 944 q 65 501 65 680 q 173 197 65 320 q 502 60 294 60 m 741 394 q 661 246 731 302 q 496 190 591 190 q 294 285 369 190 q 228 497 228 370 q 295 714 228 625 q 499 813 370 813 q 656 762 588 813 q 733 625 724 711 l 634 625 q 589 704 629 673 q 498 735 550 735 q 377 666 421 735 q 334 504 334 597 q 374 340 334 408 q 490 272 415 272 q 589 304 549 272 q 638 394 628 337 l 741 394 "},"ώ":{x_min:0,x_max:922,ha:1030,o:"m 687 1040 l 498 819 l 415 819 l 549 1040 l 687 1040 m 922 339 q 856 97 922 203 q 650 -26 780 -26 q 538 9 587 -26 q 461 103 489 44 q 387 12 436 46 q 277 -22 339 -22 q 69 97 147 -22 q 0 338 0 202 q 45 551 0 444 q 161 737 84 643 l 302 737 q 175 552 219 647 q 124 336 124 446 q 155 179 124 248 q 275 88 197 88 q 375 163 341 88 q 400 294 400 219 l 400 572 l 524 572 l 524 294 q 561 135 524 192 q 643 88 591 88 q 762 182 719 88 q 797 341 797 257 q 745 555 797 450 q 619 737 705 637 l 760 737 q 874 551 835 640 q 922 339 922 444 "},"^":{x_min:193.0625,x_max:598.609375,ha:792,o:"m 598 772 l 515 772 l 395 931 l 277 772 l 193 772 l 326 1013 l 462 1013 l 598 772 "},"«":{x_min:0,x_max:507.203125,ha:604,o:"m 506 136 l 284 302 l 284 440 l 506 608 l 507 485 l 360 371 l 506 255 l 506 136 m 222 136 l 0 302 l 0 440 l 222 608 l 221 486 l 73 373 l 222 256 l 222 136 "},D:{x_min:0,x_max:828,ha:935,o:"m 389 1013 q 714 867 593 1013 q 828 521 828 729 q 712 161 828 309 q 382 0 587 0 l 0 0 l 0 1013 l 389 1013 m 376 124 q 607 247 523 124 q 681 510 681 355 q 607 771 681 662 q 376 896 522 896 l 139 896 l 139 124 l 376 124 "},"∙":{x_min:0,x_max:142,ha:239,o:"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 "},"ÿ":{x_min:0,x_max:47,ha:125,o:"m 47 3 q 37 -7 47 -7 q 28 0 30 -7 q 39 -4 32 -4 q 45 3 45 -1 l 37 0 q 28 9 28 0 q 39 19 28 19 l 47 16 l 47 19 l 47 3 m 37 1 q 44 8 44 1 q 37 16 44 16 q 30 8 30 16 q 37 1 30 1 m 26 1 l 23 22 l 14 0 l 3 22 l 3 3 l 0 25 l 13 1 l 22 25 l 26 1 "},w:{x_min:0,x_max:1009.71875,ha:1100,o:"m 1009 738 l 783 0 l 658 0 l 501 567 l 345 0 l 222 0 l 0 738 l 130 738 l 284 174 l 432 737 l 576 738 l 721 173 l 881 737 l 1009 738 "},$:{x_min:0,x_max:700,ha:793,o:"m 664 717 l 542 717 q 490 825 531 785 q 381 872 450 865 l 381 551 q 620 446 540 522 q 700 241 700 370 q 618 45 700 116 q 381 -25 536 -25 l 381 -152 l 307 -152 l 307 -25 q 81 62 162 -25 q 0 297 0 149 l 124 297 q 169 146 124 204 q 307 81 215 89 l 307 441 q 80 536 148 469 q 13 725 13 603 q 96 910 13 839 q 307 982 180 982 l 307 1077 l 381 1077 l 381 982 q 574 917 494 982 q 664 717 664 845 m 307 565 l 307 872 q 187 831 233 872 q 142 724 142 791 q 180 618 142 656 q 307 565 218 580 m 381 76 q 562 237 562 96 q 517 361 562 313 q 381 423 472 409 l 381 76 "},"\\":{x_min:-0.015625,x_max:425.0625,ha:522,o:"m 425 -129 l 337 -129 l 0 1041 l 83 1041 l 425 -129 "},"µ":{x_min:0,x_max:697.21875,ha:747,o:"m 697 -4 q 629 -14 658 -14 q 498 97 513 -14 q 422 9 470 41 q 313 -23 374 -23 q 207 4 258 -23 q 119 81 156 32 l 119 -278 l 0 -278 l 0 738 l 124 738 l 124 343 q 165 173 124 246 q 308 83 216 83 q 452 178 402 83 q 493 359 493 255 l 493 738 l 617 738 l 617 214 q 623 136 617 160 q 673 92 637 92 q 697 96 684 92 l 697 -4 "},"Ι":{x_min:42,x_max:181,ha:297,o:"m 181 0 l 42 0 l 42 1013 l 181 1013 l 181 0 "},"Ύ":{x_min:0,x_max:1144.5,ha:1214,o:"m 1144 1012 l 807 416 l 807 0 l 667 0 l 667 416 l 325 1012 l 465 1012 l 736 533 l 1004 1012 l 1144 1012 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"’":{x_min:0,x_max:139,ha:236,o:"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 "},"Ν":{x_min:0,x_max:801,ha:915,o:"m 801 0 l 651 0 l 131 822 l 131 0 l 0 0 l 0 1013 l 151 1013 l 670 191 l 670 1013 l 801 1013 l 801 0 "},"-":{x_min:8.71875,x_max:350.390625,ha:478,o:"m 350 317 l 8 317 l 8 428 l 350 428 l 350 317 "},Q:{x_min:0,x_max:968,ha:1072,o:"m 954 5 l 887 -79 l 744 35 q 622 -11 687 2 q 483 -26 556 -26 q 127 130 262 -26 q 0 504 0 279 q 127 880 0 728 q 484 1041 262 1041 q 841 884 708 1041 q 968 507 968 735 q 933 293 968 398 q 832 104 899 188 l 954 5 m 723 191 q 802 330 777 248 q 828 499 828 412 q 744 790 828 673 q 483 922 650 922 q 228 791 322 922 q 142 505 142 673 q 227 221 142 337 q 487 91 323 91 q 632 123 566 91 l 520 215 l 587 301 l 723 191 "},"ς":{x_min:1,x_max:676.28125,ha:740,o:"m 676 460 l 551 460 q 498 595 542 546 q 365 651 448 651 q 199 578 263 651 q 136 401 136 505 q 266 178 136 241 q 508 106 387 142 q 640 -50 640 62 q 625 -158 640 -105 q 583 -278 611 -211 l 465 -278 q 498 -182 490 -211 q 515 -80 515 -126 q 381 12 515 -15 q 134 91 197 51 q 1 388 1 179 q 100 651 1 542 q 354 761 199 761 q 587 680 498 761 q 676 460 676 599 "},M:{x_min:0,x_max:954,ha:1067,o:"m 954 0 l 819 0 l 819 869 l 537 0 l 405 0 l 128 866 l 128 0 l 0 0 l 0 1013 l 200 1013 l 472 160 l 757 1013 l 954 1013 l 954 0 "},"Ψ":{x_min:0,x_max:1006,ha:1094,o:"m 1006 678 q 914 319 1006 429 q 571 200 814 200 l 571 0 l 433 0 l 433 200 q 92 319 194 200 q 0 678 0 429 l 0 1013 l 139 1013 l 139 679 q 191 417 139 492 q 433 326 255 326 l 433 1013 l 571 1013 l 571 326 l 580 326 q 813 423 747 326 q 868 679 868 502 l 868 1013 l 1006 1013 l 1006 678 "},C:{x_min:0,x_max:886,ha:944,o:"m 886 379 q 760 87 886 201 q 455 -26 634 -26 q 112 136 236 -26 q 0 509 0 283 q 118 882 0 737 q 469 1041 245 1041 q 748 955 630 1041 q 879 708 879 859 l 745 708 q 649 862 724 805 q 473 920 573 920 q 219 791 312 920 q 136 509 136 675 q 217 229 136 344 q 470 99 311 99 q 672 179 591 99 q 753 379 753 259 l 886 379 "},"!":{x_min:0,x_max:138,ha:236,o:"m 138 684 q 116 409 138 629 q 105 244 105 299 l 33 244 q 16 465 33 313 q 0 684 0 616 l 0 1013 l 138 1013 l 138 684 m 138 0 l 0 0 l 0 151 l 138 151 l 138 0 "},"{":{x_min:0,x_max:480.5625,ha:578,o:"m 480 -286 q 237 -213 303 -286 q 187 -45 187 -159 q 194 48 187 -15 q 201 141 201 112 q 164 264 201 225 q 0 314 118 314 l 0 417 q 164 471 119 417 q 201 605 201 514 q 199 665 201 644 q 193 772 193 769 q 241 941 193 887 q 480 1015 308 1015 l 480 915 q 336 866 375 915 q 306 742 306 828 q 310 662 306 717 q 314 577 314 606 q 288 452 314 500 q 176 365 256 391 q 289 275 257 337 q 314 143 314 226 q 313 84 314 107 q 310 -11 310 -5 q 339 -131 310 -94 q 480 -182 377 -182 l 480 -286 "},X:{x_min:-0.015625,x_max:854.15625,ha:940,o:"m 854 0 l 683 0 l 423 409 l 166 0 l 0 0 l 347 519 l 18 1013 l 186 1013 l 428 637 l 675 1013 l 836 1013 l 504 520 l 854 0 "},"#":{x_min:0,x_max:963.890625,ha:1061,o:"m 963 690 l 927 590 l 719 590 l 655 410 l 876 410 l 840 310 l 618 310 l 508 -3 l 393 -2 l 506 309 l 329 310 l 215 -2 l 102 -3 l 212 310 l 0 310 l 36 410 l 248 409 l 312 590 l 86 590 l 120 690 l 347 690 l 459 1006 l 573 1006 l 462 690 l 640 690 l 751 1006 l 865 1006 l 754 690 l 963 690 m 606 590 l 425 590 l 362 410 l 543 410 l 606 590 "},"ι":{x_min:42,x_max:284,ha:361,o:"m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 738 l 167 738 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 103 239 101 q 284 112 257 104 l 284 3 "},"Ά":{x_min:0,x_max:906.953125,ha:982,o:"m 283 1040 l 88 799 l 5 799 l 145 1040 l 283 1040 m 906 0 l 756 0 l 650 303 l 251 303 l 143 0 l 0 0 l 376 1012 l 529 1012 l 906 0 m 609 421 l 452 866 l 293 421 l 609 421 "},")":{x_min:0,x_max:318,ha:415,o:"m 318 365 q 257 25 318 191 q 87 -290 197 -141 l 0 -290 q 140 21 93 -128 q 193 360 193 189 q 141 704 193 537 q 0 1024 97 850 l 87 1024 q 257 706 197 871 q 318 365 318 542 "},"ε":{x_min:0,x_max:634.71875,ha:714,o:"m 634 234 q 527 38 634 110 q 300 -25 433 -25 q 98 29 183 -25 q 0 204 0 93 q 37 314 0 265 q 128 390 67 353 q 56 460 82 419 q 26 555 26 505 q 114 712 26 654 q 295 763 191 763 q 499 700 416 763 q 589 515 589 631 l 478 515 q 419 618 464 580 q 307 657 374 657 q 207 630 253 657 q 151 547 151 598 q 238 445 151 469 q 389 434 280 434 l 389 331 l 349 331 q 206 315 255 331 q 125 210 125 287 q 183 107 125 145 q 302 76 233 76 q 436 117 379 76 q 509 234 493 159 l 634 234 "},"Δ":{x_min:0,x_max:952.78125,ha:1028,o:"m 952 0 l 0 0 l 400 1013 l 551 1013 l 952 0 m 762 124 l 476 867 l 187 124 l 762 124 "},"}":{x_min:0,x_max:481,ha:578,o:"m 481 314 q 318 262 364 314 q 282 136 282 222 q 284 65 282 97 q 293 -58 293 -48 q 241 -217 293 -166 q 0 -286 174 -286 l 0 -182 q 143 -130 105 -182 q 171 -2 171 -93 q 168 81 171 22 q 165 144 165 140 q 188 275 165 229 q 306 365 220 339 q 191 455 224 391 q 165 588 165 505 q 168 681 165 624 q 171 742 171 737 q 141 865 171 827 q 0 915 102 915 l 0 1015 q 243 942 176 1015 q 293 773 293 888 q 287 675 293 741 q 282 590 282 608 q 318 466 282 505 q 481 417 364 417 l 481 314 "},"‰":{x_min:-3,x_max:1672,ha:1821,o:"m 846 0 q 664 76 732 0 q 603 244 603 145 q 662 412 603 344 q 846 489 729 489 q 1027 412 959 489 q 1089 244 1089 343 q 1029 76 1089 144 q 846 0 962 0 m 845 103 q 945 143 910 103 q 981 243 981 184 q 947 340 981 301 q 845 385 910 385 q 745 342 782 385 q 709 243 709 300 q 742 147 709 186 q 845 103 781 103 m 888 986 l 284 -25 l 199 -25 l 803 986 l 888 986 m 241 468 q 58 545 126 468 q -3 715 -3 615 q 56 881 -3 813 q 238 958 124 958 q 421 881 353 958 q 483 712 483 813 q 423 544 483 612 q 241 468 356 468 m 241 855 q 137 811 175 855 q 100 710 100 768 q 136 612 100 653 q 240 572 172 572 q 344 614 306 572 q 382 713 382 656 q 347 810 382 771 q 241 855 308 855 m 1428 0 q 1246 76 1314 0 q 1185 244 1185 145 q 1244 412 1185 344 q 1428 489 1311 489 q 1610 412 1542 489 q 1672 244 1672 343 q 1612 76 1672 144 q 1428 0 1545 0 m 1427 103 q 1528 143 1492 103 q 1564 243 1564 184 q 1530 340 1564 301 q 1427 385 1492 385 q 1327 342 1364 385 q 1291 243 1291 300 q 1324 147 1291 186 q 1427 103 1363 103 "},a:{x_min:0,x_max:698.609375,ha:794,o:"m 698 0 q 661 -12 679 -7 q 615 -17 643 -17 q 536 12 564 -17 q 500 96 508 41 q 384 6 456 37 q 236 -25 312 -25 q 65 31 130 -25 q 0 194 0 88 q 118 390 0 334 q 328 435 180 420 q 488 483 476 451 q 495 523 495 504 q 442 619 495 584 q 325 654 389 654 q 209 617 257 654 q 152 513 161 580 l 33 513 q 123 705 33 633 q 332 772 207 772 q 528 712 448 772 q 617 531 617 645 l 617 163 q 624 108 617 126 q 664 90 632 90 l 698 94 l 698 0 m 491 262 l 491 372 q 272 329 350 347 q 128 201 128 294 q 166 113 128 144 q 264 83 205 83 q 414 130 346 83 q 491 262 491 183 "},"—":{x_min:0,x_max:941.671875,ha:1039,o:"m 941 334 l 0 334 l 0 410 l 941 410 l 941 334 "},"=":{x_min:8.71875,x_max:780.953125,ha:792,o:"m 780 510 l 8 510 l 8 606 l 780 606 l 780 510 m 780 235 l 8 235 l 8 332 l 780 332 l 780 235 "},N:{x_min:0,x_max:801,ha:914,o:"m 801 0 l 651 0 l 131 823 l 131 0 l 0 0 l 0 1013 l 151 1013 l 670 193 l 670 1013 l 801 1013 l 801 0 "},"ρ":{x_min:0,x_max:712,ha:797,o:"m 712 369 q 620 94 712 207 q 362 -26 521 -26 q 230 2 292 -26 q 119 83 167 30 l 119 -278 l 0 -278 l 0 362 q 91 643 0 531 q 355 764 190 764 q 617 647 517 764 q 712 369 712 536 m 583 366 q 530 559 583 480 q 359 651 469 651 q 190 562 252 651 q 135 370 135 483 q 189 176 135 257 q 359 85 250 85 q 528 175 466 85 q 583 366 583 254 "},"¯":{x_min:0,x_max:941.671875,ha:938,o:"m 941 1033 l 0 1033 l 0 1109 l 941 1109 l 941 1033 "},Z:{x_min:0,x_max:779,ha:849,o:"m 779 0 l 0 0 l 0 113 l 621 896 l 40 896 l 40 1013 l 779 1013 l 778 887 l 171 124 l 779 124 l 779 0 "},u:{x_min:0,x_max:617,ha:729,o:"m 617 0 l 499 0 l 499 110 q 391 10 460 45 q 246 -25 322 -25 q 61 58 127 -25 q 0 258 0 136 l 0 738 l 125 738 l 125 284 q 156 148 125 202 q 273 82 197 82 q 433 165 369 82 q 493 340 493 243 l 493 738 l 617 738 l 617 0 "},k:{x_min:0,x_max:612.484375,ha:697,o:"m 612 738 l 338 465 l 608 0 l 469 0 l 251 382 l 121 251 l 121 0 l 0 0 l 0 1013 l 121 1013 l 121 402 l 456 738 l 612 738 "},"Η":{x_min:0,x_max:803,ha:917,o:"m 803 0 l 667 0 l 667 475 l 140 475 l 140 0 l 0 0 l 0 1013 l 140 1013 l 140 599 l 667 599 l 667 1013 l 803 1013 l 803 0 "},"Α":{x_min:0,x_max:906.953125,ha:985,o:"m 906 0 l 756 0 l 650 303 l 251 303 l 143 0 l 0 0 l 376 1013 l 529 1013 l 906 0 m 609 421 l 452 866 l 293 421 l 609 421 "},s:{x_min:0,x_max:604,ha:697,o:"m 604 217 q 501 36 604 104 q 292 -23 411 -23 q 86 43 166 -23 q 0 238 0 114 l 121 237 q 175 122 121 164 q 300 85 223 85 q 415 112 363 85 q 479 207 479 147 q 361 309 479 276 q 140 372 141 370 q 21 544 21 426 q 111 708 21 647 q 298 761 190 761 q 492 705 413 761 q 583 531 583 643 l 462 531 q 412 625 462 594 q 298 657 363 657 q 199 636 242 657 q 143 558 143 608 q 262 454 143 486 q 484 394 479 397 q 604 217 604 341 "},B:{x_min:0,x_max:778,ha:876,o:"m 580 546 q 724 469 670 535 q 778 311 778 403 q 673 83 778 171 q 432 0 575 0 l 0 0 l 0 1013 l 411 1013 q 629 957 541 1013 q 732 768 732 892 q 691 633 732 693 q 580 546 650 572 m 393 899 l 139 899 l 139 588 l 379 588 q 521 624 462 588 q 592 744 592 667 q 531 859 592 819 q 393 899 471 899 m 419 124 q 566 169 504 124 q 635 303 635 219 q 559 436 635 389 q 402 477 494 477 l 139 477 l 139 124 l 419 124 "},"…":{x_min:0,x_max:614,ha:708,o:"m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 m 378 0 l 236 0 l 236 151 l 378 151 l 378 0 m 614 0 l 472 0 l 472 151 l 614 151 l 614 0 "},"?":{x_min:0,x_max:607,ha:704,o:"m 607 777 q 543 599 607 674 q 422 474 482 537 q 357 272 357 391 l 236 272 q 297 487 236 395 q 411 619 298 490 q 474 762 474 691 q 422 885 474 838 q 301 933 371 933 q 179 880 228 933 q 124 706 124 819 l 0 706 q 94 963 0 872 q 302 1044 177 1044 q 511 973 423 1044 q 607 777 607 895 m 370 0 l 230 0 l 230 151 l 370 151 l 370 0 "},H:{x_min:0,x_max:803,ha:915,o:"m 803 0 l 667 0 l 667 475 l 140 475 l 140 0 l 0 0 l 0 1013 l 140 1013 l 140 599 l 667 599 l 667 1013 l 803 1013 l 803 0 "},"ν":{x_min:0,x_max:675,ha:761,o:"m 675 738 l 404 0 l 272 0 l 0 738 l 133 738 l 340 147 l 541 738 l 675 738 "},c:{x_min:1,x_max:701.390625,ha:775,o:"m 701 264 q 584 53 681 133 q 353 -26 487 -26 q 91 91 188 -26 q 1 370 1 201 q 92 645 1 537 q 353 761 190 761 q 572 688 479 761 q 690 493 666 615 l 556 493 q 487 606 545 562 q 356 650 428 650 q 186 563 246 650 q 134 372 134 487 q 188 179 134 258 q 359 88 250 88 q 492 136 437 88 q 566 264 548 185 l 701 264 "},"¶":{x_min:0,x_max:566.671875,ha:678,o:"m 21 892 l 52 892 l 98 761 l 145 892 l 176 892 l 178 741 l 157 741 l 157 867 l 108 741 l 88 741 l 40 871 l 40 741 l 21 741 l 21 892 m 308 854 l 308 731 q 252 691 308 691 q 227 691 240 691 q 207 696 213 695 l 207 712 l 253 706 q 288 733 288 706 l 288 763 q 244 741 279 741 q 193 797 193 741 q 261 860 193 860 q 287 860 273 860 q 308 854 302 855 m 288 842 l 263 843 q 213 796 213 843 q 248 756 213 756 q 288 796 288 756 l 288 842 m 566 988 l 502 988 l 502 -1 l 439 -1 l 439 988 l 317 988 l 317 -1 l 252 -1 l 252 602 q 81 653 155 602 q 0 805 0 711 q 101 989 0 918 q 309 1053 194 1053 l 566 1053 l 566 988 "},"β":{x_min:0,x_max:660,ha:745,o:"m 471 550 q 610 450 561 522 q 660 280 660 378 q 578 64 660 151 q 367 -22 497 -22 q 239 5 299 -22 q 126 82 178 32 l 126 -278 l 0 -278 l 0 593 q 54 903 0 801 q 318 1042 127 1042 q 519 964 436 1042 q 603 771 603 887 q 567 644 603 701 q 471 550 532 586 m 337 79 q 476 138 418 79 q 535 279 535 198 q 427 437 535 386 q 226 477 344 477 l 226 583 q 398 620 329 583 q 486 762 486 668 q 435 884 486 833 q 312 935 384 935 q 169 861 219 935 q 126 698 126 797 l 126 362 q 170 169 126 242 q 337 79 224 79 "},"Μ":{x_min:0,x_max:954,ha:1068,o:"m 954 0 l 819 0 l 819 868 l 537 0 l 405 0 l 128 865 l 128 0 l 0 0 l 0 1013 l 199 1013 l 472 158 l 758 1013 l 954 1013 l 954 0 "},"Ό":{x_min:0.109375,x_max:1120,ha:1217,o:"m 1120 505 q 994 132 1120 282 q 642 -29 861 -29 q 290 130 422 -29 q 167 505 167 280 q 294 883 167 730 q 650 1046 430 1046 q 999 882 868 1046 q 1120 505 1120 730 m 977 504 q 896 784 977 669 q 644 915 804 915 q 391 785 484 915 q 307 504 307 669 q 391 224 307 339 q 644 95 486 95 q 894 224 803 95 q 977 504 977 339 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"Ή":{x_min:0,x_max:1158,ha:1275,o:"m 1158 0 l 1022 0 l 1022 475 l 496 475 l 496 0 l 356 0 l 356 1012 l 496 1012 l 496 599 l 1022 599 l 1022 1012 l 1158 1012 l 1158 0 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"•":{x_min:0,x_max:663.890625,ha:775,o:"m 663 529 q 566 293 663 391 q 331 196 469 196 q 97 294 194 196 q 0 529 0 393 q 96 763 0 665 q 331 861 193 861 q 566 763 469 861 q 663 529 663 665 "},"¥":{x_min:0.1875,x_max:819.546875,ha:886,o:"m 563 561 l 697 561 l 696 487 l 520 487 l 482 416 l 482 380 l 697 380 l 695 308 l 482 308 l 482 0 l 342 0 l 342 308 l 125 308 l 125 380 l 342 380 l 342 417 l 303 487 l 125 487 l 125 561 l 258 561 l 0 1013 l 140 1013 l 411 533 l 679 1013 l 819 1013 l 563 561 "},"(":{x_min:0,x_max:318.0625,ha:415,o:"m 318 -290 l 230 -290 q 61 23 122 -142 q 0 365 0 190 q 62 712 0 540 q 230 1024 119 869 l 318 1024 q 175 705 219 853 q 125 360 125 542 q 176 22 125 187 q 318 -290 223 -127 "},U:{x_min:0,x_max:796,ha:904,o:"m 796 393 q 681 93 796 212 q 386 -25 566 -25 q 101 95 208 -25 q 0 393 0 211 l 0 1013 l 138 1013 l 138 391 q 204 191 138 270 q 394 107 276 107 q 586 191 512 107 q 656 391 656 270 l 656 1013 l 796 1013 l 796 393 "},"γ":{x_min:0.5,x_max:744.953125,ha:822,o:"m 744 737 l 463 54 l 463 -278 l 338 -278 l 338 54 l 154 495 q 104 597 124 569 q 13 651 67 651 l 0 651 l 0 751 l 39 753 q 168 711 121 753 q 242 594 207 676 l 403 208 l 617 737 l 744 737 "},"α":{x_min:0,x_max:765.5625,ha:809,o:"m 765 -4 q 698 -14 726 -14 q 564 97 586 -14 q 466 7 525 40 q 337 -26 407 -26 q 88 98 186 -26 q 0 369 0 212 q 88 637 0 525 q 337 760 184 760 q 465 728 407 760 q 563 637 524 696 l 563 739 l 685 739 l 685 222 q 693 141 685 168 q 748 94 708 94 q 765 96 760 94 l 765 -4 m 584 371 q 531 562 584 485 q 360 653 470 653 q 192 566 254 653 q 135 379 135 489 q 186 181 135 261 q 358 84 247 84 q 528 176 465 84 q 584 371 584 260 "},F:{x_min:0,x_max:683.328125,ha:717,o:"m 683 888 l 140 888 l 140 583 l 613 583 l 613 458 l 140 458 l 140 0 l 0 0 l 0 1013 l 683 1013 l 683 888 "},"­":{x_min:0,x_max:705.5625,ha:803,o:"m 705 334 l 0 334 l 0 410 l 705 410 l 705 334 "},":":{x_min:0,x_max:142,ha:239,o:"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 "},"Χ":{x_min:0,x_max:854.171875,ha:935,o:"m 854 0 l 683 0 l 423 409 l 166 0 l 0 0 l 347 519 l 18 1013 l 186 1013 l 427 637 l 675 1013 l 836 1013 l 504 521 l 854 0 "},"*":{x_min:116,x_max:674,ha:792,o:"m 674 768 l 475 713 l 610 544 l 517 477 l 394 652 l 272 478 l 178 544 l 314 713 l 116 766 l 153 876 l 341 812 l 342 1013 l 446 1013 l 446 811 l 635 874 l 674 768 "},"†":{x_min:0,x_max:777,ha:835,o:"m 458 804 l 777 804 l 777 683 l 458 683 l 458 0 l 319 0 l 319 681 l 0 683 l 0 804 l 319 804 l 319 1015 l 458 1013 l 458 804 "},"°":{x_min:0,x_max:347,ha:444,o:"m 173 802 q 43 856 91 802 q 0 977 0 905 q 45 1101 0 1049 q 173 1153 90 1153 q 303 1098 255 1153 q 347 977 347 1049 q 303 856 347 905 q 173 802 256 802 m 173 884 q 238 910 214 884 q 262 973 262 937 q 239 1038 262 1012 q 173 1064 217 1064 q 108 1037 132 1064 q 85 973 85 1010 q 108 910 85 937 q 173 884 132 884 "},V:{x_min:0,x_max:862.71875,ha:940,o:"m 862 1013 l 505 0 l 361 0 l 0 1013 l 143 1013 l 434 165 l 718 1012 l 862 1013 "},"Ξ":{x_min:0,x_max:734.71875,ha:763,o:"m 723 889 l 9 889 l 9 1013 l 723 1013 l 723 889 m 673 463 l 61 463 l 61 589 l 673 589 l 673 463 m 734 0 l 0 0 l 0 124 l 734 124 l 734 0 "}," ":{x_min:0,x_max:0,ha:853},"Ϋ":{x_min:0.328125,x_max:819.515625,ha:889,o:"m 588 1046 l 460 1046 l 460 1189 l 588 1189 l 588 1046 m 360 1046 l 232 1046 l 232 1189 l 360 1189 l 360 1046 m 819 1012 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1012 l 140 1012 l 411 533 l 679 1012 l 819 1012 "},"”":{x_min:0,x_max:347,ha:454,o:"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 m 347 851 q 310 737 347 784 q 208 669 273 690 l 208 734 q 267 787 250 741 q 280 873 280 821 l 208 873 l 208 1013 l 347 1013 l 347 851 "},"@":{x_min:0,x_max:1260,ha:1357,o:"m 1098 -45 q 877 -160 1001 -117 q 633 -203 752 -203 q 155 -29 327 -203 q 0 360 0 127 q 176 802 0 616 q 687 1008 372 1008 q 1123 854 969 1008 q 1260 517 1260 718 q 1155 216 1260 341 q 868 82 1044 82 q 772 106 801 82 q 737 202 737 135 q 647 113 700 144 q 527 82 594 82 q 367 147 420 82 q 314 312 314 212 q 401 565 314 452 q 639 690 498 690 q 810 588 760 690 l 849 668 l 938 668 q 877 441 900 532 q 833 226 833 268 q 853 182 833 198 q 902 167 873 167 q 1088 272 1012 167 q 1159 512 1159 372 q 1051 793 1159 681 q 687 925 925 925 q 248 747 415 925 q 97 361 97 586 q 226 26 97 159 q 627 -122 370 -122 q 856 -87 737 -122 q 1061 8 976 -53 l 1098 -45 m 786 488 q 738 580 777 545 q 643 615 700 615 q 483 517 548 615 q 425 322 425 430 q 457 203 425 250 q 552 156 490 156 q 722 273 665 156 q 786 488 738 309 "},"Ί":{x_min:0,x_max:499,ha:613,o:"m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 m 499 0 l 360 0 l 360 1012 l 499 1012 l 499 0 "},i:{x_min:14,x_max:136,ha:275,o:"m 136 873 l 14 873 l 14 1013 l 136 1013 l 136 873 m 136 0 l 14 0 l 14 737 l 136 737 l 136 0 "},"Β":{x_min:0,x_max:778,ha:877,o:"m 580 545 q 724 468 671 534 q 778 310 778 402 q 673 83 778 170 q 432 0 575 0 l 0 0 l 0 1013 l 411 1013 q 629 957 541 1013 q 732 768 732 891 q 691 632 732 692 q 580 545 650 571 m 393 899 l 139 899 l 139 587 l 379 587 q 521 623 462 587 q 592 744 592 666 q 531 859 592 819 q 393 899 471 899 m 419 124 q 566 169 504 124 q 635 302 635 219 q 559 435 635 388 q 402 476 494 476 l 139 476 l 139 124 l 419 124 "},"υ":{x_min:0,x_max:617,ha:725,o:"m 617 352 q 540 94 617 199 q 308 -24 455 -24 q 76 94 161 -24 q 0 352 0 199 l 0 739 l 126 739 l 126 355 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 355 492 257 l 492 739 l 617 739 l 617 352 "},"]":{x_min:0,x_max:275,ha:372,o:"m 275 -281 l 0 -281 l 0 -187 l 151 -187 l 151 920 l 0 920 l 0 1013 l 275 1013 l 275 -281 "},m:{x_min:0,x_max:1019,ha:1128,o:"m 1019 0 l 897 0 l 897 454 q 860 591 897 536 q 739 660 816 660 q 613 586 659 660 q 573 436 573 522 l 573 0 l 447 0 l 447 455 q 412 591 447 535 q 294 657 372 657 q 165 586 213 657 q 122 437 122 521 l 122 0 l 0 0 l 0 738 l 117 738 l 117 640 q 202 730 150 697 q 316 763 254 763 q 437 730 381 763 q 525 642 494 697 q 621 731 559 700 q 753 763 682 763 q 943 694 867 763 q 1019 512 1019 625 l 1019 0 "},"χ":{x_min:8.328125,x_max:780.5625,ha:815,o:"m 780 -278 q 715 -294 747 -294 q 616 -257 663 -294 q 548 -175 576 -227 l 379 133 l 143 -277 l 9 -277 l 313 254 l 163 522 q 127 586 131 580 q 36 640 91 640 q 8 637 27 640 l 8 752 l 52 757 q 162 719 113 757 q 236 627 200 690 l 383 372 l 594 737 l 726 737 l 448 250 l 625 -69 q 670 -153 647 -110 q 743 -188 695 -188 q 780 -184 759 -188 l 780 -278 "},"ί":{x_min:42,x_max:326.71875,ha:361,o:"m 284 3 q 233 -10 258 -5 q 182 -15 207 -15 q 85 26 119 -15 q 42 200 42 79 l 42 737 l 167 737 l 168 215 q 172 141 168 157 q 226 101 183 101 q 248 102 239 101 q 284 112 257 104 l 284 3 m 326 1040 l 137 819 l 54 819 l 189 1040 l 326 1040 "},"Ζ":{x_min:0,x_max:779.171875,ha:850,o:"m 779 0 l 0 0 l 0 113 l 620 896 l 40 896 l 40 1013 l 779 1013 l 779 887 l 170 124 l 779 124 l 779 0 "},R:{x_min:0,x_max:781.953125,ha:907,o:"m 781 0 l 623 0 q 587 242 590 52 q 407 433 585 433 l 138 433 l 138 0 l 0 0 l 0 1013 l 396 1013 q 636 946 539 1013 q 749 731 749 868 q 711 597 749 659 q 608 502 674 534 q 718 370 696 474 q 729 207 722 352 q 781 26 736 62 l 781 0 m 373 551 q 533 594 465 551 q 614 731 614 645 q 532 859 614 815 q 373 896 465 896 l 138 896 l 138 551 l 373 551 "},o:{x_min:0,x_max:713,ha:821,o:"m 357 -25 q 94 91 194 -25 q 0 368 0 202 q 93 642 0 533 q 357 761 193 761 q 618 644 518 761 q 713 368 713 533 q 619 91 713 201 q 357 -25 521 -25 m 357 85 q 528 175 465 85 q 584 369 584 255 q 529 562 584 484 q 357 651 467 651 q 189 560 250 651 q 135 369 135 481 q 187 177 135 257 q 357 85 250 85 "},K:{x_min:0,x_max:819.46875,ha:906,o:"m 819 0 l 649 0 l 294 509 l 139 355 l 139 0 l 0 0 l 0 1013 l 139 1013 l 139 526 l 626 1013 l 809 1013 l 395 600 l 819 0 "},",":{x_min:0,x_max:142,ha:239,o:"m 142 -12 q 105 -132 142 -82 q 0 -205 68 -182 l 0 -138 q 57 -82 40 -124 q 70 0 70 -51 l 0 0 l 0 151 l 142 151 l 142 -12 "},d:{x_min:0,x_max:683,ha:796,o:"m 683 0 l 564 0 l 564 93 q 456 6 516 38 q 327 -25 395 -25 q 87 100 181 -25 q 0 365 0 215 q 90 639 0 525 q 343 763 187 763 q 564 647 486 763 l 564 1013 l 683 1013 l 683 0 m 582 373 q 529 562 582 484 q 361 653 468 653 q 190 561 253 653 q 135 365 135 479 q 189 175 135 254 q 358 85 251 85 q 529 178 468 85 q 582 373 582 258 "},"¨":{x_min:-109,x_max:247,ha:232,o:"m 247 1046 l 119 1046 l 119 1189 l 247 1189 l 247 1046 m 19 1046 l -109 1046 l -109 1189 l 19 1189 l 19 1046 "},E:{x_min:0,x_max:736.109375,ha:789,o:"m 736 0 l 0 0 l 0 1013 l 725 1013 l 725 889 l 139 889 l 139 585 l 677 585 l 677 467 l 139 467 l 139 125 l 736 125 l 736 0 "},Y:{x_min:0,x_max:820,ha:886,o:"m 820 1013 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1013 l 140 1013 l 411 534 l 679 1012 l 820 1013 "},"\"":{x_min:0,x_max:299,ha:396,o:"m 299 606 l 203 606 l 203 988 l 299 988 l 299 606 m 96 606 l 0 606 l 0 988 l 96 988 l 96 606 "},"‹":{x_min:17.984375,x_max:773.609375,ha:792,o:"m 773 40 l 18 376 l 17 465 l 773 799 l 773 692 l 159 420 l 773 149 l 773 40 "},"„":{x_min:0,x_max:364,ha:467,o:"m 141 -12 q 104 -132 141 -82 q 0 -205 67 -182 l 0 -138 q 56 -82 40 -124 q 69 0 69 -51 l 0 0 l 0 151 l 141 151 l 141 -12 m 364 -12 q 327 -132 364 -82 q 222 -205 290 -182 l 222 -138 q 279 -82 262 -124 q 292 0 292 -51 l 222 0 l 222 151 l 364 151 l 364 -12 "},"δ":{x_min:1,x_max:710,ha:810,o:"m 710 360 q 616 87 710 196 q 356 -28 518 -28 q 99 82 197 -28 q 1 356 1 192 q 100 606 1 509 q 355 703 199 703 q 180 829 288 754 q 70 903 124 866 l 70 1012 l 643 1012 l 643 901 l 258 901 q 462 763 422 794 q 636 592 577 677 q 710 360 710 485 m 584 365 q 552 501 584 447 q 451 602 521 555 q 372 611 411 611 q 197 541 258 611 q 136 355 136 472 q 190 171 136 245 q 358 85 252 85 q 528 173 465 85 q 584 365 584 252 "},"έ":{x_min:0,x_max:634.71875,ha:714,o:"m 634 234 q 527 38 634 110 q 300 -25 433 -25 q 98 29 183 -25 q 0 204 0 93 q 37 313 0 265 q 128 390 67 352 q 56 459 82 419 q 26 555 26 505 q 114 712 26 654 q 295 763 191 763 q 499 700 416 763 q 589 515 589 631 l 478 515 q 419 618 464 580 q 307 657 374 657 q 207 630 253 657 q 151 547 151 598 q 238 445 151 469 q 389 434 280 434 l 389 331 l 349 331 q 206 315 255 331 q 125 210 125 287 q 183 107 125 145 q 302 76 233 76 q 436 117 379 76 q 509 234 493 159 l 634 234 m 520 1040 l 331 819 l 248 819 l 383 1040 l 520 1040 "},"ω":{x_min:0,x_max:922,ha:1031,o:"m 922 339 q 856 97 922 203 q 650 -26 780 -26 q 538 9 587 -26 q 461 103 489 44 q 387 12 436 46 q 277 -22 339 -22 q 69 97 147 -22 q 0 339 0 203 q 45 551 0 444 q 161 738 84 643 l 302 738 q 175 553 219 647 q 124 336 124 446 q 155 179 124 249 q 275 88 197 88 q 375 163 341 88 q 400 294 400 219 l 400 572 l 524 572 l 524 294 q 561 135 524 192 q 643 88 591 88 q 762 182 719 88 q 797 342 797 257 q 745 556 797 450 q 619 738 705 638 l 760 738 q 874 551 835 640 q 922 339 922 444 "},"´":{x_min:0,x_max:96,ha:251,o:"m 96 606 l 0 606 l 0 988 l 96 988 l 96 606 "},"±":{x_min:11,x_max:781,ha:792,o:"m 781 490 l 446 490 l 446 255 l 349 255 l 349 490 l 11 490 l 11 586 l 349 586 l 349 819 l 446 819 l 446 586 l 781 586 l 781 490 m 781 21 l 11 21 l 11 115 l 781 115 l 781 21 "},"|":{x_min:343,x_max:449,ha:792,o:"m 449 462 l 343 462 l 343 986 l 449 986 l 449 462 m 449 -242 l 343 -242 l 343 280 l 449 280 l 449 -242 "},"ϋ":{x_min:0,x_max:617,ha:725,o:"m 482 800 l 372 800 l 372 925 l 482 925 l 482 800 m 239 800 l 129 800 l 129 925 l 239 925 l 239 800 m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 "},"§":{x_min:0,x_max:593,ha:690,o:"m 593 425 q 554 312 593 369 q 467 233 516 254 q 537 83 537 172 q 459 -74 537 -12 q 288 -133 387 -133 q 115 -69 184 -133 q 47 96 47 -6 l 166 96 q 199 7 166 40 q 288 -26 232 -26 q 371 -5 332 -26 q 420 60 420 21 q 311 201 420 139 q 108 309 210 255 q 0 490 0 383 q 33 602 0 551 q 124 687 66 654 q 75 743 93 712 q 58 812 58 773 q 133 984 58 920 q 300 1043 201 1043 q 458 987 394 1043 q 529 814 529 925 l 411 814 q 370 908 404 877 q 289 939 336 939 q 213 911 246 939 q 180 841 180 883 q 286 720 180 779 q 484 612 480 615 q 593 425 593 534 m 467 409 q 355 544 467 473 q 196 630 228 612 q 146 587 162 609 q 124 525 124 558 q 239 387 124 462 q 398 298 369 315 q 448 345 429 316 q 467 409 467 375 "},b:{x_min:0,x_max:685,ha:783,o:"m 685 372 q 597 99 685 213 q 347 -25 501 -25 q 219 5 277 -25 q 121 93 161 36 l 121 0 l 0 0 l 0 1013 l 121 1013 l 121 634 q 214 723 157 692 q 341 754 272 754 q 591 637 493 754 q 685 372 685 526 m 554 356 q 499 550 554 470 q 328 644 437 644 q 162 556 223 644 q 108 369 108 478 q 160 176 108 256 q 330 83 221 83 q 498 169 435 83 q 554 356 554 245 "},q:{x_min:0,x_max:683,ha:876,o:"m 683 -278 l 564 -278 l 564 97 q 474 8 533 39 q 345 -23 415 -23 q 91 93 188 -23 q 0 364 0 203 q 87 635 0 522 q 337 760 184 760 q 466 727 408 760 q 564 637 523 695 l 564 737 l 683 737 l 683 -278 m 582 375 q 527 564 582 488 q 358 652 466 652 q 190 565 253 652 q 135 377 135 488 q 189 179 135 261 q 361 84 251 84 q 530 179 469 84 q 582 375 582 260 "},"Ω":{x_min:-0.171875,x_max:969.5625,ha:1068,o:"m 969 0 l 555 0 l 555 123 q 744 308 675 194 q 814 558 814 423 q 726 812 814 709 q 484 922 633 922 q 244 820 334 922 q 154 567 154 719 q 223 316 154 433 q 412 123 292 199 l 412 0 l 0 0 l 0 124 l 217 124 q 68 327 122 210 q 15 572 15 444 q 144 911 15 781 q 484 1041 274 1041 q 822 909 691 1041 q 953 569 953 777 q 899 326 953 443 q 750 124 846 210 l 969 124 l 969 0 "},"ύ":{x_min:0,x_max:617,ha:725,o:"m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 m 535 1040 l 346 819 l 262 819 l 397 1040 l 535 1040 "},z:{x_min:-0.015625,x_max:613.890625,ha:697,o:"m 613 0 l 0 0 l 0 100 l 433 630 l 20 630 l 20 738 l 594 738 l 593 636 l 163 110 l 613 110 l 613 0 "},"™":{x_min:0,x_max:894,ha:1000,o:"m 389 951 l 229 951 l 229 503 l 160 503 l 160 951 l 0 951 l 0 1011 l 389 1011 l 389 951 m 894 503 l 827 503 l 827 939 l 685 503 l 620 503 l 481 937 l 481 503 l 417 503 l 417 1011 l 517 1011 l 653 580 l 796 1010 l 894 1011 l 894 503 "},"ή":{x_min:0.78125,x_max:697,ha:810,o:"m 697 -278 l 572 -278 l 572 454 q 540 587 572 536 q 425 650 501 650 q 271 579 337 650 q 206 420 206 509 l 206 0 l 81 0 l 81 489 q 73 588 81 562 q 0 644 56 644 l 0 741 q 68 755 38 755 q 158 721 124 755 q 200 630 193 687 q 297 726 234 692 q 434 761 359 761 q 620 692 544 761 q 697 516 697 624 l 697 -278 m 479 1040 l 290 819 l 207 819 l 341 1040 l 479 1040 "},"Θ":{x_min:0,x_max:960,ha:1056,o:"m 960 507 q 833 129 960 280 q 476 -32 698 -32 q 123 129 255 -32 q 0 507 0 280 q 123 883 0 732 q 476 1045 255 1045 q 832 883 696 1045 q 960 507 960 732 m 817 500 q 733 789 817 669 q 476 924 639 924 q 223 792 317 924 q 142 507 142 675 q 222 222 142 339 q 476 89 315 89 q 730 218 636 89 q 817 500 817 334 m 716 449 l 243 449 l 243 571 l 716 571 l 716 449 "},"®":{x_min:-3,x_max:1008,ha:1106,o:"m 503 532 q 614 562 566 532 q 672 658 672 598 q 614 747 672 716 q 503 772 569 772 l 338 772 l 338 532 l 503 532 m 502 -7 q 123 151 263 -7 q -3 501 -3 294 q 123 851 -3 706 q 502 1011 263 1011 q 881 851 739 1011 q 1008 501 1008 708 q 883 151 1008 292 q 502 -7 744 -7 m 502 60 q 830 197 709 60 q 940 501 940 322 q 831 805 940 681 q 502 944 709 944 q 174 805 296 944 q 65 501 65 680 q 173 197 65 320 q 502 60 294 60 m 788 146 l 678 146 q 653 316 655 183 q 527 449 652 449 l 338 449 l 338 146 l 241 146 l 241 854 l 518 854 q 688 808 621 854 q 766 658 766 755 q 739 563 766 607 q 668 497 713 519 q 751 331 747 472 q 788 164 756 190 l 788 146 "},"~":{x_min:0,x_max:833,ha:931,o:"m 833 958 q 778 753 833 831 q 594 665 716 665 q 402 761 502 665 q 240 857 302 857 q 131 795 166 857 q 104 665 104 745 l 0 665 q 54 867 0 789 q 237 958 116 958 q 429 861 331 958 q 594 765 527 765 q 704 827 670 765 q 729 958 729 874 l 833 958 "},"Ε":{x_min:0,x_max:736.21875,ha:778,o:"m 736 0 l 0 0 l 0 1013 l 725 1013 l 725 889 l 139 889 l 139 585 l 677 585 l 677 467 l 139 467 l 139 125 l 736 125 l 736 0 "},"³":{x_min:0,x_max:450,ha:547,o:"m 450 552 q 379 413 450 464 q 220 366 313 366 q 69 414 130 366 q 0 567 0 470 l 85 567 q 126 470 85 504 q 225 437 168 437 q 320 467 280 437 q 360 552 360 498 q 318 632 360 608 q 213 657 276 657 q 195 657 203 657 q 176 657 181 657 l 176 722 q 279 733 249 722 q 334 815 334 752 q 300 881 334 856 q 220 907 267 907 q 133 875 169 907 q 97 781 97 844 l 15 781 q 78 926 15 875 q 220 972 135 972 q 364 930 303 972 q 426 817 426 888 q 344 697 426 733 q 421 642 392 681 q 450 552 450 603 "},"[":{x_min:0,x_max:273.609375,ha:371,o:"m 273 -281 l 0 -281 l 0 1013 l 273 1013 l 273 920 l 124 920 l 124 -187 l 273 -187 l 273 -281 "},L:{x_min:0,x_max:645.828125,ha:696,o:"m 645 0 l 0 0 l 0 1013 l 140 1013 l 140 126 l 645 126 l 645 0 "},"σ":{x_min:0,x_max:803.390625,ha:894,o:"m 803 628 l 633 628 q 713 368 713 512 q 618 93 713 204 q 357 -25 518 -25 q 94 91 194 -25 q 0 368 0 201 q 94 644 0 533 q 356 761 194 761 q 481 750 398 761 q 608 739 564 739 l 803 739 l 803 628 m 360 85 q 529 180 467 85 q 584 374 584 262 q 527 566 584 490 q 352 651 463 651 q 187 559 247 651 q 135 368 135 478 q 189 175 135 254 q 360 85 251 85 "},"ζ":{x_min:0,x_max:573,ha:642,o:"m 573 -40 q 553 -162 573 -97 q 510 -278 543 -193 l 400 -278 q 441 -187 428 -219 q 462 -90 462 -132 q 378 -14 462 -14 q 108 45 197 -14 q 0 290 0 117 q 108 631 0 462 q 353 901 194 767 l 55 901 l 55 1012 l 561 1012 l 561 924 q 261 669 382 831 q 128 301 128 489 q 243 117 128 149 q 458 98 350 108 q 573 -40 573 80 "},"θ":{x_min:0,x_max:674,ha:778,o:"m 674 496 q 601 160 674 304 q 336 -26 508 -26 q 73 153 165 -26 q 0 485 0 296 q 72 840 0 683 q 343 1045 166 1045 q 605 844 516 1045 q 674 496 674 692 m 546 579 q 498 798 546 691 q 336 935 437 935 q 178 798 237 935 q 126 579 137 701 l 546 579 m 546 475 l 126 475 q 170 233 126 348 q 338 80 230 80 q 504 233 447 80 q 546 475 546 346 "},"Ο":{x_min:0,x_max:958,ha:1054,o:"m 485 1042 q 834 883 703 1042 q 958 511 958 735 q 834 136 958 287 q 481 -26 701 -26 q 126 130 261 -26 q 0 504 0 279 q 127 880 0 729 q 485 1042 263 1042 m 480 98 q 731 225 638 98 q 815 504 815 340 q 733 783 815 670 q 480 913 640 913 q 226 785 321 913 q 142 504 142 671 q 226 224 142 339 q 480 98 319 98 "},"Γ":{x_min:0,x_max:705.28125,ha:749,o:"m 705 886 l 140 886 l 140 0 l 0 0 l 0 1012 l 705 1012 l 705 886 "}," ":{x_min:0,x_max:0,ha:375},"%":{x_min:-3,x_max:1089,ha:1186,o:"m 845 0 q 663 76 731 0 q 602 244 602 145 q 661 412 602 344 q 845 489 728 489 q 1027 412 959 489 q 1089 244 1089 343 q 1029 76 1089 144 q 845 0 962 0 m 844 103 q 945 143 909 103 q 981 243 981 184 q 947 340 981 301 q 844 385 909 385 q 744 342 781 385 q 708 243 708 300 q 741 147 708 186 q 844 103 780 103 m 888 986 l 284 -25 l 199 -25 l 803 986 l 888 986 m 241 468 q 58 545 126 468 q -3 715 -3 615 q 56 881 -3 813 q 238 958 124 958 q 421 881 353 958 q 483 712 483 813 q 423 544 483 612 q 241 468 356 468 m 241 855 q 137 811 175 855 q 100 710 100 768 q 136 612 100 653 q 240 572 172 572 q 344 614 306 572 q 382 713 382 656 q 347 810 382 771 q 241 855 308 855 "},P:{x_min:0,x_max:726,ha:806,o:"m 424 1013 q 640 931 555 1013 q 726 719 726 850 q 637 506 726 587 q 413 426 548 426 l 140 426 l 140 0 l 0 0 l 0 1013 l 424 1013 m 379 889 l 140 889 l 140 548 l 372 548 q 522 589 459 548 q 593 720 593 637 q 528 845 593 801 q 379 889 463 889 "},"Έ":{x_min:0,x_max:1078.21875,ha:1118,o:"m 1078 0 l 342 0 l 342 1013 l 1067 1013 l 1067 889 l 481 889 l 481 585 l 1019 585 l 1019 467 l 481 467 l 481 125 l 1078 125 l 1078 0 m 277 1040 l 83 799 l 0 799 l 140 1040 l 277 1040 "},"Ώ":{x_min:0.125,x_max:1136.546875,ha:1235,o:"m 1136 0 l 722 0 l 722 123 q 911 309 842 194 q 981 558 981 423 q 893 813 981 710 q 651 923 800 923 q 411 821 501 923 q 321 568 321 720 q 390 316 321 433 q 579 123 459 200 l 579 0 l 166 0 l 166 124 l 384 124 q 235 327 289 210 q 182 572 182 444 q 311 912 182 782 q 651 1042 441 1042 q 989 910 858 1042 q 1120 569 1120 778 q 1066 326 1120 443 q 917 124 1013 210 l 1136 124 l 1136 0 m 277 1040 l 83 800 l 0 800 l 140 1041 l 277 1040 "},_:{x_min:0,x_max:705.5625,ha:803,o:"m 705 -334 l 0 -334 l 0 -234 l 705 -234 l 705 -334 "},"Ϊ":{x_min:-110,x_max:246,ha:275,o:"m 246 1046 l 118 1046 l 118 1189 l 246 1189 l 246 1046 m 18 1046 l -110 1046 l -110 1189 l 18 1189 l 18 1046 m 136 0 l 0 0 l 0 1012 l 136 1012 l 136 0 "},"+":{x_min:23,x_max:768,ha:792,o:"m 768 372 l 444 372 l 444 0 l 347 0 l 347 372 l 23 372 l 23 468 l 347 468 l 347 840 l 444 840 l 444 468 l 768 468 l 768 372 "},"½":{x_min:0,x_max:1050,ha:1149,o:"m 1050 0 l 625 0 q 712 178 625 108 q 878 277 722 187 q 967 385 967 328 q 932 456 967 429 q 850 484 897 484 q 759 450 798 484 q 721 352 721 416 l 640 352 q 706 502 640 448 q 851 551 766 551 q 987 509 931 551 q 1050 385 1050 462 q 976 251 1050 301 q 829 179 902 215 q 717 68 740 133 l 1050 68 l 1050 0 m 834 985 l 215 -28 l 130 -28 l 750 984 l 834 985 m 224 422 l 142 422 l 142 811 l 0 811 l 0 867 q 104 889 62 867 q 164 973 157 916 l 224 973 l 224 422 "},"Ρ":{x_min:0,x_max:720,ha:783,o:"m 424 1013 q 637 933 554 1013 q 720 723 720 853 q 633 508 720 591 q 413 426 546 426 l 140 426 l 140 0 l 0 0 l 0 1013 l 424 1013 m 378 889 l 140 889 l 140 548 l 371 548 q 521 589 458 548 q 592 720 592 637 q 527 845 592 801 q 378 889 463 889 "},"'":{x_min:0,x_max:139,ha:236,o:"m 139 851 q 102 737 139 784 q 0 669 65 690 l 0 734 q 59 787 42 741 q 72 873 72 821 l 0 873 l 0 1013 l 139 1013 l 139 851 "},"ª":{x_min:0,x_max:350,ha:397,o:"m 350 625 q 307 616 328 616 q 266 631 281 616 q 247 673 251 645 q 190 628 225 644 q 116 613 156 613 q 32 641 64 613 q 0 722 0 669 q 72 826 0 800 q 247 866 159 846 l 247 887 q 220 934 247 916 q 162 953 194 953 q 104 934 129 953 q 76 882 80 915 l 16 882 q 60 976 16 941 q 166 1011 104 1011 q 266 979 224 1011 q 308 891 308 948 l 308 706 q 311 679 308 688 q 331 670 315 670 l 350 672 l 350 625 m 247 757 l 247 811 q 136 790 175 798 q 64 726 64 773 q 83 682 64 697 q 132 667 103 667 q 207 690 174 667 q 247 757 247 718 "},"΅":{x_min:0,x_max:450,ha:553,o:"m 450 800 l 340 800 l 340 925 l 450 925 l 450 800 m 406 1040 l 212 800 l 129 800 l 269 1040 l 406 1040 m 110 800 l 0 800 l 0 925 l 110 925 l 110 800 "},T:{x_min:0,x_max:777,ha:835,o:"m 777 894 l 458 894 l 458 0 l 319 0 l 319 894 l 0 894 l 0 1013 l 777 1013 l 777 894 "},"Φ":{x_min:0,x_max:915,ha:997,o:"m 527 0 l 389 0 l 389 122 q 110 231 220 122 q 0 509 0 340 q 110 785 0 677 q 389 893 220 893 l 389 1013 l 527 1013 l 527 893 q 804 786 693 893 q 915 509 915 679 q 805 231 915 341 q 527 122 696 122 l 527 0 m 527 226 q 712 310 641 226 q 779 507 779 389 q 712 705 779 627 q 527 787 641 787 l 527 226 m 389 226 l 389 787 q 205 698 275 775 q 136 505 136 620 q 206 308 136 391 q 389 226 276 226 "},"⁋":{x_min:0,x_max:0,ha:694},j:{x_min:-77.78125,x_max:167,ha:349,o:"m 167 871 l 42 871 l 42 1013 l 167 1013 l 167 871 m 167 -80 q 121 -231 167 -184 q -26 -278 76 -278 l -77 -278 l -77 -164 l -41 -164 q 26 -143 11 -164 q 42 -65 42 -122 l 42 737 l 167 737 l 167 -80 "},"Σ":{x_min:0,x_max:756.953125,ha:819,o:"m 756 0 l 0 0 l 0 107 l 395 523 l 22 904 l 22 1013 l 745 1013 l 745 889 l 209 889 l 566 523 l 187 125 l 756 125 l 756 0 "},"›":{x_min:18.0625,x_max:774,ha:792,o:"m 774 376 l 18 40 l 18 149 l 631 421 l 18 692 l 18 799 l 774 465 l 774 376 "},"<":{x_min:17.984375,x_max:773.609375,ha:792,o:"m 773 40 l 18 376 l 17 465 l 773 799 l 773 692 l 159 420 l 773 149 l 773 40 "},"£":{x_min:0,x_max:704.484375,ha:801,o:"m 704 41 q 623 -10 664 5 q 543 -26 583 -26 q 359 15 501 -26 q 243 36 288 36 q 158 23 197 36 q 73 -21 119 10 l 6 76 q 125 195 90 150 q 175 331 175 262 q 147 443 175 383 l 0 443 l 0 512 l 108 512 q 43 734 43 623 q 120 929 43 854 q 358 1010 204 1010 q 579 936 487 1010 q 678 729 678 857 l 678 684 l 552 684 q 504 838 552 780 q 362 896 457 896 q 216 852 263 896 q 176 747 176 815 q 199 627 176 697 q 248 512 217 574 l 468 512 l 468 443 l 279 443 q 297 356 297 398 q 230 194 297 279 q 153 107 211 170 q 227 133 190 125 q 293 142 264 142 q 410 119 339 142 q 516 96 482 96 q 579 105 550 96 q 648 142 608 115 l 704 41 "},t:{x_min:0,x_max:367,ha:458,o:"m 367 0 q 312 -5 339 -2 q 262 -8 284 -8 q 145 28 183 -8 q 108 143 108 64 l 108 638 l 0 638 l 0 738 l 108 738 l 108 944 l 232 944 l 232 738 l 367 738 l 367 638 l 232 638 l 232 185 q 248 121 232 140 q 307 102 264 102 q 345 104 330 102 q 367 107 360 107 l 367 0 "},"¬":{x_min:0,x_max:706,ha:803,o:"m 706 411 l 706 158 l 630 158 l 630 335 l 0 335 l 0 411 l 706 411 "},"λ":{x_min:0,x_max:750,ha:803,o:"m 750 -7 q 679 -15 716 -15 q 538 59 591 -15 q 466 214 512 97 l 336 551 l 126 0 l 0 0 l 270 705 q 223 837 247 770 q 116 899 190 899 q 90 898 100 899 l 90 1004 q 152 1011 125 1011 q 298 938 244 1011 q 373 783 326 901 l 605 192 q 649 115 629 136 q 716 95 669 95 l 736 95 q 750 97 745 97 l 750 -7 "},W:{x_min:0,x_max:1263.890625,ha:1351,o:"m 1263 1013 l 995 0 l 859 0 l 627 837 l 405 0 l 265 0 l 0 1013 l 136 1013 l 342 202 l 556 1013 l 701 1013 l 921 207 l 1133 1012 l 1263 1013 "},">":{x_min:18.0625,x_max:774,ha:792,o:"m 774 376 l 18 40 l 18 149 l 631 421 l 18 692 l 18 799 l 774 465 l 774 376 "},v:{x_min:0,x_max:675.15625,ha:761,o:"m 675 738 l 404 0 l 272 0 l 0 738 l 133 737 l 340 147 l 541 737 l 675 738 "},"τ":{x_min:0.28125,x_max:644.5,ha:703,o:"m 644 628 l 382 628 l 382 179 q 388 120 382 137 q 436 91 401 91 q 474 94 447 91 q 504 97 501 97 l 504 0 q 454 -9 482 -5 q 401 -14 426 -14 q 278 67 308 -14 q 260 233 260 118 l 260 628 l 0 628 l 0 739 l 644 739 l 644 628 "},"ξ":{x_min:0,x_max:624.9375,ha:699,o:"m 624 -37 q 608 -153 624 -96 q 563 -278 593 -211 l 454 -278 q 491 -183 486 -200 q 511 -83 511 -126 q 484 -23 511 -44 q 370 1 452 1 q 323 0 354 1 q 283 -1 293 -1 q 84 76 169 -1 q 0 266 0 154 q 56 431 0 358 q 197 538 108 498 q 94 613 134 562 q 54 730 54 665 q 77 823 54 780 q 143 901 101 867 l 27 901 l 27 1012 l 576 1012 l 576 901 l 380 901 q 244 863 303 901 q 178 745 178 820 q 312 600 178 636 q 532 582 380 582 l 532 479 q 276 455 361 479 q 118 281 118 410 q 165 173 118 217 q 274 120 208 133 q 494 101 384 110 q 624 -37 624 76 "},"&":{x_min:-3,x_max:894.25,ha:992,o:"m 894 0 l 725 0 l 624 123 q 471 0 553 40 q 306 -41 390 -41 q 168 -7 231 -41 q 62 92 105 26 q 14 187 31 139 q -3 276 -3 235 q 55 433 -3 358 q 248 581 114 508 q 170 689 196 640 q 137 817 137 751 q 214 985 137 922 q 384 1041 284 1041 q 548 988 483 1041 q 622 824 622 928 q 563 666 622 739 q 431 556 516 608 l 621 326 q 649 407 639 361 q 663 493 653 426 l 781 493 q 703 229 781 352 l 894 0 m 504 818 q 468 908 504 877 q 384 940 433 940 q 293 907 331 940 q 255 818 255 875 q 289 714 255 767 q 363 628 313 678 q 477 729 446 682 q 504 818 504 771 m 556 209 l 314 499 q 179 395 223 449 q 135 283 135 341 q 146 222 135 253 q 183 158 158 192 q 333 80 241 80 q 556 209 448 80 "},"Λ":{x_min:0,x_max:862.5,ha:942,o:"m 862 0 l 719 0 l 426 847 l 143 0 l 0 0 l 356 1013 l 501 1013 l 862 0 "},I:{x_min:41,x_max:180,ha:293,o:"m 180 0 l 41 0 l 41 1013 l 180 1013 l 180 0 "},G:{x_min:0,x_max:921,ha:1011,o:"m 921 0 l 832 0 l 801 136 q 655 15 741 58 q 470 -28 568 -28 q 126 133 259 -28 q 0 499 0 284 q 125 881 0 731 q 486 1043 259 1043 q 763 957 647 1043 q 905 709 890 864 l 772 709 q 668 866 747 807 q 486 926 589 926 q 228 795 322 926 q 142 507 142 677 q 228 224 142 342 q 483 94 323 94 q 712 195 625 94 q 796 435 796 291 l 477 435 l 477 549 l 921 549 l 921 0 "},"ΰ":{x_min:0,x_max:617,ha:725,o:"m 524 800 l 414 800 l 414 925 l 524 925 l 524 800 m 183 800 l 73 800 l 73 925 l 183 925 l 183 800 m 617 352 q 540 93 617 199 q 308 -24 455 -24 q 76 93 161 -24 q 0 352 0 199 l 0 738 l 126 738 l 126 354 q 169 185 126 257 q 312 98 220 98 q 451 185 402 98 q 492 354 492 257 l 492 738 l 617 738 l 617 352 m 489 1040 l 300 819 l 216 819 l 351 1040 l 489 1040 "},"`":{x_min:0,x_max:138.890625,ha:236,o:"m 138 699 l 0 699 l 0 861 q 36 974 0 929 q 138 1041 72 1020 l 138 977 q 82 931 95 969 q 69 839 69 893 l 138 839 l 138 699 "},"·":{x_min:0,x_max:142,ha:239,o:"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 "},"Υ":{x_min:0.328125,x_max:819.515625,ha:889,o:"m 819 1013 l 482 416 l 482 0 l 342 0 l 342 416 l 0 1013 l 140 1013 l 411 533 l 679 1013 l 819 1013 "},r:{x_min:0,x_max:355.5625,ha:432,o:"m 355 621 l 343 621 q 179 569 236 621 q 122 411 122 518 l 122 0 l 0 0 l 0 737 l 117 737 l 117 604 q 204 719 146 686 q 355 753 262 753 l 355 621 "},x:{x_min:0,x_max:675,ha:764,o:"m 675 0 l 525 0 l 331 286 l 144 0 l 0 0 l 256 379 l 12 738 l 157 737 l 336 473 l 516 738 l 661 738 l 412 380 l 675 0 "},"μ":{x_min:0,x_max:696.609375,ha:747,o:"m 696 -4 q 628 -14 657 -14 q 498 97 513 -14 q 422 8 470 41 q 313 -24 374 -24 q 207 3 258 -24 q 120 80 157 31 l 120 -278 l 0 -278 l 0 738 l 124 738 l 124 343 q 165 172 124 246 q 308 82 216 82 q 451 177 402 82 q 492 358 492 254 l 492 738 l 616 738 l 616 214 q 623 136 616 160 q 673 92 636 92 q 696 95 684 92 l 696 -4 "},h:{x_min:0,x_max:615,ha:724,o:"m 615 472 l 615 0 l 490 0 l 490 454 q 456 590 490 535 q 338 654 416 654 q 186 588 251 654 q 122 436 122 522 l 122 0 l 0 0 l 0 1013 l 122 1013 l 122 633 q 218 727 149 694 q 362 760 287 760 q 552 676 484 760 q 615 472 615 600 "},".":{x_min:0,x_max:142,ha:239,o:"m 142 0 l 0 0 l 0 151 l 142 151 l 142 0 "},"φ":{x_min:-2,x_max:878,ha:974,o:"m 496 -279 l 378 -279 l 378 -17 q 101 88 204 -17 q -2 367 -2 194 q 68 626 -2 510 q 283 758 151 758 l 283 646 q 167 537 209 626 q 133 373 133 462 q 192 177 133 254 q 378 93 259 93 l 378 758 q 445 764 426 763 q 476 765 464 765 q 765 659 653 765 q 878 377 878 553 q 771 96 878 209 q 496 -17 665 -17 l 496 -279 m 496 93 l 514 93 q 687 183 623 93 q 746 380 746 265 q 691 569 746 491 q 522 658 629 658 l 496 656 l 496 93 "},";":{x_min:0,x_max:142,ha:239,o:"m 142 585 l 0 585 l 0 738 l 142 738 l 142 585 m 142 -12 q 105 -132 142 -82 q 0 -206 68 -182 l 0 -138 q 58 -82 43 -123 q 68 0 68 -56 l 0 0 l 0 151 l 142 151 l 142 -12 "},f:{x_min:0,x_max:378,ha:472,o:"m 378 638 l 246 638 l 246 0 l 121 0 l 121 638 l 0 638 l 0 738 l 121 738 q 137 935 121 887 q 290 1028 171 1028 q 320 1027 305 1028 q 378 1021 334 1026 l 378 908 q 323 918 346 918 q 257 870 273 918 q 246 780 246 840 l 246 738 l 378 738 l 378 638 "},"“":{x_min:1,x_max:348.21875,ha:454,o:"m 140 670 l 1 670 l 1 830 q 37 943 1 897 q 140 1011 74 990 l 140 947 q 82 900 97 940 q 68 810 68 861 l 140 810 l 140 670 m 348 670 l 209 670 l 209 830 q 245 943 209 897 q 348 1011 282 990 l 348 947 q 290 900 305 940 q 276 810 276 861 l 348 810 l 348 670 "},A:{x_min:0.03125,x_max:906.953125,ha:1008,o:"m 906 0 l 756 0 l 648 303 l 251 303 l 142 0 l 0 0 l 376 1013 l 529 1013 l 906 0 m 610 421 l 452 867 l 293 421 l 610 421 "},"‘":{x_min:1,x_max:139.890625,ha:236,o:"m 139 670 l 1 670 l 1 830 q 37 943 1 897 q 139 1011 74 990 l 139 947 q 82 900 97 940 q 68 810 68 861 l 139 810 l 139 670 "},"ϊ":{x_min:-70,x_max:283,ha:361,o:"m 283 800 l 173 800 l 173 925 l 283 925 l 283 800 m 40 800 l -70 800 l -70 925 l 40 925 l 40 800 m 283 3 q 232 -10 257 -5 q 181 -15 206 -15 q 84 26 118 -15 q 41 200 41 79 l 41 737 l 166 737 l 167 215 q 171 141 167 157 q 225 101 182 101 q 247 103 238 101 q 283 112 256 104 l 283 3 "},"π":{x_min:-0.21875,x_max:773.21875,ha:857,o:"m 773 -7 l 707 -11 q 575 40 607 -11 q 552 174 552 77 l 552 226 l 552 626 l 222 626 l 222 0 l 97 0 l 97 626 l 0 626 l 0 737 l 773 737 l 773 626 l 676 626 l 676 171 q 695 103 676 117 q 773 90 714 90 l 773 -7 "},"ά":{x_min:0,x_max:765.5625,ha:809,o:"m 765 -4 q 698 -14 726 -14 q 564 97 586 -14 q 466 7 525 40 q 337 -26 407 -26 q 88 98 186 -26 q 0 369 0 212 q 88 637 0 525 q 337 760 184 760 q 465 727 407 760 q 563 637 524 695 l 563 738 l 685 738 l 685 222 q 693 141 685 168 q 748 94 708 94 q 765 95 760 94 l 765 -4 m 584 371 q 531 562 584 485 q 360 653 470 653 q 192 566 254 653 q 135 379 135 489 q 186 181 135 261 q 358 84 247 84 q 528 176 465 84 q 584 371 584 260 m 604 1040 l 415 819 l 332 819 l 466 1040 l 604 1040 "},O:{x_min:0,x_max:958,ha:1057,o:"m 485 1041 q 834 882 702 1041 q 958 512 958 734 q 834 136 958 287 q 481 -26 702 -26 q 126 130 261 -26 q 0 504 0 279 q 127 880 0 728 q 485 1041 263 1041 m 480 98 q 731 225 638 98 q 815 504 815 340 q 733 783 815 669 q 480 912 640 912 q 226 784 321 912 q 142 504 142 670 q 226 224 142 339 q 480 98 319 98 "},n:{x_min:0,x_max:615,ha:724,o:"m 615 463 l 615 0 l 490 0 l 490 454 q 453 592 490 537 q 331 656 410 656 q 178 585 240 656 q 117 421 117 514 l 117 0 l 0 0 l 0 738 l 117 738 l 117 630 q 218 728 150 693 q 359 764 286 764 q 552 675 484 764 q 615 463 615 593 "},l:{x_min:41,x_max:166,ha:279,o:"m 166 0 l 41 0 l 41 1013 l 166 1013 l 166 0 "},"¤":{x_min:40.09375,x_max:728.796875,ha:825,o:"m 728 304 l 649 224 l 512 363 q 383 331 458 331 q 256 363 310 331 l 119 224 l 40 304 l 177 441 q 150 553 150 493 q 184 673 150 621 l 40 818 l 119 898 l 267 749 q 321 766 291 759 q 384 773 351 773 q 447 766 417 773 q 501 749 477 759 l 649 898 l 728 818 l 585 675 q 612 618 604 648 q 621 553 621 587 q 591 441 621 491 l 728 304 m 384 682 q 280 643 318 682 q 243 551 243 604 q 279 461 243 499 q 383 423 316 423 q 487 461 449 423 q 525 553 525 500 q 490 641 525 605 q 384 682 451 682 "},"κ":{x_min:0,x_max:632.328125,ha:679,o:"m 632 0 l 482 0 l 225 384 l 124 288 l 124 0 l 0 0 l 0 738 l 124 738 l 124 446 l 433 738 l 596 738 l 312 466 l 632 0 "},p:{x_min:0,x_max:685,ha:786,o:"m 685 364 q 598 96 685 205 q 350 -23 504 -23 q 121 89 205 -23 l 121 -278 l 0 -278 l 0 738 l 121 738 l 121 633 q 220 726 159 691 q 351 761 280 761 q 598 636 504 761 q 685 364 685 522 m 557 371 q 501 560 557 481 q 330 651 437 651 q 162 559 223 651 q 108 366 108 479 q 162 177 108 254 q 333 87 224 87 q 502 178 441 87 q 557 371 557 258 "},"‡":{x_min:0,x_max:777,ha:835,o:"m 458 238 l 458 0 l 319 0 l 319 238 l 0 238 l 0 360 l 319 360 l 319 681 l 0 683 l 0 804 l 319 804 l 319 1015 l 458 1013 l 458 804 l 777 804 l 777 683 l 458 683 l 458 360 l 777 360 l 777 238 l 458 238 "},"ψ":{x_min:0,x_max:808,ha:907,o:"m 465 -278 l 341 -278 l 341 -15 q 87 102 180 -15 q 0 378 0 210 l 0 739 l 133 739 l 133 379 q 182 195 133 275 q 341 98 242 98 l 341 922 l 465 922 l 465 98 q 623 195 563 98 q 675 382 675 278 l 675 742 l 808 742 l 808 381 q 720 104 808 213 q 466 -13 627 -13 l 465 -278 "},"η":{x_min:0.78125,x_max:697,ha:810,o:"m 697 -278 l 572 -278 l 572 454 q 540 587 572 536 q 425 650 501 650 q 271 579 337 650 q 206 420 206 509 l 206 0 l 81 0 l 81 489 q 73 588 81 562 q 0 644 56 644 l 0 741 q 68 755 38 755 q 158 720 124 755 q 200 630 193 686 q 297 726 234 692 q 434 761 359 761 q 620 692 544 761 q 697 516 697 624 l 697 -278 "}};var cssFontWeight="normal";var ascender=1189;var underlinePosition=-100;var cssFontStyle="normal";var boundingBox={yMin:-334,xMin:-111,yMax:1189,xMax:1672};var resolution=1000;var original_font_information={postscript_name:"Helvetiker-Regular",version_string:"Version 1.00 2004 initial release",vendor_url:"http://www.magenta.gr/",full_font_name:"Helvetiker",font_family_name:"Helvetiker",copyright:"Copyright (c) Μagenta ltd, 2004",description:"",trademark:"",designer:"",designer_url:"",unique_font_identifier:"Μagenta ltd:Helvetiker:22-10-104",license_url:"http://www.ellak.gr/fonts/MgOpen/license.html",license_description:"Copyright (c) 2004 by MAGENTA Ltd. All Rights Reserved.\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of the fonts accompanying this license (\"Fonts\") and associated documentation files (the \"Font Software\"), to reproduce and distribute the Font Software, including without limitation the rights to use, copy, merge, publish, distribute, and/or sell copies of the Font Software, and to permit persons to whom the Font Software is furnished to do so, subject to the following conditions: \r\n\r\nThe above copyright and this permission notice shall be included in all copies of one or more of the Font Software typefaces.\r\n\r\nThe Font Software may be modified, altered, or added to, and in particular the designs of glyphs or characters in the Fonts may be modified and additional glyphs or characters may be added to the Fonts, only if the fonts are renamed to names not containing the word \"MgOpen\", or if the modifications are accepted for inclusion in the Font Software itself by the each appointed Administrator.\r\n\r\nThis License becomes null and void to the extent applicable to Fonts or Font Software that has been modified and is distributed under the \"MgOpen\" name.\r\n\r\nThe Font Software may be sold as part of a larger software package but no copy of one or more of the Font Software typefaces may be sold by itself. \r\n\r\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL MAGENTA OR PERSONS OR BODIES IN CHARGE OF ADMINISTRATION AND MAINTENANCE OF THE FONT SOFTWARE BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.",manufacturer_name:"Μagenta ltd",font_sub_family_name:"Regular"};var descender=-334;var familyName="Helvetiker";var lineHeight=1522;var underlineThickness=50;var defaultTypeFace = {glyphs:glyphs,cssFontWeight:cssFontWeight,ascender:ascender,underlinePosition:underlinePosition,cssFontStyle:cssFontStyle,boundingBox:boundingBox,resolution:resolution,original_font_information:original_font_information,descender:descender,familyName:familyName,lineHeight:lineHeight,underlineThickness:underlineThickness};
 
-  var THREE$6 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE$1 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    CircleBufferGeometry: three.CircleBufferGeometry,
-    Font: three.Font,
-    Group: three.Group,
-    Mesh: three.Mesh,
-    MeshLambertMaterial: three.MeshLambertMaterial,
-    TextBufferGeometry: three.TextBufferGeometry,
-    Vector3: three.Vector3
+    CircleBufferGeometry: three$1.CircleBufferGeometry,
+    Font: three$1.Font,
+    Group: three$1.Group,
+    Mesh: three$1.Mesh,
+    MeshLambertMaterial: three$1.MeshLambertMaterial,
+    TextBufferGeometry: three$1.TextBufferGeometry,
+    Vector3: three$1.Vector3
   };
 
-  var LabelsLayerKapsule = index({
+  var LabelsLayerKapsule = index$2({
     props: {
       labelsData: {
         "default": []
@@ -11333,7 +12460,7 @@
       labelTypeFace: {
         "default": defaultTypeFace,
         onChange: function onChange(tf, state) {
-          state.font = new THREE$6.Font(tf);
+          state.font = new THREE$1.Font(tf);
         }
       },
       labelColor: {
@@ -11388,22 +12515,22 @@
       var dotOrientationAccessor = index$1(state.labelDotOrientation);
       var orientations = new Set(['right', 'top', 'bottom']);
       var pxPerDeg = 2 * Math.PI * GLOBE_RADIUS / 360;
-      var circleGeometry = new THREE$6.CircleBufferGeometry(1, 16);
+      var circleGeometry = new THREE$1.CircleBufferGeometry(1, 16);
       threeDigest(state.labelsData, state.scene, {
         createObj: function createObj() {
-          var material = new THREE$6.MeshLambertMaterial();
-          var obj = new THREE$6.Group(); // container
+          var material = new THREE$1.MeshLambertMaterial();
+          var obj = new THREE$1.Group(); // container
 
-          obj.add(new THREE$6.Mesh(circleGeometry, material)); // dot
+          obj.add(new THREE$1.Mesh(circleGeometry, material)); // dot
 
-          obj.add(new THREE$6.Mesh(undefined, material)); // text
+          obj.add(new THREE$1.Mesh(undefined, material)); // text
 
           obj.__globeObjType = 'label'; // Add object type
 
           return obj;
         },
         updateObj: function updateObj(obj, d) {
-          var _obj$children = _slicedToArray(obj.children, 2),
+          var _obj$children = _slicedToArray$5(obj.children, 2),
               dotObj = _obj$children[0],
               textObj = _obj$children[1]; // update color
 
@@ -11422,7 +12549,7 @@
           dotObj.scale.x = dotObj.scale.y = dotR; // create text geometry
 
           var textHeight = +sizeAccessor(d) * pxPerDeg;
-          textObj.geometry = new THREE$6.TextBufferGeometry(textAccessor(d), {
+          textObj.geometry = new THREE$1.TextBufferGeometry(textAccessor(d), {
             font: state.font,
             size: textHeight,
             height: 0,
@@ -11453,9 +12580,9 @@
                 scale = _obj$__currentTargetD.scale; // position center
 
 
-            Object.assign(obj.position, polar2Cartesian(lat, lng, alt)); // rotate
+            Object.assign(obj.position, polar2Cartesian$2(lat, lng, alt)); // rotate
 
-            obj.lookAt(state.scene.localToWorld(new THREE$6.Vector3(0, 0, 0))); // face globe (local) center
+            obj.lookAt(state.scene.localToWorld(new THREE$1.Vector3(0, 0, 0))); // face globe (local) center
 
             obj.rotateY(Math.PI); // face outwards
             // rotate clockwise relative to lat parallel
@@ -11492,7 +12619,7 @@
     }
   });
 
-  var CustomLayerKapsule = index({
+  var CustomLayerKapsule = index$2({
     props: {
       customLayerData: {
         "default": []
@@ -11538,57 +12665,60 @@
     }
   });
 
-  var THREE$7 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
+  var THREE = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
   : {
-    Group: three.Group,
-    Vector2: three.Vector2,
-    Vector3: three.Vector3
+    Group: three$1.Group,
+    Vector2: three$1.Vector2,
+    Vector3: three$1.Vector3
   };
 
   var layers = ['globeLayer', 'pointsLayer', 'polygonsLayer', 'tilesLayer', 'labelsLayer', 'customLayer']; // Expose config from layers
 
   var bindGlobeLayer = linkKapsule('globeLayer', GlobeLayerKapsule);
-  var linkedGlobeLayerProps = Object.assign.apply(Object, _toConsumableArray(['globeImageUrl', 'bumpImageUrl', 'showAtmosphere', 'showGraticules'].map(function (p) {
-    return _defineProperty({}, p, bindGlobeLayer.linkProp(p));
+  var linkedGlobeLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['globeImageUrl', 'bumpImageUrl', 'showGlobe', 'showGraticules', 'showAtmosphere', 'atmosphereColor', 'atmosphereAltitude'].map(function (p) {
+    return _defineProperty$1({}, p, bindGlobeLayer.linkProp(p));
   })));
-  var linkedGlobeLayerMethods = Object.assign.apply(Object, _toConsumableArray(['globeMaterial'].map(function (p) {
-    return _defineProperty({}, p, bindGlobeLayer.linkMethod(p));
+  var linkedGlobeLayerMethods = Object.assign.apply(Object, _toConsumableArray$3(['globeMaterial'].map(function (p) {
+    return _defineProperty$1({}, p, bindGlobeLayer.linkMethod(p));
   })));
   var bindPointsLayer = linkKapsule('pointsLayer', PointsLayerKapsule);
-  var linkedPointsLayerProps = Object.assign.apply(Object, _toConsumableArray(['pointsData', 'pointLat', 'pointLng', 'pointColor', 'pointAltitude', 'pointRadius', 'pointResolution', 'pointsMerge', 'pointsTransitionDuration'].map(function (p) {
-    return _defineProperty({}, p, bindPointsLayer.linkProp(p));
+  var linkedPointsLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['pointsData', 'pointLat', 'pointLng', 'pointColor', 'pointAltitude', 'pointRadius', 'pointResolution', 'pointsMerge', 'pointsTransitionDuration'].map(function (p) {
+    return _defineProperty$1({}, p, bindPointsLayer.linkProp(p));
   })));
   var bindPolygonsLayer = linkKapsule('polygonsLayer', PolygonsLayerKapsule);
-  var linkedPolygonsLayerProps = Object.assign.apply(Object, _toConsumableArray(['polygonsData', 'polygonGeoJsonGeometry', 'polygonCapColor', 'polygonSideColor', 'polygonStrokeColor', 'polygonAltitude', 'polygonCapCurvatureResolution', 'polygonsTransitionDuration'].map(function (p) {
-    return _defineProperty({}, p, bindPolygonsLayer.linkProp(p));
+  var linkedPolygonsLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['polygonsData', 'polygonGeoJsonGeometry', 'polygonCapColor', 'polygonCapMaterial', 'polygonSideColor', 'polygonSideMaterial', 'polygonStrokeColor', 'polygonAltitude', 'polygonCapCurvatureResolution', 'polygonsTransitionDuration'].map(function (p) {
+    return _defineProperty$1({}, p, bindPolygonsLayer.linkProp(p));
   })));
   var bindTilesLayer = linkKapsule('tilesLayer', TilesLayerKapsule);
-  var linkedTilesLayerProps = Object.assign.apply(Object, _toConsumableArray(['tilesData', 'tileLat', 'tileLng', 'tileAltitude', 'tileWidth', 'tileHeight', 'tileUseGlobeProjection', 'tileMaterial', 'tileCurvatureResolution', 'tilesTransitionDuration'].map(function (p) {
-    return _defineProperty({}, p, bindTilesLayer.linkProp(p));
+  var linkedTilesLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['tilesData', 'tileLat', 'tileLng', 'tileAltitude', 'tileWidth', 'tileHeight', 'tileUseGlobeProjection', 'tileMaterial', 'tileCurvatureResolution', 'tilesTransitionDuration'].map(function (p) {
+    return _defineProperty$1({}, p, bindTilesLayer.linkProp(p));
   })));
   var bindLabelsLayer = linkKapsule('labelsLayer', LabelsLayerKapsule);
-  var linkedLabelsLayerProps = Object.assign.apply(Object, _toConsumableArray(['labelsData', 'labelLat', 'labelLng', 'labelAltitude', 'labelRotation', 'labelText', 'labelSize', 'labelTypeFace', 'labelColor', 'labelResolution', 'labelIncludeDot', 'labelDotRadius', 'labelDotOrientation', 'labelsTransitionDuration'].map(function (p) {
-    return _defineProperty({}, p, bindLabelsLayer.linkProp(p));
+  var linkedLabelsLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['labelsData', 'labelLat', 'labelLng', 'labelAltitude', 'labelRotation', 'labelText', 'labelSize', 'labelTypeFace', 'labelColor', 'labelResolution', 'labelIncludeDot', 'labelDotRadius', 'labelDotOrientation', 'labelsTransitionDuration'].map(function (p) {
+    return _defineProperty$1({}, p, bindLabelsLayer.linkProp(p));
   })));
   var bindCustomLayer = linkKapsule('customLayer', CustomLayerKapsule);
-  var linkedCustomLayerProps = Object.assign.apply(Object, _toConsumableArray(['customLayerData', 'customThreeObject', 'customThreeObjectUpdate'].map(function (p) {
-    return _defineProperty({}, p, bindCustomLayer.linkProp(p));
+  var linkedCustomLayerProps = Object.assign.apply(Object, _toConsumableArray$3(['customLayerData', 'customThreeObject', 'customThreeObjectUpdate'].map(function (p) {
+    return _defineProperty$1({}, p, bindCustomLayer.linkProp(p));
   }))); //
 
-  var Globe = index({
-    props: _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({
+  var Globe = index$2({
+    props: _objectSpread2$1(_objectSpread2$1(_objectSpread2$1(_objectSpread2$1(_objectSpread2$1(_objectSpread2$1({
+      onGlobeReady: {
+        triggerUpdate: false
+      },
       rendererSize: {
-        "default": new THREE$7.Vector2(window.innerWidth, window.innerHeight),
+        "default": new THREE.Vector2(window.innerWidth, window.innerHeight),
         triggerUpdate: false
       }
     }, linkedGlobeLayerProps), linkedPointsLayerProps), linkedPolygonsLayerProps), linkedTilesLayerProps), linkedLabelsLayerProps), linkedCustomLayerProps),
-    methods: _objectSpread2({
+    methods: _objectSpread2$1({
       getCoords: function getCoords(state) {
         for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
 
-        return polar2Cartesian.apply(void 0, args);
+        return polar2Cartesian$2.apply(void 0, args);
       },
       toGeoCoords: function toGeoCoords(state) {
         for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
@@ -11616,12 +12746,12 @@
       // Clear the scene
       emptyObject(threeObj); // Main three object to manipulate
 
-      threeObj.add(state.scene = new THREE$7.Group());
+      threeObj.add(state.scene = new THREE.Group());
       state.scene.visible = false; // hide scene before globe initialization
       // Add all layers groups
 
       layers.forEach(function (layer) {
-        var g = new THREE$7.Group();
+        var g = new THREE.Group();
         state.scene.add(g);
         state[layer](g);
       });
@@ -11638,7 +12768,7 @@
             var k = _ref9.k;
             return state.scene.scale.set(k, k, k);
           }).start();
-          var rotAxis = new THREE$7.Vector3(0, 1, 0);
+          var rotAxis = new THREE.Vector3(0, 1, 0);
           new exports$1.Tween({
             rot: Math.PI * 2
           }).to({
@@ -11650,6 +12780,7 @@
         }
 
         state.scene.visible = true;
+        state.onGlobeReady && state.onGlobeReady();
       };
 
       waitForGlobeReady ? state.globeLayer.onReady(initGlobe) : initGlobe();
@@ -11662,21 +12793,21 @@
     var initKapsuleWithSelf = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var FromKapsule = /*#__PURE__*/function (_baseClass) {
-      _inherits(FromKapsule, _baseClass);
+      _inherits$2(FromKapsule, _baseClass);
 
-      var _super = _createSuper(FromKapsule);
+      var _super = _createSuper$2(FromKapsule);
 
       function FromKapsule() {
         var _this;
 
-        _classCallCheck(this, FromKapsule);
+        _classCallCheck$3(this, FromKapsule);
 
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
 
         _this = _super.call.apply(_super, [this].concat(args));
-        _this.__kapsuleInstance = kapsule.apply(void 0, args).apply(void 0, [].concat(_toConsumableArray(initKapsuleWithSelf ? [_assertThisInitialized(_this)] : []), args));
+        _this.__kapsuleInstance = kapsule.apply(void 0, args).apply(void 0, [].concat(_toConsumableArray$3(initKapsuleWithSelf ? [_assertThisInitialized$2(_this)] : []), args));
         return _this;
       }
 
@@ -11697,6 +12828,9 @@
     return FromKapsule;
   }
 
+  var three = window.THREE ? window.THREE : {
+    Group: three$1.Group
+  }; // Prefer consumption from global THREE, if exists
   var threeGlobe = fromKapsule(Globe, three.Group, true);
 
   return threeGlobe;
