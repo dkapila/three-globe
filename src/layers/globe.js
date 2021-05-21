@@ -4,27 +4,24 @@ import {
   LineSegments,
   Mesh,
   MeshPhongMaterial,
-  SphereGeometry,
+  SphereBufferGeometry,
   TextureLoader
 } from 'three';
 
 const THREE = window.THREE
-  ? {
-    // Prefer consumption from global THREE, if exists
-    ...window.THREE,
-    SphereGeometry // keep SphereGeometry from module for instance matching with three-glow-mesh
-  } : {
+  ? window.THREE // Prefer consumption from global THREE, if exists
+  : {
     Color,
     LineBasicMaterial,
     LineSegments,
     Mesh,
     MeshPhongMaterial,
-    SphereGeometry,
+    SphereBufferGeometry,
     TextureLoader
   };
 
 import { GeoJsonGeometry } from 'three-geojson-geometry';
-import { createGlowMesh } from 'three-glow-mesh';
+import { createGlowMesh } from '../utils/three-glow-mesh';
 
 import Kapsule from 'kapsule';
 import { geoGraticule10 } from 'd3-geo';
@@ -38,30 +35,30 @@ export default Kapsule({
   props: {
     globeImageUrl: {},
     bumpImageUrl: {},
-    showAtmosphere: { default: true, onChange(showAtmosphere, state) { state.atmosphereObj.visible = !!showAtmosphere }, triggerUpdate: false },
+    showGlobe: { default: true, onChange(showGlobe, state) { state.globeObj.visible = !!showGlobe }, triggerUpdate: false },
     showGraticules: { default: false, onChange(showGraticules, state) { state.graticulesObj.visible = !!showGraticules }, triggerUpdate: false },
+    showAtmosphere: { default: true, onChange(showAtmosphere, state) { state.atmosphereObj && (state.atmosphereObj.visible = !!showAtmosphere) }, triggerUpdate: false },
+    atmosphereColor: { default: 'lightskyblue' },
+    atmosphereAltitude: { default: 0.15 },
     onReady: { default: () => {}, triggerUpdate: false }
   },
   methods: {
-    globeMaterial: state => state.globeObj.material
+    globeMaterial: function(state, globeMaterial) {
+      if (globeMaterial !== undefined) {
+        state.globeObj.material = globeMaterial || state.defaultGlobeMaterial;
+        return this;
+      }
+      return state.globeObj.material;
+    }
   },
 
   stateInit: () => {
     // create globe
-    const globeGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 75, 75);
-    const globeObj = new THREE.Mesh(globeGeometry, new THREE.MeshPhongMaterial({ color: 0x000000, transparent: true }));
+    const globeGeometry = new THREE.SphereBufferGeometry(GLOBE_RADIUS, 75, 75);
+    const defaultGlobeMaterial = new THREE.MeshPhongMaterial({ color: 0x000000, transparent: true });
+    const globeObj = new THREE.Mesh(globeGeometry, defaultGlobeMaterial);
     globeObj.rotation.y = -Math.PI / 2; // face prime meridian along Z axis
     globeObj.__globeObjType = 'globe'; // Add object type
-
-    // create atmosphere
-    const atmosphereObj = createGlowMesh(globeObj.geometry, {
-      backside: true,
-      color: 'lightskyblue',
-      size: GLOBE_RADIUS * 0.15,
-      power: 3.5, // dispersion
-      coefficient: 0.1
-    });
-    atmosphereObj.__globeObjType = 'atmosphere'; // Add object type
 
     // create graticules
     const graticulesObj = new THREE.LineSegments(
@@ -71,8 +68,8 @@ export default Kapsule({
 
     return {
       globeObj,
-      atmosphereObj,
-      graticulesObj
+      graticulesObj,
+      defaultGlobeMaterial
     }
   },
 
@@ -84,7 +81,6 @@ export default Kapsule({
     state.scene = threeObj;
 
     state.scene.add(state.globeObj); // add globe
-    state.scene.add(state.atmosphereObj); // add atmosphere
     state.scene.add(state.graticulesObj); // add graticules
 
     state.ready = false;
@@ -118,6 +114,27 @@ export default Kapsule({
           globeMaterial.bumpMap = texture;
           globeMaterial.needsUpdate = true;
         });
+      }
+    }
+
+    if (changedProps.hasOwnProperty('atmosphereColor') || changedProps.hasOwnProperty('atmosphereAltitude')) {
+      if (state.atmosphereObj) {
+        // recycle previous atmosphere object
+        state.scene.remove(state.atmosphereObj);
+        emptyObject(state.atmosphereObj);
+      }
+
+      if (state.atmosphereColor && state.atmosphereAltitude) {
+        const obj = state.atmosphereObj = createGlowMesh(state.globeObj.geometry, {
+          backside: true,
+          color: state.atmosphereColor,
+          size: GLOBE_RADIUS * state.atmosphereAltitude,
+          power: 3.5, // dispersion
+          coefficient: 0.1
+        });
+        obj.visible = !!state.showAtmosphere;
+        obj.__globeObjType = 'atmosphere'; // Add object type
+        state.scene.add(obj);
       }
     }
 
