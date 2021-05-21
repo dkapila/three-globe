@@ -43,7 +43,6 @@ const linkedGlobeLayerProps = Object.assign(...[
   'globeImageUrl',
   'bumpImageUrl',
   'showGlobe',
-  'showGraticules',
   'showAtmosphere',
   'atmosphereColor',
   'atmosphereAltitude'
